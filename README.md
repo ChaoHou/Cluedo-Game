@@ -13,4 +13,8 @@ GIT with Eclipse(EGIT):
 
 http://www.vogella.com/tutorials/EclipseGit/article.html
 
+Online Diagram
+
+https://www.lucidchart.com/
+
 //TODO
