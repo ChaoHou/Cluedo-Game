@@ -1,5 +1,5 @@
 package cluedo.model;
 
-public class TestK {
+public class Board {
 
 }
