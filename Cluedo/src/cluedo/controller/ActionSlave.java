@@ -1,5 +1,5 @@
 package cluedo.controller;
 
-public class ActionSlave {
+public class ActionSlave extends Thread implements ActionHandler {
 
 }
