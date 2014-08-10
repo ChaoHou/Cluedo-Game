@@ -1,5 +1,7 @@
 package cluedo.view;
 
-public class Frame {
+import javax.swing.JFrame;
+
+public class BoardFrame extends JFrame {
 
 }

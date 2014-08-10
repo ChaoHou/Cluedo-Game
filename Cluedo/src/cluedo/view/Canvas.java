@@ -1,5 +1,7 @@
 package cluedo.view;
 
-public class Canvas {
+import java.awt.Canvas;
+
+public class BoardCanvas extends Canvas {
 
 }
