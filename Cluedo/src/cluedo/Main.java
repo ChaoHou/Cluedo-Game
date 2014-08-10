@@ -3,9 +3,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import cluedo.controller.ActionMaster;
 import cluedo.controller.ClockThread;
-import cluedo.controller.Master;
-import cluedo.controller.Slave;
+import cluedo.controller.connection.Master;
+import cluedo.controller.connection.Slave;
 
 public class Main {
 
@@ -38,8 +39,7 @@ public class Main {
 					port = Integer.parseInt(args[++i]);
 				}
 			} else {
-				usage();
-				System.exit(0);
+				System.out.println("Wrong argument");
 			}
 		}
 
@@ -55,7 +55,7 @@ public class Main {
 		// run game
 		try{
 			if(server){
-				
+				runServer(port, nplayers, gameClock, broadcastClock);
 			}else{
 				runClient(url,port);
 			}
@@ -101,11 +101,12 @@ public class Main {
 	private static void runClient(String addr, int port) throws IOException {		
 		Socket s = new Socket(addr,port);
 		System.out.println("PACMAN CLIENT CONNECTED TO " + addr + ":" + port);			
-		new Slave(s);		
+		new Slave(s);
+		
 	}
 	
 	private static void runServer(int port, int nplayers, int gameClock, int broadcastClock) {	
-		ClockThread clk = new ClockThread(gameClock);	
+		//ClockThread clk = new ClockThread(gameClock);	
 		
 		// Listen for connections
 		System.out.println("CLUEDO SERVER LISTENING ON PORT " + port);
@@ -120,11 +121,17 @@ public class Main {
 				System.out.println("ACCEPTED CONNECTION FROM: " + s.getInetAddress());				
 				//int uid = game.registerPacman();
 				int uid = 0;
-				connections[--nplayers] = new Master(s,uid,broadcastClock);
-				connections[nplayers].start();				
+				connections[--nplayers] = new Master(s,uid);
+				//connections[nplayers].start();				
 				if(nplayers == 0) {
 					System.out.println("ALL CLIENTS ACCEPTED --- GAME BEGINS");
 					//multiUserGame(clk,game,connections);
+					
+					ActionMaster actionMaster = new ActionMaster(connections);
+					ClockThread clk = new ClockThread(actionMaster,gameClock);
+					clk.start();
+					actionMaster.start();;
+					
 					System.out.println("ALL CLIENTS DISCONNECTED --- GAME OVER");
 					return; // done
 				}

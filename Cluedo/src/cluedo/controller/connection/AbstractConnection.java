@@ -1,16 +1,16 @@
-package cluedo.controller;
+package cluedo.controller.connection;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class Slave extends Thread{
+public abstract class AbstractConnection {
 	private final Socket socket;
-	private DataOutputStream output;
-	private DataInputStream input;
+	protected DataOutputStream output;
+	protected DataInputStream input;
 	
-	public Slave(Socket socket){
+	public AbstractConnection(Socket socket){
 		this.socket = socket;
 		
 		try{
@@ -23,4 +23,11 @@ public class Slave extends Thread{
 		}
 	}
 	
+	public DataOutputStream getOutput(){
+		return output;
+	}
+	
+	public DataInputStream getInput(){
+		return input;
+	}
 }

@@ -1,5 +1,8 @@
 package cluedo.controller;
 
-public interface ActionHandler {
+import cluedo.controller.action.Action;
 
+public interface ActionHandler {
+	public boolean isEmpty();
+	public Action pollAction();
 }
