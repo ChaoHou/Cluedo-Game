@@ -36,10 +36,8 @@ public class ActionSlave extends Thread implements ActionHandler {
 				
 				Thread.sleep(1000);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

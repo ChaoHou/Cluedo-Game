@@ -17,15 +17,17 @@ public class ActionMaster extends Thread implements ActionHandler{
 	
 	private Board game;
 	private Round round;
+	private int broadcastClock;
 	
-	public ActionMaster(Master[] con){
+	public ActionMaster(Master[] con, int clock){
 		connections = con;
+		broadcastClock = clock;
 		
 		//initialize the game
 		round = new Round();
-		
-		//Action initialize = new Initialize();
-		//actionQueue.offer(initialize);
+		game = new Board(0, 0);
+		Action initialize = new Initialize(connections,game,round,broadcastClock);
+		actionQueue.offer(initialize);
 	}
 	
 	@Override

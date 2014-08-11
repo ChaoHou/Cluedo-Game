@@ -2,6 +2,7 @@ package cluedo;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import cluedo.controller.ActionMaster;
 import cluedo.controller.ActionSlave;
@@ -53,17 +54,10 @@ public class Main {
 			System.exit(1);
 		} 
 		
-		// run game
-		try{
-			if(server){
-				runServer(port, nplayers, gameClock, broadcastClock);
-			}else{
-				runClient(url,port);
-			}
-		}catch(IOException ioe){
-			System.out.println("I/O error: " + ioe.getMessage());
-			ioe.printStackTrace();
-			System.exit(1);
+		if(server){
+			runServer(port, nplayers, gameClock, broadcastClock);
+		}else{
+			runClient(url,port);
 		}
 		
 		System.exit(0);
@@ -99,14 +93,24 @@ public class Main {
 		}
 	}
 	
-	private static void runClient(String addr, int port) throws IOException {		
-		Socket s = new Socket(addr,port);
-		System.out.println("CLUEDO CLIENT CONNECTED TO " + addr + ":" + port);			
-		Slave slave = new Slave(s);
-		ActionSlave actionSlave = new ActionSlave(slave);
-		ClockThread clk = new ClockThread(actionSlave,5);
-		clk.start();
-		actionSlave.run();
+	private static void runClient(String addr, int port){		
+		Socket s;
+		try {
+			s = new Socket(addr,port);
+			System.out.println("CLUEDO CLIENT CONNECTED TO " + addr + ":" + port);			
+			Slave slave = new Slave(s);
+			ActionSlave actionSlave = new ActionSlave(slave);
+			ClockThread clk = new ClockThread(actionSlave,5);
+			clk.start();
+			actionSlave.run();
+			
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+			System.exit(1);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
 		
 	}
 	
@@ -132,7 +136,7 @@ public class Main {
 					System.out.println("ALL CLIENTS ACCEPTED --- GAME BEGINS");
 					//multiUserGame(clk,game,connections);
 					
-					ActionMaster actionMaster = new ActionMaster(connections);
+					ActionMaster actionMaster = new ActionMaster(connections,broadcastClock);
 					ClockThread clk = new ClockThread(actionMaster,gameClock);
 					clk.start();
 					actionMaster.run();
@@ -143,6 +147,7 @@ public class Main {
 			}
 		} catch(IOException e) {
 			System.err.println("I/O error: " + e.getMessage());
+			System.exit(1);
 		} 
 	}
 	
