@@ -12,7 +12,7 @@ public class BoardFrame extends JFrame {
     public BoardFrame(String title, Board game, MouseListener mouse) {
         super(title);
 
-        canvas = new BoardCanvas(/* uid,game */);
+        canvas = new BoardCanvas(/* uid,*/game);
         //it needs just one Listener?
         canvas.addMouseListener(mouse);
 
