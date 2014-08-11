@@ -4,6 +4,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import cluedo.controller.ActionMaster;
+import cluedo.controller.ActionSlave;
 import cluedo.controller.ClockThread;
 import cluedo.controller.connection.Master;
 import cluedo.controller.connection.Slave;
@@ -100,8 +101,12 @@ public class Main {
 	
 	private static void runClient(String addr, int port) throws IOException {		
 		Socket s = new Socket(addr,port);
-		System.out.println("PACMAN CLIENT CONNECTED TO " + addr + ":" + port);			
-		new Slave(s);
+		System.out.println("CLUEDO CLIENT CONNECTED TO " + addr + ":" + port);			
+		Slave slave = new Slave(s);
+		ActionSlave actionSlave = new ActionSlave(slave);
+		ClockThread clk = new ClockThread(actionSlave,5);
+		clk.start();
+		actionSlave.run();
 		
 	}
 	
@@ -130,9 +135,9 @@ public class Main {
 					ActionMaster actionMaster = new ActionMaster(connections);
 					ClockThread clk = new ClockThread(actionMaster,gameClock);
 					clk.start();
-					actionMaster.start();;
+					actionMaster.run();
 					
-					System.out.println("ALL CLIENTS DISCONNECTED --- GAME OVER");
+					//System.out.println("ALL CLIENTS DISCONNECTED --- GAME OVER");
 					return; // done
 				}
 			}
