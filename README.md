@@ -3,18 +3,8 @@ SWEN222Assign1
 
 Cluedo Game
 
-Find some tutorials:
+Please use here for disscussion.
 
-GIT:
-
-http://www.vogella.com/tutorials/Git/article.html
-
-GIT with Eclipse(EGIT):
-
-http://www.vogella.com/tutorials/EclipseGit/article.html
-
-Online Diagram
-
-https://www.lucidchart.com/
+Features required:
 
 //TODO
