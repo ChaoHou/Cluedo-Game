@@ -2,6 +2,12 @@ package cluedo.controller.action;
 
 public abstract class AbstractAction implements Action{
 	
+	/**
+	 * Type of the actions, the ordinal value will be passed to the slave 
+	 * in order to indicate current action type
+	 * @author C
+	 *
+	 */
 	public enum ActionType {
 		INITIALIZE,
 		MOVE,
@@ -12,8 +18,29 @@ public abstract class AbstractAction implements Action{
 		NOTIFY,
 	}
 	
+	/**
+	 * To indicate whether this is a server side action or a client side action
+	 */
+	protected boolean server;
 	
-	public static void main(String[] arg){
-		
+	/**
+	 * depends on the mode of current user, dispatch the relevant method 
+	 */
+	public void execute() {
+		if(server){
+			serverAction();
+		}else{
+			clientAction();
+		}
 	}
+	
+	/**
+	 * The server side action
+	 */
+	protected abstract void serverAction();
+	
+	/**
+	 * The client side Action
+	 */
+	protected abstract void clientAction();
 }

@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import cluedo.controller.action.Action;
 import cluedo.controller.action.Initialize;
+import cluedo.controller.action.Notify;
 import cluedo.controller.connection.Master;
 import cluedo.model.Board;
 
@@ -23,12 +24,25 @@ public class ActionMaster extends Thread implements ActionHandler{
 		//initialize the game
 		round = new Round();
 		
-		Action initialize = new Initialize();
-		actionQueue.offer(initialize);
+		//Action initialize = new Initialize();
+		//actionQueue.offer(initialize);
 	}
 	
-	
+	@Override
 	public void run(){
+		System.out.println("MASTER RUNNING");
+		while(1 == 1){
+			try {
+				Thread.sleep(1000);
+				actionQueue.add(new Notify(connections));
+				
+				System.out.println("Queue an action");
+				
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 	}
 	

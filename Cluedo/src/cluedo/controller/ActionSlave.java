@@ -1,5 +1,6 @@
 package cluedo.controller;
 
+import java.io.IOException;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -14,6 +15,28 @@ public class ActionSlave extends Thread implements ActionHandler {
 	
 	public ActionSlave(Slave con){
 		connection = con;
+	}
+	
+	public void run(){
+		System.out.println("CLIENT RUNNING");
+		
+		while(1 == 1){
+			try {
+				if(connection.getInput().available() != 0){
+					int index = connection.getInput().readInt();
+					System.out.println(connection.getInput().readByte());
+					
+					Thread.sleep(1000);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 	@Override
