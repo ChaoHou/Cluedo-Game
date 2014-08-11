@@ -13,9 +13,20 @@ public class ClockThread extends Thread{
 	}
 	
 	public void run(){
-		
-		while(!handler.isEmpty()){
-			Action action = handler.pollAction();
+		System.out.println("CLOCK RUNNING");
+		while(1==1){
+			try {
+				if(!handler.isEmpty()){
+					System.out.println("have action");
+					Action action = handler.pollAction();
+					action.execute();
+				}
+			
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
