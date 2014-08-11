@@ -24,8 +24,8 @@ public class ActionMaster extends Thread implements ActionHandler{
 		//initialize the game
 		round = new Round();
 		
-		Action initialize = new Initialize();
-		actionQueue.offer(initialize);
+		//Action initialize = new Initialize();
+		//actionQueue.offer(initialize);
 	}
 	
 	@Override

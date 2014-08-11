@@ -22,4 +22,25 @@ public abstract class AbstractAction implements Action{
 	 * To indicate whether this is a server side action or a client side action
 	 */
 	protected boolean server;
+	
+	/**
+	 * depends on the mode of current user, dispatch the relevant method 
+	 */
+	public void execute() {
+		if(server){
+			serverAction();
+		}else{
+			clientAction();
+		}
+	}
+	
+	/**
+	 * The server side action
+	 */
+	protected abstract void serverAction();
+	
+	/**
+	 * The client side Action
+	 */
+	protected abstract void clientAction();
 }

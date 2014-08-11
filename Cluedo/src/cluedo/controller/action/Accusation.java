@@ -3,7 +3,13 @@ package cluedo.controller.action;
 public class Accusation extends AbstractAction {
 
 	@Override
-	public void execute() {
+	protected void serverAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void clientAction() {
 		// TODO Auto-generated method stub
 		
 	}
