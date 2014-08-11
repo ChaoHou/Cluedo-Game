@@ -34,4 +34,9 @@ public class BoardFrame extends JFrame {
         canvas.repaint();
     }
 
+    //main method for test
+    public static void main(String[] arg) {
+        new BoardFrame("test",new Board(10*24,10*26),null);
+    }
+
 }

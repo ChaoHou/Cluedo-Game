@@ -55,4 +55,11 @@ public class Board {
         return solution;
     }
 
+    public int height() {
+        return height;
+    }
+
+    public int width() {
+        return width;
+    }
 }
