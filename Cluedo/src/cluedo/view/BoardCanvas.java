@@ -55,7 +55,7 @@ public class BoardCanvas extends Canvas {
                     g.fillRect(x*cell, y*cell, cell, cell);
                     g.setColor(Color.BLACK);
                     g.drawRect(x*cell, y*cell, cell, cell);
-                } else if (map[y].charAt(x) == 'R' || map[y].charAt(x) == 'D' ) {
+                } else if (map[y].charAt(x) == 'R' || map[y].charAt(x) == 'D' || map[y].charAt(x) == 'J' ) {
                     g.setColor(new Color(30, 233, 64));
                     g.fillRect(x*cell,y*cell,cell,cell);
                 } else {

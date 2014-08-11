@@ -36,7 +36,8 @@ public class BoardFrame extends JFrame {
 
     //main method for test
     public static void main(String[] arg) {
-        new BoardFrame("test",new Board(10*24,10*26),null);
+        int cell = 20;
+        new BoardFrame("test",new Board(cell*24,cell*26),null);
     }
 
 }
