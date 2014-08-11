@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import cluedo.controller.action.AbstractAction;
+import cluedo.controller.action.AbstractAction.ActionType;
 import cluedo.controller.action.Action;
 import cluedo.controller.connection.Slave;
 
@@ -23,11 +25,16 @@ public class ActionSlave extends Thread implements ActionHandler {
 		while(1 == 1){
 			try {
 				if(connection.getInput().available() != 0){
+					//read the type of the action
 					int index = connection.getInput().readInt();
-					System.out.println(connection.getInput().readByte());
+					ActionType actionType = ActionType.values()[index];
 					
-					Thread.sleep(1000);
+					Action action = AbstractAction.slaveActionFromType(actionType, connection);
+					actionQueue.offer(action);
+					
 				}
+				
+				Thread.sleep(1000);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -1,5 +1,7 @@
 package cluedo.controller.action;
 
+import cluedo.controller.connection.Slave;
+
 public abstract class AbstractAction implements Action{
 	
 	/**
@@ -43,4 +45,30 @@ public abstract class AbstractAction implements Action{
 	 * The client side Action
 	 */
 	protected abstract void clientAction();
+	
+	public static Action slaveActionFromType(ActionType type, Slave slave){
+		if(type.equals(ActionType.INITIALIZE)){
+			return new Initialize(slave);
+		}
+		if(type.equals(ActionType.MOVE)){
+			
+		}
+		if(type.equals(ActionType.SUGGESTION)){
+			
+		}
+		if(type.equals(ActionType.ACCUSATION)){
+			
+		}
+		if(type.equals(ActionType.ROLL)){
+			
+		}
+		if(type.equals(ActionType.REFUTE)){
+	
+		}
+		if(type.equals(ActionType.NOTIFY)){
+			return new Notify(slave);
+		}
+		
+		throw new IllegalArgumentException("INVALID TYPE");
+	}
 }
