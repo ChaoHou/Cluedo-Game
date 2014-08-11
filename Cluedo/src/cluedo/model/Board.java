@@ -1,6 +1,8 @@
 package cluedo.model;
 
 
+import cluedo.exception.IllegalRequestException;
+
 import java.util.ArrayList;
 
 //in client mode Board is renewed each time client receives new state
@@ -43,7 +45,7 @@ public class Board {
      * throws exception when an index stores different type of card
      * @param solution
      */
-    public void setSolution(Card[] solution) throws Exception{
+    public void setSolution(Card[] solution) throws IllegalRequestException { //this Exception needs to be original Exception
         this.solution = solution;
     }
 
