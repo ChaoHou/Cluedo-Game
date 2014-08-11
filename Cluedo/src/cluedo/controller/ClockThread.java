@@ -1,5 +1,7 @@
 package cluedo.controller;
 
+import cluedo.controller.action.Action;
+
 public class ClockThread extends Thread{
 	
 	private ActionHandler handler;
@@ -12,8 +14,8 @@ public class ClockThread extends Thread{
 	
 	public void run(){
 		
-		while(1 == 1){
-			
+		while(!handler.isEmpty()){
+			Action action = handler.pollAction();
 		}
 	}
 	

@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import cluedo.controller.action.Action;
 import cluedo.controller.action.Initialize;
 import cluedo.controller.connection.Master;
+import cluedo.model.Board;
 
 public class ActionMaster extends Thread implements ActionHandler{
 	
@@ -13,6 +14,7 @@ public class ActionMaster extends Thread implements ActionHandler{
 	
 	private Queue<Action> actionQueue = new ConcurrentLinkedQueue<Action>();
 	
+	private Board game;
 	private Round round;
 	
 	public ActionMaster(Master[] con){
