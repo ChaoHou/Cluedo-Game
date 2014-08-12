@@ -17,41 +17,17 @@ public class Board {
     /**
      * stores all rooms
      */
-    private final Room[] rooms = {
-            new Room("KITCHEN"),
-            new Room("BALL ROOM"),
-            new Room("CONSERVATORY"),
-            new Room("DINING ROOM"),
-            new Room("BILLIARD ROOM"),
-            new Room("LIBRARY"),
-            new Room("LOUNGE"),
-            new Room("HALL"),
-            new Room("STUDY")
-    };
+    private final Room[] rooms = new Room[9];
 
     /**
      * stores all characters
      */
-    private final Chara[] characters = {
-            new Chara("SCARLETT"),
-            new Chara("MUSTARD"),
-            new Chara("WHITE"),
-            new Chara("GREEN"),
-            new Chara("PEACOCK"),
-            new Chara("PLUM"),
-    };
+    private final Chara[] characters = new Chara[6];
 
     /**
      * sotres all weapons
      */
-    private final Weapon[] weapons = {
-            new Weapon("CANDLESTICK"),
-            new Weapon("DAGGER"),
-            new Weapon("LEAD_PIPE"),
-            new Weapon("REVOLVER"),
-            new Weapon("ROPE"),
-            new Weapon("SPANNER"),
-    };
+    private final Weapon[] weapons = new Weapon[6];
 
     /**
      * constructor
@@ -63,6 +39,26 @@ public class Board {
         this.width = width;
         this.height = height;
 
+        setupBoard();
+    }
+
+    /**
+     * setup defalut board
+     */
+    private void setupBoard() {
+        Card.ROOM[] valuesR = Card.ROOM.values();
+        Card.WEAPON[] valuesW = Card.WEAPON.values();
+        Card.CHARACTER[] valuesC = Card.CHARACTER.values();
+
+        for (int i = 0; i < valuesR.length; i++) {
+            rooms[i] = new Room(valuesR[i]);
+        }
+        for (int i = 0; i < valuesW.length; i++) {
+            weapons[i] = new Weapon(valuesW[i]);
+        }
+        for (int i = 0; i < valuesW.length; i++) {
+            characters[i] = new Chara(valuesC[i]);
+        }
     }
 
     /**
@@ -117,5 +113,17 @@ public class Board {
      */
     public byte[] toBit() {
         return null;
+    }
+
+    public Room[] getRooms() {
+        return rooms;
+    }
+
+    public Chara[] getCharacters() {
+        return characters;
+    }
+
+    public Weapon[] getWeapons() {
+        return weapons;
     }
 }
