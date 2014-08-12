@@ -36,20 +36,28 @@ public class BoardCanvas extends Canvas {
             "RRRRRR#S#RRRRRR#A#RRRRRR",
     };
 
+    /**
+     * constructor
+     * @param board
+     */
     public BoardCanvas(Board board) {
         this.board = board;
 
         setSize(new Dimension(board.width(),board.height()));
     }
 
+    /**
+     * paints canvas.
+     * @param g
+     */
     public void paint(Graphics g) {
         int width = board.width();
         int height = board.height();
         int cell = width/24;
 
-        //draw board
         for (int x = 0; x < 24;x++) {
             for (int y = 0; y < 26; y++) {
+                //draw board
                 if (map[y].charAt(x) == 'A' || map[y].charAt(x) == 'S') {
                     g.setColor(new Color(255, 237, 0));
                     g.fillRect(x*cell, y*cell, cell, cell);
@@ -62,6 +70,10 @@ public class BoardCanvas extends Canvas {
                     g.setColor(new Color(0, 141, 255));
                     g.fillRect(x*cell,y*cell,cell,cell);
                 }
+
+                //draw characters
+
+
 //                System.out.println(x+", "+y);
             }
 
