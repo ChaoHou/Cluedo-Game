@@ -26,14 +26,14 @@ public class ActionMaster extends Thread implements ActionHandler{
 		//initialize the game
 		round = new Round();
 		game = new Board(0, 0);
-		Action initialize = new Initialize(connections,game,round,broadcastClock);
-		actionQueue.offer(initialize);
+		//Action initialize = new Initialize(connections,game,round,broadcastClock);
+		//actionQueue.offer(initialize);
 	}
 	
 	@Override
 	public void run(){
 		System.out.println("MASTER RUNNING");
-		while(1 == 1){
+		while(allConnectionAlive()){
 			try {
 				Thread.sleep(1000);
 				actionQueue.add(new Notify(connections));
@@ -53,5 +53,12 @@ public class ActionMaster extends Thread implements ActionHandler{
 	
 	public Action pollAction(){
 		return actionQueue.poll();
+	}
+	
+	private boolean allConnectionAlive(){
+		for(Master master:connections){
+			if(master.isClosed()) return false;
+		}
+		return true;
 	}
 }

@@ -30,4 +30,12 @@ public abstract class AbstractConnection {
 	public DataInputStream getInput(){
 		return input;
 	}
+	
+	public boolean isClosed(){
+		return socket.isClosed();
+	}
+	
+	public void close() throws IOException{
+		socket.close();
+	}
 }

@@ -18,6 +18,7 @@ public abstract class AbstractAction implements Action{
 		ROLL,
 		REFUTE,
 		NOTIFY,
+		DISCONNECTED,
 	}
 	
 	/**
