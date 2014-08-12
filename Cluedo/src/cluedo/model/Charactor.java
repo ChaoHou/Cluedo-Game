@@ -1,5 +1,16 @@
 package cluedo.model;
 
-public class Charactor {
+import java.awt.*;
 
+public class Charactor {
+    private int xCoordinate;
+    private int yCoordinate;
+
+    public int getX() {
+        return xCoordinate;
+    }
+
+    public int getY() {
+        return yCoordinate;
+    }
 }
