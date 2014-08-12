@@ -1,6 +1,6 @@
 package cluedo.view;
 
-import cluedo.model.Board;
+import cluedo.model.*;
 
 import java.awt.*;
 
@@ -70,6 +70,11 @@ public class BoardCanvas extends Canvas {
                 }
 
                 //draw characters
+                for (Chara c: board.getCharacters()) {
+                    g.setColor(getCColor(c.getName()));
+                    g.fillOval(c.getX() * cell, c.getY() * cell, cell, cell);
+                }
+
 
 
 //                System.out.println(x+", "+y);
@@ -77,5 +82,24 @@ public class BoardCanvas extends Canvas {
 
         }
 
+    }
+
+    private Color getCColor(Card.CHARACTER c) {
+        switch (c.ordinal()) {
+            case 0:
+                return Color.red;
+            case 1:
+                return Color.yellow;
+            case 2:
+                return Color.white;
+            case 3:
+                return Color.green;
+            case 4:
+                return Color.blue;
+            case 5:
+                return new Color(255, 0, 255);
+            default:
+                return null;
+        }
     }
 }
