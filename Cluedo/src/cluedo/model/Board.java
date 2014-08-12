@@ -3,8 +3,6 @@ package cluedo.model;
 
 import cluedo.exception.IllegalRequestException;
 
-import java.util.ArrayList;
-
 //in client mode Board is renewed each time client receives new state
 //in server mode Board is just refreshed.
 public class Board {
@@ -34,25 +32,25 @@ public class Board {
     /**
      * stores all characters
      */
-    private final Character[] characters = {
-            SCARLETT,
-            MUSTARD,
-            WHITE,
-            GREEN,
-            PEACOCK,
-            PLUM,
+    private final Chara[] characters = {
+            new Chara("SCARLETT"),
+            new Chara("MUSTARD"),
+            new Chara("WHITE"),
+            new Chara("GREEN"),
+            new Chara("PEACOCK"),
+            new Chara("PLUM"),
     };
 
     /**
      * sotres all weapons
      */
     private final Weapon[] weapons = {
-            CANDLESTICK,
-            DAGGER,
-            LEAD_PIPE,
-            REVOLVER,
-            ROPE,
-            SPANNER,
+            new Weapon("CANDLESTICK"),
+            new Weapon("DAGGER"),
+            new Weapon("LEAD_PIPE"),
+            new Weapon("REVOLVER"),
+            new Weapon("ROPE"),
+            new Weapon("SPANNER"),
     };
 
     /**
