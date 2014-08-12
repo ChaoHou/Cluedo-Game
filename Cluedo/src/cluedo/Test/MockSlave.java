@@ -10,16 +10,27 @@ import java.awt.event.MouseListener;
  * Created by innocence on 12/08/2014.
  */
 public class MockSlave implements MouseListener{
+    private final Board board;
+
+    public MockSlave() {
+        this.board = new Board(20*24, 20*26);
+    }
+
+
+    public void run() {
+        int cell = 20;
+        new BoardFrame("test",board,this);
+    }
+
 
     //main method for test
     public static void main(String[] arg) {
-        int cell = 20;
-        new BoardFrame("test",new Board(cell*24,cell*26),null);
+        Board board = new Board(20*24,20*26);
+        new MockSlave().run();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
     }
 
     @Override
