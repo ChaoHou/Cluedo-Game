@@ -4,8 +4,6 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import cluedo.controller.action.Action;
-import cluedo.controller.action.Initialize;
-import cluedo.controller.action.Notify;
 import cluedo.controller.connection.Master;
 import cluedo.model.Board;
 
@@ -17,15 +15,16 @@ public class ActionMaster extends Thread implements ActionHandler{
 	
 	private Board game;
 	private Round round;
-	private int broadcastClock;
+	private int gameClock;
 	
 	public ActionMaster(Master[] con, int clock){
 		connections = con;
-		broadcastClock = clock;
+		gameClock = clock;
 		
 		//initialize the game
-		round = new Round();
+		
 		game = new Board(0, 0);
+		round = new Round(connections);
 		//Action initialize = new Initialize(connections,game,round,broadcastClock);
 		//actionQueue.offer(initialize);
 	}
@@ -33,7 +32,22 @@ public class ActionMaster extends Thread implements ActionHandler{
 	@Override
 	public void run(){
 		System.out.println("MASTER RUNNING");
-		
+		while(1 == 1){
+			try {
+				if(!actionQueue.isEmpty()){
+					Action action = actionQueue.poll();
+					action.execute();
+					
+					round.tick();
+				}
+				
+				
+				Thread.sleep(gameClock);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public boolean isEmpty(){

@@ -56,7 +56,7 @@ public class Main {
 		if(server){
 			runServer(port, nplayers, gameClock, broadcastClock);
 		}else{
-			runClient(url,port,broadcastClock);
+			runClient(url,port,gameClock,broadcastClock);
 		}
 		
 		System.exit(0);
@@ -92,13 +92,13 @@ public class Main {
 		}
 	}
 	
-	private static void runClient(String addr, int port, int broadcastClock){		
+	private static void runClient(String addr, int port,int gameClock, int broadcastClock){		
 		Socket s;
 		try {
 			s = new Socket(addr,port);
 			System.out.println("CLUEDO CLIENT CONNECTED TO " + addr + ":" + port);			
 			Slave slave = new Slave(s,broadcastClock);
-			ActionSlave actionSlave = new ActionSlave(slave);
+			ActionSlave actionSlave = new ActionSlave(slave,gameClock);
 			slave.setActionHandler(actionSlave);
 			
 			slave.start();
@@ -136,7 +136,7 @@ public class Main {
 					System.out.println("ALL CLIENTS ACCEPTED --- GAME BEGINS");
 					//multiUserGame(clk,game,connections);
 					
-					ActionMaster actionMaster = new ActionMaster(connections,broadcastClock);
+					ActionMaster actionMaster = new ActionMaster(connections,gameClock);
 					
 					for(Master master:connections){
 						master.setActionHandler(actionMaster);
