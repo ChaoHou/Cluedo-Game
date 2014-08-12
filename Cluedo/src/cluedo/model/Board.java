@@ -57,11 +57,36 @@ public class Board {
         return solution;
     }
 
+    /**
+     * return the game board's height
+     * @return int
+     */
     public int height() {
         return height;
     }
 
+    /**
+     * return the game board's width
+     * @return int
+     */
     public int width() {
         return width;
+    }
+
+    /**
+     * decode current game state and apply it
+     * @param input
+     */
+
+    public void fromBit(byte[] input) {
+
+    }
+
+    /**
+     * encode current game state into Bitwise
+     * @return int
+     */
+    public byte[] toBit() {
+        return null;
     }
 }
