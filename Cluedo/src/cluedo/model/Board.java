@@ -19,21 +19,52 @@ public class Board {
     /**
      * stores all rooms
      */
-    private final ArrayList<Room> rooms = new ArrayList<Room>();
+    private final Room[] rooms = {
+            new Room("KITCHEN"),
+            new Room("BALL ROOM"),
+            new Room("CONSERVATORY"),
+            new Room("DINING ROOM"),
+            new Room("BILLIARD ROOM"),
+            new Room("LIBRARY"),
+            new Room("LOUNGE"),
+            new Room("HALL"),
+            new Room("STUDY")
+    };
 
     /**
      * stores all characters
      */
-    private final ArrayList<Character> characters = new ArrayList<Character>();
+    private final Character[] characters = {
+            SCARLETT,
+            MUSTARD,
+            WHITE,
+            GREEN,
+            PEACOCK,
+            PLUM,
+    };
 
     /**
      * sotres all weapons
      */
-    private final ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+    private final Weapon[] weapons = {
+            CANDLESTICK,
+            DAGGER,
+            LEAD_PIPE,
+            REVOLVER,
+            ROPE,
+            SPANNER,
+    };
 
+    /**
+     * constructor
+     * initialise all rooms, characters and weapons on default position.
+     * @param width
+     * @param height
+     */
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
+
     }
 
     /**
