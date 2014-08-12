@@ -6,34 +6,34 @@ import java.awt.*;
 
 public class BoardCanvas extends Canvas {
     private final Board board;
-    // A = collidor R = room D = door S = start J = jump
+    // C = collidor R = room D = door S = start J = jump
     private final String[] map = {
             "#########S####S#########",
-            "RRRRRJ#AAARRRRAAA#RRRRRR",
-            "RRRRRRAARRRRRRRRAARRRRRR",
-            "RRRRRRAARRRRRRRRAARRRRRR",
-            "RRRRRRAARRRRRRRRAARRRRRR",
-            "RRRRRRAARRRRRRRRAADRRRRR",
-            "#RRRDRAADRRRRRRDAAA#####",
-            "AAAAAAAARRRRRRRRAAAAAAAS",
-            "#AAAAAAARDRRRRDRAAAAAAA#",
-            "RRRRRAAAAAAAAAAAAARRRRRR",
-            "RRRRRRRRAAAAAAAAAARRRRRR",
-            "RRRRRRRRAA#####AAARRRRRR",
-            "RRRRRRRRAA#####AAARRRRRR",
-            "RRRRRRRDAA#####AAARRRRRR",
-            "RRRRRRRRAA#####AAAAAAAA#",
-            "RRRRRRRRAA#####AAARRRRR#",
-            "RRRRRRDRAA#####AARRRRRRR",
-            "#AAAAAAAAA#####AADRRRRRR",
-            "SAAAAAAAAAAAAAAAARRRRRRR",
-            "#AAAAAAAARRRRRRAAARRRRR#",
-            "JRRRRRRAARRRRRRAAAAAAAAS",
-            "RRRRRRRAARRRRRRAAAAAAAA#",
-            "RRRRRRRAARRRRRRAARRRRRRJ",
-            "RRRRRRRAARRRRRRAARRRRRRR",
-            "RRRRRRRAARRRRRRAARRRRRRR",
-            "RRRRRR#S#RRRRRR#A#RRRRRR",
+            "RRRRRJ#CCCRRRRCCC#RRRRRR",
+            "RRRRRRCCRRRRRRRRCCRRRRRR",
+            "RRRRRRCCRRRRRRRRCCRRRRRR",
+            "RRRRRRCCRRRRRRRRCCRRRRRR",
+            "RRRRRRCCRRRRRRRRCCDRRRRR",
+            "#RRRDRCCDRRRRRRDCCC#####",
+            "CCCCCCCCRRRRRRRRCCCCCCCS",
+            "#CCCCCCCRDRRRRDRCCCCCCC#",
+            "RRRRRCCCCCCCCCCCCCRRRRRR",
+            "RRRRRRRRCCCCCCCCCCRRRRRR",
+            "RRRRRRRRCC#####CCCRRRRRR",
+            "RRRRRRRRCC#####CCCRRRRRR",
+            "RRRRRRRDCC#####CCCRRRRRR",
+            "RRRRRRRRCC#####CCCCCCCC#",
+            "RRRRRRRRCC#####CCCRRRRR#",
+            "RRRRRRDRCC#####CCRRRRRRR",
+            "#CCCCCCCCC#####CCDRRRRRR",
+            "SCCCCCCCCCCCCCCCCRRRRRRR",
+            "#CCCCCCCCRRRRRRCCCRRRRR#",
+            "JRRRRRRCCRRRRRRCCCCCCCCS",
+            "RRRRRRRCCRRRRRRCCCCCCCC#",
+            "RRRRRRRCCRRRRRRCCRRRRRRJ",
+            "RRRRRRRCCRRRRRRCCRRRRRRR",
+            "RRRRRRRCCRRRRRRCCRRRRRRR",
+            "RRRRRR#S#RRRRRR#C#RRRRRR",
     };
 
     /**
@@ -51,14 +51,12 @@ public class BoardCanvas extends Canvas {
      * @param g
      */
     public void paint(Graphics g) {
-        int width = board.width();
-        int height = board.height();
-        int cell = width/24;
+        int cell = board.width()/24;
 
         for (int x = 0; x < 24;x++) {
             for (int y = 0; y < 26; y++) {
                 //draw board
-                if (map[y].charAt(x) == 'A' || map[y].charAt(x) == 'S') {
+                if (map[y].charAt(x) == 'C' || map[y].charAt(x) == 'S') {
                     g.setColor(new Color(255, 237, 0));
                     g.fillRect(x*cell, y*cell, cell, cell);
                     g.setColor(Color.BLACK);
