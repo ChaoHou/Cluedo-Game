@@ -1,23 +1,25 @@
 package cluedo.model;
 
-import java.awt.*;
-
 public class Chara {
-    private final String name;
+    private final Card.CHARACTER name;
     private int xCoordinate;
     private int yCoordinate;
 
-    public Chara(String name) {
+    public Chara(Card.CHARACTER name) {
         this.name = name;
+
+        setStartPos();
     }
 
     /**
      * get character's name
-     * @return String
+     * @return Card.CHARACTER
      */
-    public String getName() {
+    public Card.CHARACTER getName() {
         return name;
+
     }
+
     /**
      * get X coordinate of the character 0..24
      * @return int
@@ -32,5 +34,38 @@ public class Chara {
      */
     public int getY() {
         return yCoordinate;
+    }
+
+    /**
+     * set the character into certain start position depends on character
+     */
+    private void setStartPos() {
+        switch(name.ordinal()){
+            case 0:
+                xCoordinate = 7;
+                yCoordinate = 25;
+                break;
+            case 1:
+                xCoordinate = 0;
+                yCoordinate = 18;
+                break;
+            case 2:
+                xCoordinate = 9;
+                yCoordinate = 0;
+                break;
+            case 3:
+                xCoordinate = 14;
+                yCoordinate = 0;
+                break;
+            case 4:
+                xCoordinate = 23;
+                yCoordinate = 7;
+                break;
+            case 5:
+                xCoordinate = 23;
+                yCoordinate = 20;
+                break;
+        }
+
     }
 }
