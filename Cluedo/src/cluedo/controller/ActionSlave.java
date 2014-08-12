@@ -31,25 +31,7 @@ public class ActionSlave extends Thread implements ActionHandler,WindowListener{
 	public void run(){
 		System.out.println("CLIENT RUNNING");
 		
-		while(!connection.isClosed()){
-			try {
-				if(connection.getInput().available() != 0){
-					//read the type of the action
-					int index = connection.getInput().readInt();
-					ActionType actionType = ActionType.values()[index];
-					System.out.println(actionType);
-					Action action = AbstractAction.slaveActionFromType(actionType, connection);
-					actionQueue.offer(action);
-					
-				}
-				
-				Thread.sleep(1000);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+		
 		
 	}
 
@@ -97,5 +79,10 @@ public class ActionSlave extends Thread implements ActionHandler,WindowListener{
 
 	@Override
 	public void windowOpened(WindowEvent arg0) {
+	}
+
+	@Override
+	public void offerAction(Action action) {
+		actionQueue.offer(action);
 	}
 }

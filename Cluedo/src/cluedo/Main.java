@@ -6,7 +6,6 @@ import java.net.UnknownHostException;
 
 import cluedo.controller.ActionMaster;
 import cluedo.controller.ActionSlave;
-import cluedo.controller.ClockThread;
 import cluedo.controller.connection.Master;
 import cluedo.controller.connection.Slave;
 
@@ -57,7 +56,7 @@ public class Main {
 		if(server){
 			runServer(port, nplayers, gameClock, broadcastClock);
 		}else{
-			runClient(url,port);
+			runClient(url,port,broadcastClock);
 		}
 		
 		System.exit(0);
@@ -93,15 +92,16 @@ public class Main {
 		}
 	}
 	
-	private static void runClient(String addr, int port){		
+	private static void runClient(String addr, int port, int broadcastClock){		
 		Socket s;
 		try {
 			s = new Socket(addr,port);
 			System.out.println("CLUEDO CLIENT CONNECTED TO " + addr + ":" + port);			
-			Slave slave = new Slave(s);
+			Slave slave = new Slave(s,broadcastClock);
 			ActionSlave actionSlave = new ActionSlave(slave);
-			ClockThread clk = new ClockThread(actionSlave,5);
-			clk.start();
+			slave.setActionHandler(actionSlave);
+			
+			slave.start();
 			actionSlave.run();
 			
 		} catch (UnknownHostException e) {
@@ -130,17 +130,20 @@ public class Main {
 				System.out.println("ACCEPTED CONNECTION FROM: " + s.getInetAddress());				
 				//int uid = game.registerPacman();
 				int uid = 0;
-				connections[--nplayers] = new Master(s,uid);
+				connections[--nplayers] = new Master(s,broadcastClock,uid);
 				//connections[nplayers].start();				
 				if(nplayers == 0) {
 					System.out.println("ALL CLIENTS ACCEPTED --- GAME BEGINS");
 					//multiUserGame(clk,game,connections);
 					
 					ActionMaster actionMaster = new ActionMaster(connections,broadcastClock);
-					ClockThread clk = new ClockThread(actionMaster,gameClock);
-					clk.start();
-					actionMaster.run();
 					
+					for(Master master:connections){
+						master.setActionHandler(actionMaster);
+						master.start();
+					}
+					
+					actionMaster.run();
 					//System.out.println("ALL CLIENTS DISCONNECTED --- GAME OVER");
 					return; // done
 				}

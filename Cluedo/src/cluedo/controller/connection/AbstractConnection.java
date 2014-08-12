@@ -5,13 +5,18 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public abstract class AbstractConnection {
-	private final Socket socket;
+import cluedo.controller.ActionHandler;
+
+public abstract class AbstractConnection extends Thread{
+	protected final Socket socket;
+	protected int boardcastClock;
+	protected ActionHandler handler;
 	protected DataOutputStream output;
 	protected DataInputStream input;
 	
-	public AbstractConnection(Socket socket){
+	public AbstractConnection(Socket socket,int clock){
 		this.socket = socket;
+		boardcastClock = clock;
 		
 		try{
 			output = new DataOutputStream(socket.getOutputStream());
@@ -21,6 +26,10 @@ public abstract class AbstractConnection {
 			System.err.println("I/O Error: " + e.getMessage());
 			e.printStackTrace(System.err);
 		}
+	}
+	
+	public void setActionHandler(ActionHandler aHandler){
+		handler = aHandler;
 	}
 	
 	public DataOutputStream getOutput(){

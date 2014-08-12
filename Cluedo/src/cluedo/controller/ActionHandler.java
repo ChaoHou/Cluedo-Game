@@ -13,4 +13,10 @@ public interface ActionHandler {
 	 * @return
 	 */
 	public Action pollAction();
+	
+	/**
+	 * Offer an action to the action queue
+	 * @param action
+	 */
+	public void offerAction(Action action);
 }

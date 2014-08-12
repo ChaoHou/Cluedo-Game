@@ -33,17 +33,6 @@ public class ActionMaster extends Thread implements ActionHandler{
 	@Override
 	public void run(){
 		System.out.println("MASTER RUNNING");
-		while(allConnectionAlive()){
-			try {
-				Thread.sleep(1000);
-				actionQueue.add(new Notify(connections));
-				
-				System.out.println("Queue an action");
-				
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
 		
 	}
 	
@@ -60,5 +49,10 @@ public class ActionMaster extends Thread implements ActionHandler{
 			if(master.isClosed()) return false;
 		}
 		return true;
+	}
+
+	@Override
+	public void offerAction(Action action) {
+		actionQueue.offer(action);
 	}
 }

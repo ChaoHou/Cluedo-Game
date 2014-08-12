@@ -1,5 +1,8 @@
 package cluedo.controller.action;
 
+import java.io.DataInputStream;
+
+import cluedo.controller.action.AbstractAction.ActionType;
 import cluedo.controller.connection.Slave;
 
 public abstract class AbstractAction implements Action{
@@ -47,9 +50,9 @@ public abstract class AbstractAction implements Action{
 	 */
 	protected abstract void clientAction();
 	
-	public static Action slaveActionFromType(ActionType type, Slave slave){
+	public static Action actionFromSlave(ActionType type, DataInputStream input){
 		if(type.equals(ActionType.INITIALIZE)){
-			return new Initialize(slave);
+			//return new Initialize(slave);
 		}
 		if(type.equals(ActionType.MOVE)){
 			
@@ -67,9 +70,15 @@ public abstract class AbstractAction implements Action{
 	
 		}
 		if(type.equals(ActionType.NOTIFY)){
-			return new Notify(slave);
+			//return new Notify(slave);
 		}
 		
 		throw new IllegalArgumentException("INVALID TYPE");
+	}
+
+	public static Action actionFromMaster(ActionType type, DataInputStream input) {
+		
+		
+		return null;
 	}
 }
