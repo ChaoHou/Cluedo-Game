@@ -17,12 +17,12 @@ public class ClockThread extends Thread{
 		while(1==1){
 			try {
 				if(!handler.isEmpty()){
-					System.out.println("have action");
 					Action action = handler.pollAction();
 					action.execute();
+					System.out.println("ACTION EXECUTED");
 				}
 			
-				Thread.sleep(1000);
+				Thread.sleep(clock);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

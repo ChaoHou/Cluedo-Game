@@ -4,19 +4,25 @@ import java.io.IOException;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import cluedo.Test.MockSlave;
 import cluedo.controller.action.AbstractAction;
 import cluedo.controller.action.AbstractAction.ActionType;
 import cluedo.controller.action.Action;
 import cluedo.controller.connection.Slave;
+import cluedo.model.Board;
+import cluedo.view.BoardFrame;
 
 public class ActionSlave extends Thread implements ActionHandler {
 
 	private Slave connection;
-	
+	private Board game;
+	private BoardFrame frame;
 	private Queue<Action> actionQueue = new ConcurrentLinkedQueue<Action>();
 	
 	public ActionSlave(Slave con){
 		connection = con;
+		game = new Board(100,100);
+		frame = new BoardFrame("cludo",game,new MockSlave());
 	}
 	
 	public void run(){

@@ -1,5 +1,6 @@
 package cluedo.controller.action;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,11 +36,37 @@ public class Initialize extends AbstractAction {
 	 */
 	protected void serverAction(){
 		List<Master> unInit = new ArrayList<Master>(Arrays.asList(connections));
-		List<Master> Inited = new ArrayList<Master>();
+		List<Master> inited = new ArrayList<Master>();
 		
 		while(!unInit.isEmpty()){
 			
 			try {
+				
+				//get input from client
+				//remove the client from unInit
+				//add to the inited
+				//boardcast to inited with current status
+				
+				for(Master master:unInit){
+					try {
+						if(master.getInput().available() != 0){
+							//read input from user
+							//update the board, player
+							
+							inited.add(master);
+							
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				for(Master master:inited){
+					//boardcast the current state
+					
+					//remove the object from unInit
+					unInit.remove(master);
+				}
 				
 				
 				Thread.sleep(broadcastClock);
@@ -52,6 +79,6 @@ public class Initialize extends AbstractAction {
 	}
 	
 	protected void clientAction(){
-		
+		//require user input for name and character
 	}
 }

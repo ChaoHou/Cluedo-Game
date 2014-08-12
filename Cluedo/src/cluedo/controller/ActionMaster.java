@@ -41,7 +41,6 @@ public class ActionMaster extends Thread implements ActionHandler{
 				System.out.println("Queue an action");
 				
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
