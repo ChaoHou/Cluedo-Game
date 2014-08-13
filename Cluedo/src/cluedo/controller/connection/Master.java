@@ -25,7 +25,7 @@ public class Master extends AbstractConnection{
 				if(input.available() != 0){
 					int index = input.readInt();
 					ActionType actionType = ActionType.values()[index];
-					Action action = AbstractAction.actionFromSlave(actionType, input);
+					Action action = AbstractAction.serverSideAction(actionType, input);
 					
 					handler.offerAction(action);
 				}

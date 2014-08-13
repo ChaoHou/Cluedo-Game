@@ -21,9 +21,14 @@ public class Slave extends AbstractConnection{
 				if(input.available() != 0){
 					int index = input.readInt();
 					ActionType actionType = ActionType.values()[index];
-					Action action = AbstractAction.actionFromMaster(actionType, input);
 					
-					handler.offerAction(action);
+					//all the action recieved will be a notify action
+					//depends on the type of the notify, update the view
+					
+					
+					//Action action = AbstractAction.actionFromMaster(actionType, input);
+					
+					//handler.offerAction(action);
 				}
 				
 				Thread.sleep(boardcastClock);

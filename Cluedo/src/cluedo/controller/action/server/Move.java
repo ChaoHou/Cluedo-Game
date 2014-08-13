@@ -1,25 +1,27 @@
-package cluedo.controller.action;
+package cluedo.controller.action.server;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+
+import cluedo.controller.action.AbstractAction;
+import cluedo.controller.action.AbstractAction.ActionType;
 
 public class Move extends AbstractAction{
 
 	private int x;
 	private int y;
+	/**
+	 * Constructor for a move action from slave
+	 * @param x
+	 * @param y
+	 */
 	public Move(int x,int y){
 		this.x = x;
 		this.y = y;
 		server = false;
 	}
 	
-	@Override
-	protected void serverAction() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
 	protected void clientAction() {
 		System.out.println("Coord x: "+x+" y: "+y);
 	}
@@ -34,6 +36,12 @@ public class Move extends AbstractAction{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void execute() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

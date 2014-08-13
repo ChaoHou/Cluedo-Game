@@ -11,8 +11,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import cluedo.Test.MockSlave;
 import cluedo.controller.action.AbstractAction;
 import cluedo.controller.action.AbstractAction.ActionType;
+import cluedo.controller.action.server.Move;
 import cluedo.controller.action.Action;
-import cluedo.controller.action.Move;
 import cluedo.controller.connection.Slave;
 import cluedo.model.Board;
 import cluedo.view.BoardFrame;
@@ -30,7 +30,8 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener{
 		gameClock = clock;
 		game = new Board(100,100);
 		frame = new BoardFrame("cludo",game,this);
-		//frame.addWindowListener(this);
+		//enable the popup to ask user for user name and token
+		//then send to server
 	}
 	
 	public void run(){

@@ -1,7 +1,9 @@
-package cluedo.controller.action;
+package cluedo.controller.action.client;
 
 import java.io.IOException;
 
+import cluedo.controller.action.AbstractAction;
+import cluedo.controller.action.AbstractAction.ActionType;
 import cluedo.controller.connection.Master;
 import cluedo.controller.connection.Slave;
 
@@ -57,6 +59,12 @@ public class Notify extends AbstractAction {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+	}
+
+	@Override
+	public void execute() {
+		// TODO Auto-generated method stub
 		
 	}
 

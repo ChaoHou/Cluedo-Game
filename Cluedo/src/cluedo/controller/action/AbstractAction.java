@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import cluedo.controller.action.AbstractAction.ActionType;
+import cluedo.controller.action.server.Move;
 import cluedo.controller.connection.Slave;
 
 public abstract class AbstractAction implements Action{
@@ -30,28 +31,9 @@ public abstract class AbstractAction implements Action{
 	 */
 	protected boolean server;
 	
-	/**
-	 * depends on the mode of current user, dispatch the relevant method 
-	 */
-	public void execute() {
-		if(server){
-			serverAction();
-		}else{
-			clientAction();
-		}
-	}
+	public abstract void execute();
 	
-	/**
-	 * The server side action
-	 */
-	protected abstract void serverAction();
-	
-	/**
-	 * The client side Action
-	 */
-	protected abstract void clientAction();
-	
-	public static Action actionFromSlave(ActionType type, DataInputStream input){
+	public static Action serverSideAction(ActionType type, DataInputStream input){
 		if(type.equals(ActionType.INITIALIZE)){
 			//return new Initialize(slave);
 		}
@@ -85,7 +67,7 @@ public abstract class AbstractAction implements Action{
 		throw new IllegalArgumentException("INVALID TYPE");
 	}
 
-	public static Action actionFromMaster(ActionType type, DataInputStream input) {
+	public static Action clientSideAction(ActionType type, DataInputStream input) {
 		
 		
 		return null;
