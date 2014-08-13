@@ -8,7 +8,7 @@ disableRoll()//disable the roll button
 
 enableRoll()
 
-disableAction()//disabled the ability to make announcement or accusation.
+disableAction()//disabled the ability to make announcement or accusation. For example disable buttons.
 
 enableAction()
 
