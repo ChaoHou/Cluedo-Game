@@ -63,7 +63,7 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		//check player's state, if needs inputs, 
-		// queue an action,
+		// send info to server
 		//if server confirmed the action, change player's state
 		System.out.println("clicked");
 	}
