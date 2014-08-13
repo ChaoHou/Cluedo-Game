@@ -1,0 +1,17 @@
+Method for frame class:
+
+initPlayer() //which will show a popup to ask user to enter a name and select a type of token.
+
+showMessage(String str)//will show messages to user
+
+disableRoll()//disable the roll button
+
+enableRoll()
+
+disableAction()//disabled the ability to make announcement or accusation.
+
+enableAction()
+
+disableRefute() //disable the ability to select a card to refute.
+
+enableRefute()
