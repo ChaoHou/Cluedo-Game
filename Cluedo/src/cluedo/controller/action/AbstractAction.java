@@ -1,6 +1,7 @@
 package cluedo.controller.action;
 
 import java.io.DataInputStream;
+import java.io.IOException;
 
 import cluedo.controller.action.AbstractAction.ActionType;
 import cluedo.controller.connection.Slave;
@@ -55,6 +56,14 @@ public abstract class AbstractAction implements Action{
 			//return new Initialize(slave);
 		}
 		if(type.equals(ActionType.MOVE)){
+			
+			try {
+				int x = input.readInt();
+				int y = input.readInt();
+				return new Move(x,y);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 		}
 		if(type.equals(ActionType.SUGGESTION)){

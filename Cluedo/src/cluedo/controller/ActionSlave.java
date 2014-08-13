@@ -12,6 +12,7 @@ import cluedo.Test.MockSlave;
 import cluedo.controller.action.AbstractAction;
 import cluedo.controller.action.AbstractAction.ActionType;
 import cluedo.controller.action.Action;
+import cluedo.controller.action.Move;
 import cluedo.controller.connection.Slave;
 import cluedo.model.Board;
 import cluedo.view.BoardFrame;
@@ -61,11 +62,15 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener{
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent arg) {
 		//check player's state, if needs inputs, 
 		// send info to server
 		//if server confirmed the action, change player's state
-		System.out.println("clicked");
+		System.out.println("MOUSE CLICKED");
+		int x = arg.getX();
+		int y = arg.getY();
+		
+		Move.sendMove(connection.getOutput(), x, y);
 	}
 
 	@Override
