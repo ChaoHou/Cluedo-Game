@@ -8,8 +8,8 @@ import java.util.ArrayList;
 //in client mode Board is renewed each time client receives new state
 //in server mode Board is just refreshed.
 public class Board {
-    private final int width = 400;
-    private final int height = 400;
+    private final int width = 20*24;
+    private final int height = 20*26;
 
     /**
      * stores solution
@@ -127,7 +127,7 @@ public class Board {
     /**
      * read a byte array and creates a board instance
      * @param input
-     * @return 
+     * @return
      */
     public static Board boardFromByte(byte[] input) {
         return null;

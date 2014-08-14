@@ -12,14 +12,13 @@ public class BoardFrame extends JFrame {
     private boolean rollDisabled;
     private boolean refuteDisabled;
 
-    private JButton[] buttons;
+    private JButton[] buttons = new JButton[2];
 
     public BoardFrame(String title, Board game, MouseListener mouse, ActionListener action) {
         super(title);
 
         canvas = new BoardCanvas(/* uid,*/game);
-        //Master doesn't have listener
-            canvas.addMouseListener(mouse);
+        canvas.addMouseListener(mouse);
 
         //does this line necessary?
         setLayout(new BorderLayout());
@@ -32,8 +31,8 @@ public class BoardFrame extends JFrame {
         buttons[0] = ac;
         JButton as = new JButton("ASSUMPTION");
         buttons[1] = as;
-        ac.addActionListener(action);
-        as.addActionListener(action);
+//        ac.addActionListener(action);
+//        as.addActionListener(action);
 
         //create combo boxes
         String[] charas = {"SCARLETT","MUSTARD","WHITE","GREEN","PEACOCK","PLUM"};
@@ -55,7 +54,7 @@ public class BoardFrame extends JFrame {
 //        JTextArea textArea = new JTextArea();
 //        p.add(textArea,BorderLayout.SOUTH);
 
-        add(p,BorderLayout.SOUTH);
+//        add(p,BorderLayout.SOUTH);
 
         //pack components nicely
         pack();
