@@ -97,7 +97,7 @@ public class BoardFrame extends JFrame {
     }
 
     public void showMessage(String str) {
-
+        JOptionPane.showMessageDialog(this, str, "Listen!", JOptionPane.PLAIN_MESSAGE);
     }
 
     public void repaint() {
