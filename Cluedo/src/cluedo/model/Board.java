@@ -124,6 +124,15 @@ public class Board {
         return null;
     }
 
+    /**
+     * read a byte array and creates a board instance
+     * @param input
+     * @return 
+     */
+    public static Board boardFromByte(byte[] input) {
+        return null;
+    }
+
     public Room[] getRooms() {
         return rooms;
     }
