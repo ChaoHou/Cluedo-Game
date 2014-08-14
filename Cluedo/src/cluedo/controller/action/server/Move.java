@@ -1,41 +1,52 @@
 package cluedo.controller.action.server;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
 import cluedo.controller.action.AbstractAction;
 import cluedo.controller.action.AbstractAction.ActionType;
+import cluedo.controller.action.client.Notify;
 
 public class Move extends AbstractAction{
 
-	private int x;
-	private int y;
+	public enum Direction{
+		UP,
+		DOWN,
+		LEFT,
+		RIGHT,
+	}
+	
+	private Direction direction;
+	
+	private DataOutputStream output;
 	/**
 	 * Constructor for a move action from slave
 	 * @param x
 	 * @param y
 	 */
-	public Move(int x,int y){
-		this.x = x;
-		this.y = y;
+	public Move(DataOutputStream out,Direction dir){
+		output = out;
+		direction = dir;
 		server = false;
 	}
 	
-	public static void sendMove(DataOutputStream output,int x,int y){
+	public static void sendMove(DataOutputStream output,Direction dir){
 		try {
+			System.out.println("Send move request");
 			output.writeInt(ActionType.MOVE.ordinal());
-			output.writeInt(x);
-			output.writeInt(y);
+			output.writeInt(dir.ordinal());
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public void execute() {
-		System.out.println("Coord x: "+x+" y: "+y);
+		System.out.println("Move recieved");
+		Notify.sendMessageMove(output, direction);
+		System.out.println("Sent confirmition to client");
 	}
 
 }

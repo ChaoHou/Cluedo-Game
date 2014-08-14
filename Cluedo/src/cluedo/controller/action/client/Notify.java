@@ -1,71 +1,53 @@
 package cluedo.controller.action.client;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 import cluedo.controller.action.AbstractAction;
 import cluedo.controller.action.AbstractAction.ActionType;
+import cluedo.controller.action.server.Move.Direction;
 import cluedo.controller.connection.Master;
 import cluedo.controller.connection.Slave;
 
 public class Notify extends AbstractAction {
-
-	private Master[] connections;
-	private Slave connection;
 	
-	/**
-	 * Constructor for server side notify action
-	 * @param con
-	 */
-	public Notify(Master[] con) {
-		connections = con;
-		server = true;
-	}
+	private DataInputStream input;
 	
-	/**
-	 * Constructor for client side notify action
-	 * @param con
-	 */
-	public Notify(Slave slave){
-		connection = slave;
-		server = false;
-	}
-
-	protected void serverAction(){
-		for(Master con:connections){
-			try {
-				//in case the connection is closed
-				if(con.isClosed()) continue;
-				
-				con.getOutput().writeInt(AbstractAction.ActionType.NOTIFY.ordinal());
-				byte[] bytes = "data".getBytes("UTF-8");
-				con.getOutput().writeInt(bytes.length);
-				con.getOutput().write(bytes);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+	private ActionType actionType;
 	
-	protected void clientAction(){
+	private Direction direction;
+	
+	public Notify(DataInputStream in){
+		input = in;
 		try {
-			if(connection.getInput().available() != 0){
-				int length = connection.getInput().readInt();
-				byte[] data = new byte[length];
-				System.out.println("length:"+length);
-				connection.getInput().readFully(data);
-				String str = new String(data,"UTF-8");
-				System.out.println(str);
+			actionType = ActionType.values()[input.readInt()];
+			System.out.println("Recieved Action Type: "+actionType);
+			if(actionType.equals(ActionType.MOVE)){
+				direction = Direction.values()[input.readInt()];
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		server = false;
 	}
 
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
-		
+		if(actionType.equals(ActionType.MOVE)){
+			System.out.println("Move confirmed");
+			System.out.println("Direction: "+direction);
+		}
+	}
+	
+	public static void sendMessageMove(DataOutputStream output,Direction dir){
+		try {
+			output.writeInt(ActionType.NOTIFY.ordinal());
+			output.writeInt(ActionType.MOVE.ordinal());
+			output.writeInt(dir.ordinal());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

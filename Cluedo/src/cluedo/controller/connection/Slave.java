@@ -7,6 +7,7 @@ import cluedo.controller.ActionHandler;
 import cluedo.controller.action.AbstractAction;
 import cluedo.controller.action.Action;
 import cluedo.controller.action.AbstractAction.ActionType;
+import cluedo.controller.action.client.Notify;
 
 public class Slave extends AbstractConnection{
 
@@ -22,9 +23,14 @@ public class Slave extends AbstractConnection{
 					int index = input.readInt();
 					ActionType actionType = ActionType.values()[index];
 					
+					assert(actionType.equals(ActionType.NOTIFY));
+					
+					System.out.println("Notify recieved");
+					
+					handler.offerAction(new Notify(input));
+					
 					//all the action recieved will be a notify action
 					//depends on the type of the notify, update the view
-					
 					
 					//Action action = AbstractAction.actionFromMaster(actionType, input);
 					

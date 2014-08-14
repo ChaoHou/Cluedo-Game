@@ -2,6 +2,8 @@ package cluedo.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
@@ -14,12 +16,13 @@ import cluedo.Test.MockSlave;
 import cluedo.controller.action.AbstractAction;
 import cluedo.controller.action.AbstractAction.ActionType;
 import cluedo.controller.action.server.Move;
+import cluedo.controller.action.server.Move.Direction;
 import cluedo.controller.action.Action;
 import cluedo.controller.connection.Slave;
 import cluedo.model.Board;
 import cluedo.view.BoardFrame;
 
-public class ActionSlave extends Thread implements ActionHandler,MouseListener,ActionListener{
+public class ActionSlave extends Thread implements ActionHandler,MouseListener,ActionListener,KeyListener{
 
 	private Slave connection;
 	private Board game;
@@ -33,6 +36,8 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener,A
 		
 		//game = new Board(400,400);
 		frame = new BoardFrame("cludo",new Board(null),this,this);
+		frame.addKeyListener(this);
+		frame.setFocusable(true);
 		//enable the popup to ask user for user name and token
 		//then send to server
 	}
@@ -42,6 +47,12 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener,A
 		
 		while(1 == 1){
 			try {
+				if(!actionQueue.isEmpty()){
+					Action action = actionQueue.poll();
+					action.execute();
+				}
+				
+				
 				Thread.sleep(gameClock);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -74,7 +85,7 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener,A
 		int x = arg.getX();
 		int y = arg.getY();
 		
-		Move.sendMove(connection.getOutput(), x, y);
+		//Move.sendMove(connection.getOutput(), x, y);
 	}
 
 	@Override
@@ -100,6 +111,35 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener,A
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg) {
+		System.out.println("Key preessed");
+		int keyCode = arg.getKeyCode();
+		Direction dir = null;
+		if(keyCode == KeyEvent.VK_UP){
+			dir = Direction.UP;
+		}else if(keyCode == KeyEvent.VK_DOWN){
+			dir = Direction.DOWN;
+		}else if(keyCode == KeyEvent.VK_LEFT){
+			dir = Direction.LEFT;
+		}else if(keyCode == KeyEvent.VK_RIGHT){
+			dir = Direction.RIGHT;
+		}
+		Move.sendMove(connection.getOutput(), dir);
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
