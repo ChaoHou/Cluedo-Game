@@ -1,11 +1,13 @@
 package cluedo.controller;
 
+import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import cluedo.controller.action.Action;
 import cluedo.controller.connection.Master;
 import cluedo.model.Board;
+import cluedo.model.Player;
 
 public class ActionMaster extends Thread implements ActionHandler{
 	
@@ -21,12 +23,15 @@ public class ActionMaster extends Thread implements ActionHandler{
 		connections = con;
 		gameClock = clock;
 		
-		//initialize the game
-		
-		//game = new Board(0, 0);
+		//initialize the round
 		round = new Round(connections);
-		//Action initialize = new Initialize(connections,game,round,broadcastClock);
-		//actionQueue.offer(initialize);
+		//initialize the players with uid
+		ArrayList<Player> players = new ArrayList<Player>();
+		for(int i=0;i<connections.length;i++){
+			players.add(new Player(connections[i].uid()));
+		}
+		//initialize the board
+		game = new Board(players);
 	}
 	
 	@Override

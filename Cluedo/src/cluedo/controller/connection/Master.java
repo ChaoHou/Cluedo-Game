@@ -38,4 +38,8 @@ public class Master extends AbstractConnection{
 			}
 		}
 	}
+
+	public int uid(){
+		return uid;
+	}
 }

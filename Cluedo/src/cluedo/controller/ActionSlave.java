@@ -1,5 +1,7 @@
 package cluedo.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
@@ -17,7 +19,7 @@ import cluedo.controller.connection.Slave;
 import cluedo.model.Board;
 import cluedo.view.BoardFrame;
 
-public class ActionSlave extends Thread implements ActionHandler,MouseListener{
+public class ActionSlave extends Thread implements ActionHandler,MouseListener,ActionListener{
 
 	private Slave connection;
 	private Board game;
@@ -28,8 +30,9 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener{
 	public ActionSlave(Slave con,int clock){
 		connection = con;
 		gameClock = clock;
+		
 		//game = new Board(400,400);
-		//frame = new BoardFrame("cludo",game,this);
+		frame = new BoardFrame("cludo",new Board(null),this,this);
 		//enable the popup to ask user for user name and token
 		//then send to server
 	}
@@ -91,6 +94,12 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener{
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}

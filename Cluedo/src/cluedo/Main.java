@@ -122,19 +122,20 @@ public class Main {
 		System.out.println("CLUEDO SERVER AWAITING " + nplayers + " PLAYERS");
 		try {
 			Master[] connections = new Master[nplayers];
+			//int[] uids = new int[nplayers];
 			// Now, we await connections.
 			ServerSocket ss = new ServerSocket(port);			
 			while (1 == 1) {
 				// 	Wait for a socket
 				Socket s = ss.accept();
 				System.out.println("ACCEPTED CONNECTION FROM: " + s.getInetAddress());				
-				//int uid = game.registerPacman();
-				int uid = 0;
+				
+				int uid = nplayers;
+				System.out.println("PLAYER UID: "+uid);
+				
 				connections[--nplayers] = new Master(s,broadcastClock,uid);
-				//connections[nplayers].start();				
 				if(nplayers == 0) {
 					System.out.println("ALL CLIENTS ACCEPTED --- GAME BEGINS");
-					//multiUserGame(clk,game,connections);
 					
 					ActionMaster actionMaster = new ActionMaster(connections,gameClock);
 					
