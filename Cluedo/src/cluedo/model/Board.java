@@ -51,10 +51,10 @@ public class Board {
         Card.CHARACTER[] valuesC = Card.CHARACTER.values();
 
         for (int i = 0; i < valuesR.length; i++) {
-            rooms[i] = new Room(valuesR[i]);
+//            rooms[i] = new Room(valuesR[i]);
         }
         for (int i = 0; i < valuesW.length; i++) {
-            weapons[i] = new Weapon(valuesW[i]);
+//            weapons[i] = new Weapon(valuesW[i]);
         }
         for (int i = 0; i < valuesW.length; i++) {
             characters[i] = new Chara(valuesC[i]);
