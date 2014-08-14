@@ -6,6 +6,7 @@ import java.awt.*;
 
 public class BoardCanvas extends Canvas {
     private final Board board;
+
     // C = collidor R = room D = door S = start J = jump
     private final String[] map = {
             "#########S####S#########",
