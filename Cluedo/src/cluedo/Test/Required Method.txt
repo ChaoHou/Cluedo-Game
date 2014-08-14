@@ -1,17 +1,17 @@
 Method for frame class:
 
-initPlayer() //which will show a popup to ask user to enter a name and select a type of token.
+initPlayer() //which will show a popup to ask user to enter a name and select a type of token. #added
 
-showMessage(String str)//will show messages to user
+showMessage(String str)//will show messages to user #added
 
-disableRoll()//disable the roll button
+disableRoll()//disable the roll button #added
 
-enableRoll()
+enableRoll() #added
 
-disableAction()//disabled the ability to make announcement or accusation. For example disable buttons.
+disableAction()//disabled the ability to make announcement or accusation. For example disable buttons. #added
 
-enableAction()
+enableAction() #added
 
-disableRefute() //disable the ability to select a card to refute.
+disableRefute() //disable the ability to select a card to refute. #added
 
-enableRefute()
+enableRefute() #added

@@ -3,6 +3,7 @@ package cluedo.Test;
 import cluedo.model.*;
 import cluedo.view.*;
 
+import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
