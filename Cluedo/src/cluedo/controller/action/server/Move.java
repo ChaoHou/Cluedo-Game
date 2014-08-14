@@ -21,11 +21,6 @@ public class Move extends AbstractAction{
 		server = false;
 	}
 	
-
-	protected void clientAction() {
-		System.out.println("Coord x: "+x+" y: "+y);
-	}
-	
 	public static void sendMove(DataOutputStream output,int x,int y){
 		try {
 			output.writeInt(ActionType.MOVE.ordinal());
@@ -40,8 +35,7 @@ public class Move extends AbstractAction{
 
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Coord x: "+x+" y: "+y);
 	}
 
 }
