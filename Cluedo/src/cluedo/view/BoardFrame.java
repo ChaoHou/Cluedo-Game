@@ -102,7 +102,7 @@ public class BoardFrame extends JFrame {
         String[] charas = {"SCARLETT","MUSTARD","WHITE","GREEN","PEACOCK","PLUM"};
 
         input[0] = JOptionPane.showInputDialog(this, "What's your name?");
-        input[1] =(String) JOptionPane.showInputDialog(this, "休日の過ごし方は？", "休日の過ごし方", JOptionPane.INFORMATION_MESSAGE, null, charas, charas[0]);
+        input[1] =(String) JOptionPane.showInputDialog(this, "Select a character.", "Character select", JOptionPane.INFORMATION_MESSAGE, null, charas, charas[0]);
 
         return input;
     }
