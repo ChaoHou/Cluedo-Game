@@ -3,11 +3,13 @@ package cluedo.model;
 
 import cluedo.exception.IllegalRequestException;
 
+import java.util.ArrayList;
+
 //in client mode Board is renewed each time client receives new state
 //in server mode Board is just refreshed.
 public class Board {
-    private final int width;
-    private final int height;
+    private final int width = 400;
+    private final int height = 400;
 
     /**
      * stores solution
@@ -25,21 +27,28 @@ public class Board {
     private final Chara[] characters = new Chara[6];
 
     /**
-     * sotres all weapons
+     * stores all weapons
      */
     private final Weapon[] weapons = new Weapon[6];
 
     /**
+     * stores all players
+     */
+    private final ArrayList<Player> players;
+
+    /**
      * constructor
      * initialise all rooms, characters and weapons on default position.
-     * @param width
-     * @param height
+     * @param players
      */
-    public Board(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public Board(ArrayList<Player> players) {
+        this.players = players;
 
         setupBoard();
+        dealCardToPlayers();
+    }
+
+    private void dealCardToPlayers() {
     }
 
     /**
