@@ -102,4 +102,8 @@ public class BoardCanvas extends Canvas {
                 return null;
         }
     }
+
+    public String defineClick() {
+        return null;
+    }
 }

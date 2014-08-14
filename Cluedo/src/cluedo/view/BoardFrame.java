@@ -9,6 +9,9 @@ import java.awt.event.MouseListener;
 
 public class BoardFrame extends JFrame {
     private final BoardCanvas canvas;
+    private boolean rollDisabled;
+    private boolean refuteDisabled;
+
     private JButton[] buttons;
 
     public BoardFrame(String title, Board game, MouseListener mouse, ActionListener action) {
@@ -64,14 +67,29 @@ public class BoardFrame extends JFrame {
     }
 
     /**
+     * returns string where user clicked
+     * REFUTE returned with a number which is index of card (user may have from 3 to 6 cards)
+     *
+     *
+     * @return String
+     * UP, DOWN, LEFT, RIGHT
+     * REFUTE[0-5]
+     * ROLL
+     * NULL
+     */
+    public String defineClick() {
+        return canvas.defineClick();
+    }
+
+    /**
      *  disable the roll button
      */
     public void disableRoll() {
-        canvas.disableRoll();
+        rollDisabled = true;
     }
 
     public void enableRoll() {
-        canvas.enableRall();
+        rollDisabled = false;
     }
 
     /**
@@ -94,11 +112,11 @@ public class BoardFrame extends JFrame {
      *
      */
     public void disableRefute() {
-        canvas.disableRefute();
+        refuteDisabled = true;
     }
 
     public void enableRefute() {
-        canvas.enableRefute();
+        refuteDisabled = false;
     }
 
     /**
