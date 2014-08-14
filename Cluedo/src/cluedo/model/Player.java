@@ -23,8 +23,8 @@ public class Player {
 
     }
 
-    public void setCharacter() {
-
+    public void setCharacter(Chara character){
+        this.character = character;
     }
 
 }
