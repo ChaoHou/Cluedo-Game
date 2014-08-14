@@ -9,9 +9,7 @@ import java.awt.event.MouseListener;
 
 public class BoardFrame extends JFrame {
     private final BoardCanvas canvas;
-    private boolean rollDisabled;
-    private boolean actionDisabled;
-    private boolean refuteDisabled;
+    private JButton[] buttons;
 
     public BoardFrame(String title, Board game, MouseListener mouse, ActionListener action) {
         super(title);
@@ -28,7 +26,9 @@ public class BoardFrame extends JFrame {
 
         //create JButtons and add ActionListener received
         JButton ac = new JButton("ACCUSATION");
+        buttons[0] = ac;
         JButton as = new JButton("ASSUMPTION");
+        buttons[1] = as;
         ac.addActionListener(action);
         as.addActionListener(action);
 
@@ -47,6 +47,11 @@ public class BoardFrame extends JFrame {
         p.add(room);
         p.add(ac);
         p.add(as);
+
+        //message console
+//        JTextArea textArea = new JTextArea();
+//        p.add(textArea,BorderLayout.SOUTH);
+
         add(p,BorderLayout.SOUTH);
 
         //pack components nicely
@@ -62,22 +67,26 @@ public class BoardFrame extends JFrame {
      *  disable the roll button
      */
     public void disableRoll() {
-
+        canvas.disableRoll();
     }
 
     public void enableRoll() {
-
+        canvas.enableRall();
     }
 
     /**
      * disabled the ability to make announcement or accusation. For example disable buttons.
      */
     public void disableAction() {
-
+        for (JButton b: buttons) {
+            b.setEnabled(false);
+        }
     }
 
     public void enableAction() {
-
+        for (JButton b: buttons) {
+            b.setEnabled(true);
+        }
     }
 
     /**
@@ -85,11 +94,11 @@ public class BoardFrame extends JFrame {
      *
      */
     public void disableRefute() {
-
+        canvas.disableRefute();
     }
 
     public void enableRefute() {
-
+        canvas.enableRefute();
     }
 
     /**
