@@ -92,10 +92,25 @@ public class BoardFrame extends JFrame {
 
     }
 
-    public void initPlayer() {
+    /**
+     * show popups to ask user to enter a name and select a type of token.
+     * @return 0:username 1:selected character in Uppercase
+     */
 
+    public String[] initPlayer() {
+        String[] input = new String[2];
+        String[] charas = {"SCARLETT","MUSTARD","WHITE","GREEN","PEACOCK","PLUM"};
+
+        input[0] = JOptionPane.showInputDialog(this, "What's your name?");
+        input[1] =(String) JOptionPane.showInputDialog(this, "休日の過ごし方は？", "休日の過ごし方", JOptionPane.INFORMATION_MESSAGE, null, charas, charas[0]);
+
+        return input;
     }
 
+    /**
+     *  show messages to user
+     * @param str
+     */
     public void showMessage(String str) {
         JOptionPane.showMessageDialog(this, str, "Listen!", JOptionPane.PLAIN_MESSAGE);
     }
