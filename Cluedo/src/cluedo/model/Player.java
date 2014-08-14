@@ -15,14 +15,16 @@ public class Player {
     private STATUS status;
     private final long uid;
     private ArrayList<Card> cards;
-    private final Chara character;
+    private Chara character;
     private int dice;
 
-    public Player(long uid, Chara character) {
+    public Player(long uid) {
         this.uid = uid;
-        this.character = character;
 
     }
 
+    public void setCharacter() {
+
+    }
 
 }
