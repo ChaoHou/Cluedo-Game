@@ -28,8 +28,8 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener{
 	public ActionSlave(Slave con,int clock){
 		connection = con;
 		gameClock = clock;
-		game = new Board(400,400);
-		frame = new BoardFrame("cludo",game,this);
+		//game = new Board(400,400);
+		//frame = new BoardFrame("cludo",game,this);
 		//enable the popup to ask user for user name and token
 		//then send to server
 	}
