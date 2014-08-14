@@ -112,7 +112,7 @@ public class Board {
      * @param input
      */
 
-    public void fromBit(byte[] input) {
+    public void fromByte(byte[] input) {
 
     }
 
@@ -120,7 +120,7 @@ public class Board {
      * encode current game state into Bitwise
      * @return int
      */
-    public byte[] toBit() {
+    public byte[] toByte() {
         return null;
     }
 
