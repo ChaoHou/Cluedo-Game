@@ -11,22 +11,22 @@ import java.awt.event.MouseListener;
  * Created by innocence on 12/08/2014.
  */
 public class MockSlave implements MouseListener{
-    private final Board board;
+    //private final Board board;
 
     public MockSlave() {
-        this.board = new Board(20*24, 20*26);
+        //this.board = new Board(20*24, 20*26);
     }
 
 
     public void run() {
         int cell = 20;
-        new BoardFrame("test",board,this,null);
+        //new BoardFrame("test",board,this,null);
     }
 
 
     //main method for test
     public static void main(String[] arg) {
-        Board board = new Board(20*24,20*26);
+        //Board board = new Board(20*24,20*26);
         new MockSlave().run();
     }
 

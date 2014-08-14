@@ -23,7 +23,7 @@ public class ActionMaster extends Thread implements ActionHandler{
 		
 		//initialize the game
 		
-		game = new Board(0, 0);
+		//game = new Board(0, 0);
 		round = new Round(connections);
 		//Action initialize = new Initialize(connections,game,round,broadcastClock);
 		//actionQueue.offer(initialize);
