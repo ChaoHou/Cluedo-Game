@@ -35,9 +35,21 @@ public class BoardFrame extends JFrame {
 //        as.addActionListener(action);
 
         //create combo boxes
-        String[] charas = {"SCARLETT","MUSTARD","WHITE","GREEN","PEACOCK","PLUM"};
-        String[] weapons = {"CANDLESTICK","DAGGER","LEAD PIPE","REVOLVER","ROPE","SPANNER"};
-        String[] rooms = {"KITCHEN","BALL_ROOM","CONSERVATORY","DINING_ROOM","BILLIARD_ROOM","LIBRARY","LOUNGE","HALL","STUDY"};
+        Card.CHARACTER[] charaT = Card.CHARACTER.values();
+        Card.WEAPON[] weaponT = Card.WEAPON.values();
+        Card.ROOM[] roomT = Card.ROOM.values();
+        String[] charas = new String[charaT.length];
+        String[] weapons = new String[weaponT.length];
+        String[] rooms = new String[roomT.length];
+        for (int i = 0; i < charaT.length; ++i) {
+            charas[i] = charaT[i].toString();
+            weapons[i] = weaponT[i].toString();
+        }
+        for (int i = 0; i < roomT.length; ++i) {
+            rooms[i] = roomT[i].toString();
+        }
+
+
         JComboBox chara = new JComboBox(charas);
         JComboBox weapon = new JComboBox(weapons);
         JComboBox room = new JComboBox(rooms);
