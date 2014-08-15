@@ -22,7 +22,7 @@ import cluedo.controller.connection.Slave;
 import cluedo.model.Board;
 import cluedo.view.BoardFrame;
 
-public class ActionSlave extends Thread implements ActionHandler,MouseListener,ActionListener,KeyListener{
+public class SlaveActionHandler extends Thread implements ActionHandler,MouseListener,ActionListener,KeyListener{
 
 	private Slave connection;
 	private Board game;
@@ -30,7 +30,7 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener,A
 	private BoardFrame frame;
 	private Queue<Action> actionQueue = new ConcurrentLinkedQueue<Action>();
 	
-	public ActionSlave(Slave con,int clock){
+	public SlaveActionHandler(Slave con,int clock){
 		connection = con;
 		gameClock = clock;
 		
