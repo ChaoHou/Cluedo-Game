@@ -1,17 +1,11 @@
-Method for frame class:
+Method for Board class:
 
-initPlayer() //which will show a popup to ask user to enter a name and select a type of token. #added
+public void movePlayer(int uid,Direction dir) // check if the player can move that direction, if he can, move it
 
-showMessage(String str)//will show messages to user #added
+public Player getPlayer(int uid)// get the player corresponding the given uid
 
-disableRoll()//disable the roll button #added
+public String initPlayer()// change the second return value to the index of the Chara in the Card class enum
 
-enableRoll() #added
+For Chara class;
 
-disableAction()//disabled the ability to make announcement or accusation. For example disable buttons. #added
-
-enableAction() #added
-
-disableRefute() //disable the ability to select a card to refute. #added
-
-enableRefute() #added
+new field: private int stepRemains// is the point of dice - step so far. indicate how many steps left

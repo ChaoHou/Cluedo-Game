@@ -7,6 +7,7 @@ import java.io.IOException;
 import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.server.Move;
 import cluedo.controller.action.server.Move.Direction;
+import cluedo.controller.connection.Master;
 import cluedo.controller.connection.Slave;
 
 public class ActionHelper{
@@ -71,12 +72,13 @@ public class ActionHelper{
 	 * @param playerInfo 
 	 * @param output 
 	 */
-	public static void requestInitialize(DataOutputStream output, String[] playerInfo){
+	public static void requestInitialize(Slave connection, String[] playerInfo){
 		try {
-			assert(output != null);
+			assert(connection != null);
 			assert(playerInfo.length == 2);
 			
 			System.out.println("Send initialize request");
+			DataOutputStream output = connection.getOutput();
 			output.writeInt(ActionType.INITIALIZE.ordinal());
 			output.writeUTF(playerInfo[0]);
 			output.flush();
@@ -88,11 +90,12 @@ public class ActionHelper{
 	/**
 	 * Client request
 	 */
-	public static void requestRoll(DataOutputStream output){
+	public static void requestRoll(Slave connection){
 		try {
-			assert(output != null);
+			assert(connection != null);
 			
 			System.out.println("Send roll request");
+			DataOutputStream output = connection.getOutput();
 			output.writeInt(ActionType.ROLL.ordinal());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -101,12 +104,13 @@ public class ActionHelper{
 	/**
 	 * Client request
 	 */
-	public static void requestMove(DataOutputStream output,Direction dir){
+	public static void requestMove(Slave connection,Direction dir){
 		try {
-			assert(output != null);
+			assert(connection != null);
 			assert(dir != null);
 			
 			System.out.println("Send move request");
+			DataOutputStream output = connection.getOutput();
 			output.writeInt(ActionType.MOVE.ordinal());
 			output.writeInt(dir.ordinal());
 			output.flush();
@@ -133,42 +137,29 @@ public class ActionHelper{
 	public static void requestRefute(){
 		
 	}
-	/**
-	 * Server broadcast
-	 */
-	public static void broadcastInit(){
-		
-	}
-	/**
-	 * Server broadcast
-	 */
-	public static void broadcastMove(){
-		
-	}
-	/**
-	 * Server broadcast
-	 */
-	public static void broadcastRoll(){
-		
-	}
-	/**
-	 * Server broadcast
-	 */
-	public static void broadcastSuggestion(){
-		
-	}
-	/**
-	 * Server broadcast
-	 */
-	public static void broadcastAccusation(){
-		
-	}
-	/**
-	 * Server broadcast
-	 */
-	public static void broadcastRefute(){
-		
-	}
 	
-	
+	/**
+	 * Server broadcast
+	 */
+	public static void broadcast(Master[] connections,ActionType type){
+		try {
+			assert(connections != null);
+			
+			System.out.println("Send "+type.toString()+" broadcast to all");
+			for(Master connection:connections){
+				assert(connection != null);
+				
+				System.out.println("Send "+type.toString()+" broadcast to uid: "+connection.uid());
+				DataOutputStream output = connection.getOutput();
+				output.writeInt(ActionType.NOTIFY.ordinal());
+				output.writeInt(type.ordinal());
+				//TODO
+				//get bytes from board and send to the client
+				
+				output.flush();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

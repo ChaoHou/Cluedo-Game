@@ -47,7 +47,7 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener,A
 		System.out.println("CLIENT RUNNING");
 		//TODO, the return value could be name(String),Index of chara(int)
 		String[] playerInfo = frame.initPlayer();
-		ActionHelper.requestInitialize(connection.getOutput(),playerInfo);
+		ActionHelper.requestInitialize(connection,playerInfo);
 		
 		while(1 == 1){
 			try {
@@ -122,6 +122,8 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener,A
 	@Override
 	public void keyPressed(KeyEvent arg) {
 		System.out.println("Key preessed");
+		//TODO check the state of the board, if allows to move
+		
 		int keyCode = arg.getKeyCode();
 		Direction dir = null;
 		if(keyCode == KeyEvent.VK_UP){
@@ -133,7 +135,7 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener,A
 		}else if(keyCode == KeyEvent.VK_RIGHT){
 			dir = Direction.RIGHT;
 		}
-		ActionHelper.requestMove(connection.getOutput(), dir);
+		ActionHelper.requestMove(connection, dir);
 	}
 
 	@Override
