@@ -8,7 +8,7 @@ import cluedo.controller.action.Action;
 import cluedo.controller.action.ActionHelper;
 import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.client.Notify;
-import cluedo.controller.connection.Master;
+import cluedo.controller.connection.MasterConnection;
 import cluedo.model.Board;
 
 public class Move implements Action{
@@ -20,7 +20,7 @@ public class Move implements Action{
 		RIGHT,
 	}
 	
-	private Master[] connections;
+	private MasterConnection[] connections;
 	private Board game;
 	private int uid; 
 	private Direction direction;
@@ -30,7 +30,7 @@ public class Move implements Action{
 	 * @param x
 	 * @param y
 	 */
-	public Move(Master[] masters,Board board,int id,Direction dir){
+	public Move(MasterConnection[] masters,Board board,int id,Direction dir){
 		connections = masters;
 		game = board;
 		uid = id;

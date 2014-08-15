@@ -6,8 +6,8 @@ import java.net.UnknownHostException;
 
 import cluedo.controller.MasterActionHandler;
 import cluedo.controller.SlaveActionHandler;
-import cluedo.controller.connection.Master;
-import cluedo.controller.connection.Slave;
+import cluedo.controller.connection.MasterConnection;
+import cluedo.controller.connection.SlaveConnection;
 
 public class Main {
 
@@ -97,7 +97,7 @@ public class Main {
 		try {
 			s = new Socket(addr,port);
 			System.out.println("CLUEDO CLIENT CONNECTED TO " + addr + ":" + port);			
-			Slave slave = new Slave(s,broadcastClock);
+			SlaveConnection slave = new SlaveConnection(s,broadcastClock);
 			SlaveActionHandler actionSlave = new SlaveActionHandler(slave,gameClock);
 			slave.setActionHandler(actionSlave);
 			
@@ -121,7 +121,7 @@ public class Main {
 		System.out.println("CLUEDO SERVER LISTENING ON PORT " + port);
 		System.out.println("CLUEDO SERVER AWAITING " + nplayers + " PLAYERS");
 		try {
-			Master[] connections = new Master[nplayers];
+			MasterConnection[] connections = new MasterConnection[nplayers];
 			//int[] uids = new int[nplayers];
 			// Now, we await connections.
 			ServerSocket ss = new ServerSocket(port);			
@@ -133,7 +133,7 @@ public class Main {
 				int uid = nplayers;
 				System.out.println("PLAYER UID: "+uid);
 				
-				connections[--nplayers] = new Master(s,broadcastClock,uid);
+				connections[--nplayers] = new MasterConnection(s,broadcastClock,uid);
 				if(nplayers == 0) {
 					System.out.println("ALL CLIENTS ACCEPTED --- GAME BEGINS");
 					
