@@ -4,8 +4,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import cluedo.controller.ActionMaster;
-import cluedo.controller.ActionSlave;
+import cluedo.controller.MasterActionHandler;
+import cluedo.controller.SlaveActionHandler;
 import cluedo.controller.connection.Master;
 import cluedo.controller.connection.Slave;
 
@@ -98,7 +98,7 @@ public class Main {
 			s = new Socket(addr,port);
 			System.out.println("CLUEDO CLIENT CONNECTED TO " + addr + ":" + port);			
 			Slave slave = new Slave(s,broadcastClock);
-			ActionSlave actionSlave = new ActionSlave(slave,gameClock);
+			SlaveActionHandler actionSlave = new SlaveActionHandler(slave,gameClock);
 			slave.setActionHandler(actionSlave);
 			
 			slave.start();
@@ -137,7 +137,7 @@ public class Main {
 				if(nplayers == 0) {
 					System.out.println("ALL CLIENTS ACCEPTED --- GAME BEGINS");
 					
-					ActionMaster actionMaster = new ActionMaster(connections,gameClock);
+					MasterActionHandler actionMaster = new MasterActionHandler(connections,gameClock);
 					
 					actionMaster.run();
 					//System.out.println("ALL CLIENTS DISCONNECTED --- GAME OVER");

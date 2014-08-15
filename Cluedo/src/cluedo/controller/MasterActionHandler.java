@@ -9,7 +9,7 @@ import cluedo.controller.connection.Master;
 import cluedo.model.Board;
 import cluedo.model.Player;
 
-public class ActionMaster extends Thread implements ActionHandler{
+public class MasterActionHandler extends Thread implements ActionHandler{
 	
 	private Master[] connections;
 	
@@ -19,7 +19,7 @@ public class ActionMaster extends Thread implements ActionHandler{
 	private Round round;
 	private int gameClock;
 	
-	public ActionMaster(Master[] con, int clock){
+	public MasterActionHandler(Master[] con, int clock){
 		connections = con;
 		gameClock = clock;
 		
