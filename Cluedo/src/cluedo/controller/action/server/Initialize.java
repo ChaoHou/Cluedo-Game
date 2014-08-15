@@ -22,8 +22,27 @@ public class Initialize implements MasterAction{
 	
 	private MasterConnection connection;
 	
+	private byte[] nameBytes;
+	private Card.CHARACTER character;
+	
 	public Initialize(MasterConnection master) {
 		this.connection = master;
+		
+		try {
+			
+			System.out.println("Server initialize recieved");
+			DataInputStream input = connection.getInput();
+			//read the player info from client
+			character = Card.CHARACTER.values()[input.readInt()];
+			int length;
+			length = input.readInt();
+			nameBytes = new byte[length];
+			input.read(nameBytes);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
@@ -32,13 +51,7 @@ public class Initialize implements MasterAction{
 			assert(connections != null);
 			assert(game != null);
 			
-			System.out.println("Server initialize recieved");
-			DataInputStream input = connection.getInput();
-			//read the player info from client
-			Card.CHARACTER character = Card.CHARACTER.values()[input.readInt()];
-			int length = input.readInt();
-			byte[] nameBytes = new byte[length];
-			input.read(nameBytes);
+			
 			String name = new String(nameBytes,"UTF-8");
 			//update the player info
 			Player player = game.getPlayer(connection.uid());
