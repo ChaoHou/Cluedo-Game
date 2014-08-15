@@ -36,8 +36,8 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 		connection = con;
 		gameClock = clock;
 		
-		//game = new Board(400,400);
-		frame = new BoardFrame("cludo",new Board(),this,this);
+		game = new Board();
+		frame = new BoardFrame("cludo",game,this,this);
 		frame.addKeyListener(this);
 		frame.setFocusable(true);
 		frame.requestFocus();

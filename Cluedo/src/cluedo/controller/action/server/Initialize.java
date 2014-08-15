@@ -52,8 +52,8 @@ public class Initialize implements MasterAction{
 			assert(connections != null);
 			assert(game != null);
 			
-			
 			String name = new String(nameBytes,"UTF-8");
+			System.out.println("Server update user id: "+connection.uid()+" name: "+name);
 			//update the player info
 			Player player = game.getPlayer(connection.uid());
 			player.setCharacter(new Chara(character));
