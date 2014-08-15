@@ -9,6 +9,7 @@ import cluedo.controller.action.server.Move;
 import cluedo.controller.action.server.Move.Direction;
 import cluedo.controller.connection.Master;
 import cluedo.controller.connection.Slave;
+import cluedo.model.Board;
 
 public class ActionHelper{
 	
@@ -29,15 +30,15 @@ public class ActionHelper{
 		DISCONNECTED,
 	}
 	
-	public static Action genServerAction(ActionType type,DataOutputStream output, DataInputStream input){
+	public static Action genServerAction(Master[] connections,Master connection,Board game,ActionType type){
 		if(type.equals(ActionType.INITIALIZE)){
 			//return new Initialize(slave);
 		}
 		if(type.equals(ActionType.MOVE)){
 			
 			try {
-				Direction dir = Direction.values()[input.readInt()];
-				return new Move(output,dir);
+				Direction dir = Direction.values()[connection.getInput().readInt()];
+				return new Move(connections,game,connection.uid(),dir);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -154,7 +155,9 @@ public class ActionHelper{
 				output.writeInt(ActionType.NOTIFY.ordinal());
 				output.writeInt(type.ordinal());
 				//TODO
-				//get bytes from board and send to the client
+				//get bytes from board
+				//send the length of the bytes
+				//send the bytes
 				
 				output.flush();
 			}

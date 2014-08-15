@@ -7,25 +7,21 @@ import java.io.IOException;
 import cluedo.controller.action.Action;
 import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.server.Move.Direction;
-import cluedo.controller.connection.Master;
-import cluedo.controller.connection.Slave;
 
 public class Notify implements Action{
 	
-	private DataInputStream input;
-	
 	private ActionType actionType;
+	private byte[] boardInfo;
 	
-	private Direction direction;
-	
-	public Notify(DataInputStream in){
-		input = in;
+	public Notify(DataInputStream input){
 		try {
 			actionType = ActionType.values()[input.readInt()];
 			System.out.println("Recieved Action Type: "+actionType);
-			if(actionType.equals(ActionType.MOVE)){
-				direction = Direction.values()[input.readInt()];
-			}
+			
+			//TODO
+			//read the length of the bytes
+			//read the bytes into field
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -33,19 +29,13 @@ public class Notify implements Action{
 
 	@Override
 	public void execute() {
+		//TODO
+		//update the board using the bytes
+		
+		//update the board message depends on the action performed
+		//needs to check whether it's current player's action
 		if(actionType.equals(ActionType.MOVE)){
 			System.out.println("Move confirmed");
-			System.out.println("Direction: "+direction);
-		}
-	}
-	
-	public static void sendMessageMove(DataOutputStream output,Direction dir){
-		try {
-			output.writeInt(ActionType.NOTIFY.ordinal());
-			output.writeInt(ActionType.MOVE.ordinal());
-			output.writeInt(dir.ordinal());
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 

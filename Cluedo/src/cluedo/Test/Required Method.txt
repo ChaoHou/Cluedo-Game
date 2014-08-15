@@ -9,3 +9,7 @@ public String initPlayer()// change the second return value to the index of the 
 For Chara class;
 
 new field: private int stepRemains// is the point of dice - step so far. indicate how many steps left
+
+For Player class:
+
+public void setStatus(Status status) //set the player's status to given status

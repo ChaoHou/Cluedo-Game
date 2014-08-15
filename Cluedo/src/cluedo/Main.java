@@ -139,11 +139,6 @@ public class Main {
 					
 					ActionMaster actionMaster = new ActionMaster(connections,gameClock);
 					
-					for(Master master:connections){
-						master.setActionHandler(actionMaster);
-						master.start();
-					}
-					
 					actionMaster.run();
 					//System.out.println("ALL CLIENTS DISCONNECTED --- GAME OVER");
 					return; // done

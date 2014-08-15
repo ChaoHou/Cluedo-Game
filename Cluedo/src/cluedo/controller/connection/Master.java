@@ -7,15 +7,23 @@ import cluedo.controller.ActionHandler;
 import cluedo.controller.action.ActionHelper;
 import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.Action;
+import cluedo.model.Board;
 
 public class Master extends AbstractConnection{
 	
 	private int uid;
+	private Master[] connections;
+	private Board game;
 	
 	public Master(Socket socket,int clock, int id) {
 		super(socket,clock);
 		uid = id;
 		
+	}
+	
+	public void initialize(Master[] cons,Board board){
+		connections = cons;
+		game = board;
 	}
 	
 	@Override
@@ -25,7 +33,7 @@ public class Master extends AbstractConnection{
 				if(input.available() != 0){
 					int index = input.readInt();
 					ActionType actionType = ActionType.values()[index];
-					Action action = ActionHelper.genServerAction(actionType, output, input);
+					Action action = ActionHelper.genServerAction(connections,this,game,actionType);
 					
 					handler.offerAction(action);
 				}

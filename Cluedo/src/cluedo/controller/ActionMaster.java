@@ -32,6 +32,14 @@ public class ActionMaster extends Thread implements ActionHandler{
 		}
 		//initialize the board
 		game = new Board(players);
+		
+		//initialize and start the connections
+		for(Master master:connections){
+			master.setActionHandler(this);
+			master.initialize(connections, game);
+			
+			master.start();
+		}
 	}
 	
 	@Override

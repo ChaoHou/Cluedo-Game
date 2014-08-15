@@ -7,6 +7,8 @@ import java.util.List;
 
 import cluedo.controller.Round;
 import cluedo.controller.action.Action;
+import cluedo.controller.action.ActionHelper;
+import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.connection.Master;
 import cluedo.controller.connection.Slave;
 import cluedo.model.Board;
@@ -14,26 +16,22 @@ import cluedo.model.Board;
 public class Initialize implements Action{
 	
 	private Board game;
-	private Round round;
-	private int broadcastClock;
 	private Master[] connections;
-	private Slave connection;
+	private Master connection;
 	
-	public Initialize(Master[] con, Board game, Round round, int clock) {
-		connections = con;
+	public Initialize(Master[] cons,Master master, Board game) {
+		connections = cons;
+		this.connection = master;
 		this.game = game;
-		this.round = round;
-		broadcastClock = clock;
-	}
-	
-	public Initialize(Slave slave){
-		connection = slave;
 	}
 
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
+		//get the player from the  board using UID
+		//update the player's user name, character, status
+		//broadcast the board bytes
 		
+		ActionHelper.broadcast(connections, ActionType.INITIALIZE);
 	}
 	
 	
