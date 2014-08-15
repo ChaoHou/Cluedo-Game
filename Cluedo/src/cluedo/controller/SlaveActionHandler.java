@@ -57,7 +57,7 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 			try {
 				if(!actionQueue.isEmpty()){
 					SlaveAction action = actionQueue.poll();
-					action.execute(game);
+					action.execute(game,frame);
 				}
 				
 				
