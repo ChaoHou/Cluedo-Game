@@ -11,6 +11,7 @@ import cluedo.controller.action.server.Move.Direction;
 import cluedo.controller.connection.MasterConnection;
 import cluedo.controller.connection.SlaveConnection;
 import cluedo.model.Board;
+import cluedo.model.Card;
 
 public class ActionHelper{
 	
@@ -50,9 +51,6 @@ public class ActionHelper{
 		if(type.equals(ActionType.REFUTE)){
 	
 		}
-		if(type.equals(ActionType.NOTIFY)){
-			//return new Notify(slave);
-		}
 		
 		throw new IllegalArgumentException("INVALID TYPE");
 	}
@@ -67,15 +65,22 @@ public class ActionHelper{
 	 * @param playerInfo 
 	 * @param output 
 	 */
-	public static void requestInitialize(SlaveConnection connection, String[] playerInfo){
+	public static void requestInitialize(SlaveConnection connection, String name, Card.CHARACTER character){
 		try {
 			assert(connection != null);
-			assert(playerInfo.length == 2);
+			assert(name != null);
+			assert(character != null);
 			
 			System.out.println("Send initialize request");
 			DataOutputStream output = connection.getOutput();
 			output.writeInt(ActionType.INITIALIZE.ordinal());
-			output.writeUTF(playerInfo[0]);
+			
+			//send the token and name to server
+			output.writeInt(character.ordinal());
+			byte[] nameBytes = name.getBytes("UTF-8");
+			output.writeInt(nameBytes.length);
+			output.write(nameBytes);
+			
 			output.flush();
 			
 		} catch (IOException e) {
@@ -136,7 +141,7 @@ public class ActionHelper{
 	/**
 	 * Server broadcast
 	 */
-	public static void broadcast(MasterConnection[] connections,ActionType type){
+	public static void broadcast(MasterConnection[] connections,ActionType type,Board game){
 		try {
 			assert(connections != null);
 			
@@ -148,10 +153,10 @@ public class ActionHelper{
 				DataOutputStream output = connection.getOutput();
 				output.writeInt(ActionType.NOTIFY.ordinal());
 				output.writeInt(type.ordinal());
-				//TODO
-				//get bytes from board
-				//send the length of the bytes
-				//send the bytes
+				
+				byte[] state = game.toByte();
+				output.writeInt(state.length);
+				output.write(state);
 				
 				output.flush();
 			}

@@ -1,5 +1,7 @@
 package cluedo.controller;
 
+import org.omg.CORBA.INITIALIZE;
+
 import cluedo.controller.connection.MasterConnection;
 
 public class Round {
@@ -15,11 +17,15 @@ public class Round {
 	
 	private MasterConnection playerInTurn;
 	
+	private State status = State.INITIALIZING;
+	
 	public Round(MasterConnection[] con){
 		connections = con;
 	}
 	
 	public void tick(){
-		
+		if(status.equals(State.INITIALIZING)){
+			
+		}
 	}
 }

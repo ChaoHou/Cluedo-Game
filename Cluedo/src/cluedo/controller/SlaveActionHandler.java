@@ -21,6 +21,7 @@ import cluedo.controller.action.server.Move.Direction;
 import cluedo.controller.action.Action;
 import cluedo.controller.connection.SlaveConnection;
 import cluedo.model.Board;
+import cluedo.model.Card;
 import cluedo.view.BoardFrame;
 
 public class SlaveActionHandler extends Thread implements ActionHandler,MouseListener,ActionListener,KeyListener{
@@ -48,7 +49,9 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 		System.out.println("CLIENT RUNNING");
 		//TODO, the return value could be name(String),Index of chara(int)
 		String[] playerInfo = frame.initPlayer();
-		ActionHelper.requestInitialize(connection,playerInfo);
+		Card.CHARACTER character = Card.CHARACTER.valueOf(playerInfo[1]);
+		System.out.println(character);
+		ActionHelper.requestInitialize(connection,playerInfo[0],character);
 		
 		while(1 == 1){
 			try {
@@ -136,6 +139,8 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 			dir = Direction.LEFT;
 		}else if(keyCode == KeyEvent.VK_RIGHT){
 			dir = Direction.RIGHT;
+		}else{
+			return;
 		}
 		ActionHelper.requestMove(connection, dir);
 	}
