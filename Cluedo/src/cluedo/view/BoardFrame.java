@@ -125,7 +125,12 @@ public class BoardFrame extends JFrame {
 
     public String[] initPlayer() {
         String[] input = new String[2];
-        String[] charas = {"SCARLETT","MUSTARD","WHITE","GREEN","PEACOCK","PLUM"};
+        Card.CHARACTER[] temps = Card.CHARACTER.values();
+        String[] charas = new String[temps.length];
+        for (int i = 0; i < temps.length; i++) {
+            charas[i] = temps[i].toString();
+
+        }
 
         input[0] = JOptionPane.showInputDialog(this, "What's your name?");
         input[1] =(String) JOptionPane.showInputDialog(this, "Select a character.", "Character select", JOptionPane.INFORMATION_MESSAGE, null, charas, charas[0]);
