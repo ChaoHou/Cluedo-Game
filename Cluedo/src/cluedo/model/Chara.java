@@ -1,5 +1,6 @@
 package cluedo.model;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -85,5 +86,10 @@ public class Chara {
     public void toOutputStream(DataOutputStream dos) throws IOException{
         dos.writeByte(xCoordinate);
         dos.writeByte(yCoordinate);
+    }
+
+    public void fromInputStream(DataInputStream dis) throws IOException{
+        xCoordinate = dis.readByte();
+        yCoordinate = dis.readByte();
     }
 }

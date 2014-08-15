@@ -16,8 +16,8 @@ public class Player {
         ELIMINATED,
     }
 
-    private STATUS status;
     private final long uid;
+    private STATUS status;
     private String uName;
     private ArrayList<Card> cards;
     private Chara character;
@@ -30,10 +30,11 @@ public class Player {
     }
 
     public void toOutputStream(DataOutputStream dos) throws IOException{
-        dos.writeByte(status.ordinal());
         dos.writeLong(uid);
+        dos.writeByte(status.ordinal());
         dos.writeByte(uName.length());
-        dos.writeBytes(uName);
+        byte[] b = uName.getBytes("UTF-8");
+        dos.write(b);
         dos.writeByte(character.getName().ordinal());
         dos.writeByte(dice);
         dos.writeByte(stepsRemain);
@@ -44,8 +45,25 @@ public class Player {
         }
     }
 
-    public void fromInputStream(DataInputStream dis) {
+    public static Player fromInputStream(DataInputStream dis) throws IOException{
+        Player temp = new Player(dis.readByte());
+        temp.setStatus(Player.STATUS.values()[dis.readByte()]);
+        //read name
+        int nameLength = dis.readByte();
+        byte[] nTemp = new byte[nameLength];
+        dis.read(nTemp);
+        temp.setUName(new String(nTemp,"UTF-8"));
+        temp.setCharacter(new Chara(Card.CHARACTER.values()[dis.readByte()]));
+        temp.setDice(dis.readByte());
+        temp.setStepsRemain(dis.readByte());
 
+        //read cards
+        temp.getCards().clear();
+        for (int i = 0; i < dis.readByte(); ++i) {
+            temp.getCards().add(Card.newCardFromByte(dis));
+        }
+
+        return temp;
     }
 
     /**
@@ -64,4 +82,15 @@ public class Player {
         this.character = character;
     }
 
+    public void setDice(int dice) {
+        this.dice = dice;
+    }
+
+    public void setStepsRemain(int stepsRemain) {
+        this.stepsRemain = stepsRemain;
+    }
+
+    public ArrayList<Card> getCards(){
+        return cards;
+    }
 }

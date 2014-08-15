@@ -1,5 +1,6 @@
 package cluedo.model;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -85,4 +86,11 @@ public class Card {
         dos.write(b);
     }
 
+    public static Card newCardFromByte(DataInputStream dis) throws IOException {
+        int type = dis.readByte();
+        int length = dis.readByte();
+        byte[] tName = new byte[length];
+        dis.read(tName);
+        return new Card(Card.TYPE.values()[type],new String(tName, "UTF-8"));
+    }
 }
