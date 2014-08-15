@@ -31,7 +31,12 @@ public class Notify implements SlaveAction{
 	@Override
 	public void execute(Board game) {
 		//update the board
-		game.fromByte(state);
+		try {
+			game.fromByte(state);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		if(actionType.equals(ActionType.INITIALIZE)){
