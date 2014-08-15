@@ -4,9 +4,7 @@ package cluedo.model;
 import cluedo.controller.action.server.Move;
 import cluedo.exception.IllegalRequestException;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 //in client mode Board is renewed each time client receives new state
@@ -128,7 +126,26 @@ public class Board {
      * @param input
      */
 
-    public void fromByte(byte[] input) {
+    public void fromByte(byte[] input) throws IOException{
+        ByteArrayInputStream bais = new ByteArrayInputStream(input);
+        DataInputStream dis = new DataInputStream(bais);
+
+        //retrieve tokens positions
+        for (Chara c: characters) {
+            c.fromInputStream(dis);
+        }
+
+        //retrieve weapon tokens positions
+        for (Weapon w: weapons) {
+            w.fromInputStream(dis);
+        }
+
+        int nPlayers = dis.readByte();
+        players.clear();
+
+        for (int i = 0; i < nPlayers; ++i) {
+            players.add(Player.fromInputStream(dis));
+        }
 
     }
 
