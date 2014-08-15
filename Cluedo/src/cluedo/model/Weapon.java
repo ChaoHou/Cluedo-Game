@@ -1,9 +1,14 @@
 package cluedo.model;
 
-public class Weapon {
-    private final String name;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
-    public Weapon(String name) {
+public class Weapon {
+    private final Card.WEAPON name;
+    private int xCoordinate;
+    private int yCoordinate;
+
+    public Weapon(Card.WEAPON name) {
         this.name = name;
     }
 
@@ -11,8 +16,12 @@ public class Weapon {
      * get method for the name
      * @return String
      */
-    public String getName() {
+    public Card.WEAPON getName() {
         return name;
     }
 
+    public void toOutputStream(DataOutputStream dos) throws IOException{
+        dos.writeByte(xCoordinate);
+        dos.writeByte(yCoordinate);
+    }
 }

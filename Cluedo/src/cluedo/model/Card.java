@@ -1,8 +1,11 @@
 package cluedo.model;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 public class Card {
     private final TYPE type;
-    private final String name;
+    private String name;
 
     public enum TYPE {
         ROOM,
@@ -42,6 +45,44 @@ public class Card {
 
     public Card(TYPE type, String name) {
         this.type = type;
-        this.name = name;
+        switch (type.ordinal()){
+            case 1:
+                for (int i = 0; i < WEAPON.values().length; ++i){
+                    if (name.equals(WEAPON.values()[i].toString())) {
+                        this.name = name;
+                    }
+                }
+                break;
+            case 2:
+                for (int i = 0; i < CHARACTER.values().length; ++i){
+                    if (name.equals(CHARACTER.values()[i].toString())) {
+                        this.name = name;
+                    }
+                }
+                break;
+            default:
+                for (int i = 0; i < ROOM.values().length; ++i){
+                    if (name.equals(ROOM.values()[i].toString())) {
+                        this.name = name;
+                    }
+                }
+                break;
+        }
     }
+
+    public TYPE getType() {
+        return this.type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void toOutputStream(DataOutputStream dos) throws IOException{
+        dos.writeByte(type.ordinal());
+        dos.writeByte(name.length());
+        byte[] b = name.getBytes("UTF-8");
+        dos.write(b);
+    }
+
 }

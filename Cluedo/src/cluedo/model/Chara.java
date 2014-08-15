@@ -1,5 +1,8 @@
 package cluedo.model;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 public class Chara {
     private final Card.CHARACTER name;
     private int xCoordinate;
@@ -37,6 +40,16 @@ public class Chara {
     }
 
     /**
+     * set position to given value x = 0..24, y = 0..26
+     * @param x
+     * @param y
+     */
+    public void setPosition(int x, int y) {
+        this.xCoordinate = x;
+        this.yCoordinate = y;
+    }
+
+    /**
      * set the character into certain start position depends on character
      */
     private void setStartPos() {
@@ -67,5 +80,10 @@ public class Chara {
                 break;
         }
 
+    }
+
+    public void toOutputStream(DataOutputStream dos) throws IOException{
+        dos.writeByte(xCoordinate);
+        dos.writeByte(yCoordinate);
     }
 }

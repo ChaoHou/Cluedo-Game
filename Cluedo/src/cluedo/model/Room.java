@@ -1,9 +1,9 @@
 package cluedo.model;
 
 public class Room {
-    private final String name;
+    private final Card.ROOM name;
 
-    public Room(String name) {
+    public Room(Card.ROOM name) {
         this.name = name;
     }
 
@@ -11,7 +11,7 @@ public class Room {
      * get method for the name;
      * @return String
      */
-    public String getName() {
+    public Card.ROOM getName() {
         return name;
     }
 }

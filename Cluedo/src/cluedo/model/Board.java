@@ -4,17 +4,20 @@ package cluedo.model;
 import cluedo.controller.action.server.Move;
 import cluedo.exception.IllegalRequestException;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 //in client mode Board is renewed each time client receives new state
 //in server mode Board is just refreshed.
 public class Board {
-    private final int width = 20*24;
-    private final int height = 20*26;
+    private final int width = 20 * 24;
+    private final int height = 20 * 26;
 
     /**
      * stores solution
-     **/
+     */
     private Card[] solution;
 
     /**
@@ -38,12 +41,19 @@ public class Board {
     private final ArrayList<Player> players;
 
     /**
+     * number of players 3..6
+     */
+    private final int nPlayers;
+
+    /**
      * constructor
      * initialise all rooms, characters and weapons on default position.
+     *
      * @param players
      */
     public Board(ArrayList<Player> players) {
         this.players = players;
+        this.nPlayers = players.size();
 
         setupBoard();
         dealCardToPlayers();
@@ -61,10 +71,10 @@ public class Board {
         Card.CHARACTER[] valuesC = Card.CHARACTER.values();
 
         for (int i = 0; i < valuesR.length; i++) {
-//            rooms[i] = new Room(valuesR[i]);
+            rooms[i] = new Room(valuesR[i]);
         }
         for (int i = 0; i < valuesW.length; i++) {
-//            weapons[i] = new Weapon(valuesW[i]);
+            weapons[i] = new Weapon(valuesW[i]);
         }
         for (int i = 0; i < valuesW.length; i++) {
             characters[i] = new Chara(valuesC[i]);
@@ -78,6 +88,7 @@ public class Board {
      * 1 = Room
      * 2 = Weapon
      * throws exception when an index stores different type of card
+     *
      * @param solution
      */
     public void setSolution(Card[] solution) throws IllegalRequestException { //this Exception needs to be original Exception
@@ -86,6 +97,7 @@ public class Board {
 
     /**
      * returns solution (to compare users accusation)
+     *
      * @return Card[]
      */
     public Card[] getSolution() {
@@ -94,6 +106,7 @@ public class Board {
 
     /**
      * return the game board's height
+     *
      * @return int
      */
     public int height() {
@@ -102,6 +115,7 @@ public class Board {
 
     /**
      * return the game board's width
+     *
      * @return int
      */
     public int width() {
@@ -110,6 +124,7 @@ public class Board {
 
     /**
      * decode current game state and apply it
+     *
      * @param input
      */
 
@@ -119,14 +134,43 @@ public class Board {
 
     /**
      * encode current game state into Bitwise
+     * REQUIRES:
+     * Token positions
+     * Weapon positions
+     * Player status & uid & token's name & cards & dice
+     *
      * @return int
      */
-    public byte[] toByte() {
-        return null;
+    public byte[] toByte() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(baos);
+
+        //stores tokens positions
+        for (Chara c : characters) {
+            c.toOutputStream(dos);
+        }
+
+        //stores weapon tokens positions
+        for (Weapon w : weapons) {
+            w.toOutputStream(dos);
+        }
+
+        //stores number of players
+        dos.writeByte(nPlayers);
+
+        //stores player info
+        for (Player p : players) {
+            p.toOutputStream(dos);
+        }
+
+        dos.flush();
+
+        return baos.toByteArray();
     }
 
     /**
      * return a player corresponding to the given uid
+     *
      * @param uid
      * @return
      */
@@ -138,6 +182,7 @@ public class Board {
      * if it's possible move a player's token to given direction
      * subtract stepsRemain stored in a player class
      * other wise do nothing
+     *
      * @param uid
      * @param direction
      */
