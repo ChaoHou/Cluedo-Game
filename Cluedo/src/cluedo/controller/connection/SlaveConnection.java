@@ -33,7 +33,7 @@ public class SlaveConnection extends AbstractConnection{
 					
 					System.out.println("Slave Action offered");
 					
-					handler.offerAction(new Notify(input));
+					handler.offerAction(new Notify(this));
 				}
 				
 				Thread.sleep(boardcastClock);

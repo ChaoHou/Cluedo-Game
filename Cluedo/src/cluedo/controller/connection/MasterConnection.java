@@ -17,7 +17,6 @@ public class MasterConnection extends AbstractConnection{
 		try {
 			output.writeInt(uid);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -44,7 +43,4 @@ public class MasterConnection extends AbstractConnection{
 		}
 	}
 
-	public int uid(){
-		return uid;
-	}
 }

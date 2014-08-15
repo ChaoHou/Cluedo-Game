@@ -1,18 +1,3 @@
-Method for Board class:
+Method for Player class:
 
-##done##
-public void movePlayer(int uid,Direction dir) // check if the player can move that direction, if he can, move it
-
-##done##
-public Player getPlayer(int uid)// get the player corresponding the given uid
-
-##done##
-public String initPlayer()// change the second return value to the index of the Chara in the Card class enum
-
-For Player class:
-
-##done##
-public void setStatus(Status status) //set the player's status to given status
-
-##done##
-new field: private int stepRemains// is the point of dice - step so far. indicate how many steps left
+public STATUS getStatus()//return the current status

@@ -48,4 +48,8 @@ public abstract class AbstractConnection extends Thread{
 	public void close() throws IOException{
 		socket.close();
 	}
+	
+	public int uid(){
+		return uid;
+	}
 }
