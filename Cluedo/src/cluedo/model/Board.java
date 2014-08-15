@@ -91,6 +91,10 @@ public class Board {
      * @param solution
      */
     public void setSolution(Card[] solution) throws IllegalRequestException { //this Exception needs to be original Exception
+        if (solution[0].getType() != Card.TYPE.CHARCTER
+                || solution[1].getType() != Card.TYPE.ROOM
+                || solution[2].getType() != Card.TYPE.WEAPON) {
+            throw new IllegalRequestException("given solution is 0 != character || 1 != room || 2 != weapon. please check it");}
         this.solution = solution;
     }
 
