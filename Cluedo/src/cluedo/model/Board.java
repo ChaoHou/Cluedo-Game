@@ -36,12 +36,12 @@ public class Board {
     /**
      * stores all players
      */
-    private final ArrayList<Player> players;
+    private ArrayList<Player> players;
 
     /**
      * number of players 3..6
      */
-    private final int nPlayers;
+    private int nPlayers;
 
     /**
      * constructor
@@ -53,6 +53,12 @@ public class Board {
         this.players = players;
         this.nPlayers = players.size();
 
+        setupBoard();
+        dealCardToPlayers();
+    }
+
+    public Board() {
+        
         setupBoard();
         dealCardToPlayers();
     }
