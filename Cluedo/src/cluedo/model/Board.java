@@ -1,6 +1,7 @@
 package cluedo.model;
 
 
+import cluedo.controller.action.server.Move;
 import cluedo.exception.IllegalRequestException;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class Board {
     }
 
     /**
-     * setup defalut board
+     * setup default board
      */
     private void setupBoard() {
         Card.ROOM[] valuesR = Card.ROOM.values();
@@ -125,12 +126,23 @@ public class Board {
     }
 
     /**
-     * read a byte array and creates a board instance
-     * @param input
+     * return a player corresponding to the given uid
+     * @param uid
      * @return
      */
-    public static Board boardFromByte(byte[] input) {
+    public Player getPlayer(int uid) {
         return null;
+    }
+
+    /**
+     * if it's possible move a player's token to given direction
+     * subtract stepsRemain stored in a player class
+     * other wise do nothing
+     * @param uid
+     * @param direction
+     */
+    public void movePlayer(int uid, Move.Direction direction) {
+
     }
 
     public Room[] getRooms() {

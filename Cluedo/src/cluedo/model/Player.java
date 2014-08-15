@@ -17,10 +17,19 @@ public class Player {
     private ArrayList<Card> cards;
     private Chara character;
     private int dice;
+    private int stepsRemain;
 
     public Player(long uid) {
         this.uid = uid;
 
+    }
+
+    /**
+     * set the player's status to given status
+     * @param status
+     */
+    public void setStatus(STATUS status) {
+        this.status = status;
     }
 
     public void setCharacter(Chara character){
