@@ -8,7 +8,7 @@ import cluedo.controller.action.Action;
 import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.server.Move.Direction;
 
-public class Notify implements Action{
+public class Notify implements SlaveAction{
 	
 	private ActionType actionType;
 	private byte[] boardInfo;

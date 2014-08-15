@@ -139,6 +139,11 @@ public class Main {
 					
 					MasterActionHandler actionMaster = new MasterActionHandler(connections,gameClock);
 					
+					//initialize and start the connections
+					for(MasterConnection master:connections){
+						master.setActionHandler(actionMaster);
+						master.start();
+					}
 					actionMaster.run();
 					//System.out.println("ALL CLIENTS DISCONNECTED --- GAME OVER");
 					return; // done

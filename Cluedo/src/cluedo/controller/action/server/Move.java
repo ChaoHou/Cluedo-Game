@@ -11,7 +11,7 @@ import cluedo.controller.action.client.Notify;
 import cluedo.controller.connection.MasterConnection;
 import cluedo.model.Board;
 
-public class Move implements Action{
+public class Move implements MasterAction{
 
 	public enum Direction{
 		UP,
@@ -20,9 +20,7 @@ public class Move implements Action{
 		RIGHT,
 	}
 	
-	private MasterConnection[] connections;
-	private Board game;
-	private int uid; 
+	private MasterConnection connection; 
 	private Direction direction;
 	
 	/**
@@ -30,15 +28,18 @@ public class Move implements Action{
 	 * @param x
 	 * @param y
 	 */
-	public Move(MasterConnection[] masters,Board board,int id,Direction dir){
-		connections = masters;
-		game = board;
-		uid = id;
-		direction = dir;
+	public Move(MasterConnection con){
+		connection = con;
+		try {
+			direction = Direction.values()[connection.getInput().readInt()];
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+;
 	}
 	
 	@Override
-	public void execute() {
+	public void execute(MasterConnection[] connections,Board game) {
 		System.out.println("Move recieved");
 		//make the board moving the player
 		

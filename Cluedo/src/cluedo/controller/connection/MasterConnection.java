@@ -12,18 +12,11 @@ import cluedo.model.Board;
 public class MasterConnection extends AbstractConnection{
 	
 	private int uid;
-	private MasterConnection[] connections;
-	private Board game;
 	
 	public MasterConnection(Socket socket,int clock, int id) {
 		super(socket,clock);
 		uid = id;
 		
-	}
-	
-	public void initialize(MasterConnection[] cons,Board board){
-		connections = cons;
-		game = board;
 	}
 	
 	@Override
@@ -33,7 +26,7 @@ public class MasterConnection extends AbstractConnection{
 				if(input.available() != 0){
 					int index = input.readInt();
 					ActionType actionType = ActionType.values()[index];
-					Action action = ActionHelper.genServerAction(connections,this,game,actionType);
+					Action action = ActionHelper.genServerAction(this,actionType);
 					
 					handler.offerAction(action);
 				}

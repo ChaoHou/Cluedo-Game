@@ -5,6 +5,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import cluedo.controller.action.Action;
+import cluedo.controller.action.server.MasterAction;
 import cluedo.controller.connection.MasterConnection;
 import cluedo.model.Board;
 import cluedo.model.Player;
@@ -13,7 +14,7 @@ public class MasterActionHandler extends Thread implements ActionHandler{
 	
 	private MasterConnection[] connections;
 	
-	private Queue<Action> actionQueue = new ConcurrentLinkedQueue<Action>();
+	private Queue<MasterAction> actionQueue = new ConcurrentLinkedQueue<MasterAction>();
 	
 	private Board game;
 	private Round round;
@@ -32,14 +33,6 @@ public class MasterActionHandler extends Thread implements ActionHandler{
 		}
 		//initialize the board
 		game = new Board(players);
-		
-		//initialize and start the connections
-		for(MasterConnection master:connections){
-			master.setActionHandler(this);
-			master.initialize(connections, game);
-			
-			master.start();
-		}
 	}
 	
 	@Override
@@ -48,8 +41,8 @@ public class MasterActionHandler extends Thread implements ActionHandler{
 		while(1 == 1){
 			try {
 				if(!actionQueue.isEmpty()){
-					Action action = actionQueue.poll();
-					action.execute();
+					MasterAction action = actionQueue.poll();
+					action.execute(connections,game);
 					
 					round.tick();
 				}
@@ -80,6 +73,7 @@ public class MasterActionHandler extends Thread implements ActionHandler{
 
 	@Override
 	public void offerAction(Action action) {
-		actionQueue.offer(action);
+		assert(action instanceof MasterAction);
+		actionQueue.offer((MasterAction)action);
 	}
 }
