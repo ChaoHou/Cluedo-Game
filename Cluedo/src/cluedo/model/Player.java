@@ -74,6 +74,14 @@ public class Player {
         this.status = status;
     }
 
+    /**
+     * return current player's status
+     * @return
+     */
+    public STATUS getStatus() {
+        return status;
+    }
+
     public void setUName(String name) {
         this.uName = name;
     }
