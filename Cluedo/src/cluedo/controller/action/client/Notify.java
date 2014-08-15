@@ -7,20 +7,21 @@ import java.io.IOException;
 import cluedo.controller.action.Action;
 import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.server.Move.Direction;
+import cluedo.model.Board;
 
 public class Notify implements SlaveAction{
 	
 	private ActionType actionType;
-	private byte[] boardInfo;
+	private byte[] state;
 	
 	public Notify(DataInputStream input){
 		try {
 			actionType = ActionType.values()[input.readInt()];
 			System.out.println("Recieved Action Type: "+actionType);
 			
-			//TODO
-			//read the length of the bytes
-			//read the bytes into field
+			int lenght = input.readInt();
+			state = new byte[lenght];
+			input.read(state);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -28,12 +29,18 @@ public class Notify implements SlaveAction{
 	}
 
 	@Override
-	public void execute() {
-		//TODO
-		//update the board using the bytes
+	public void execute(Board game) {
+		//update the board
+		game.fromByte(state);
 		
-		//update the board message depends on the action performed
-		//needs to check whether it's current player's action
+		
+		if(actionType.equals(ActionType.INITIALIZE)){
+			//check current player's status see whether need to start the game
+			//which is enable user from dice
+		}
+		if(actionType.equals(ActionType.ROLL)){
+			//enable player to move
+		}
 		if(actionType.equals(ActionType.MOVE)){
 			System.out.println("Move confirmed");
 		}
