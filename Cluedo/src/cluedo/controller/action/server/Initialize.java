@@ -12,6 +12,7 @@ import cluedo.controller.action.ActionHelper;
 import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.connection.MasterConnection;
 import cluedo.controller.connection.SlaveConnection;
+import cluedo.exception.IllegalRequestException;
 import cluedo.model.Board;
 import cluedo.model.Card;
 import cluedo.model.Chara;
@@ -60,6 +61,8 @@ public class Initialize implements MasterAction{
 			player.setStatus(STATUS.WATCHING);
 			
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (IllegalRequestException e) {
 			e.printStackTrace();
 		}
 		
