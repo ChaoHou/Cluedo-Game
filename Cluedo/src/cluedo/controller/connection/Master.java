@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.Socket;
 
 import cluedo.controller.ActionHandler;
-import cluedo.controller.action.AbstractAction;
-import cluedo.controller.action.AbstractAction.ActionType;
+import cluedo.controller.action.ActionHelper;
+import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.Action;
 
 public class Master extends AbstractConnection{
@@ -25,7 +25,7 @@ public class Master extends AbstractConnection{
 				if(input.available() != 0){
 					int index = input.readInt();
 					ActionType actionType = ActionType.values()[index];
-					Action action = AbstractAction.serverSideAction(actionType, output, input);
+					Action action = ActionHelper.serverSideAction(actionType, output, input);
 					
 					handler.offerAction(action);
 				}

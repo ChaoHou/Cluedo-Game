@@ -1,8 +1,9 @@
 package cluedo.controller.action.server;
 
-import cluedo.controller.action.AbstractAction;
+import cluedo.controller.action.Action;
 
-public class Refute extends AbstractAction {
+
+public class Refute implements Action{
 
 	@Override
 	public void execute() {

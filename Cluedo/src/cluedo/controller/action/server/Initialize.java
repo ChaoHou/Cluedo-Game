@@ -6,12 +6,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import cluedo.controller.Round;
-import cluedo.controller.action.AbstractAction;
+import cluedo.controller.action.Action;
 import cluedo.controller.connection.Master;
 import cluedo.controller.connection.Slave;
 import cluedo.model.Board;
 
-public class Initialize extends AbstractAction {
+public class Initialize implements Action{
 	
 	private Board game;
 	private Round round;
@@ -21,7 +21,6 @@ public class Initialize extends AbstractAction {
 	
 	public Initialize(Master[] con, Board game, Round round, int clock) {
 		connections = con;
-		server = true;
 		this.game = game;
 		this.round = round;
 		broadcastClock = clock;
@@ -29,7 +28,6 @@ public class Initialize extends AbstractAction {
 	
 	public Initialize(Slave slave){
 		connection = slave;
-		server = false;
 	}
 
 	@Override

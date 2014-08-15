@@ -4,12 +4,12 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import cluedo.controller.action.AbstractAction.ActionType;
+import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.server.Move;
 import cluedo.controller.action.server.Move.Direction;
 import cluedo.controller.connection.Slave;
 
-public abstract class AbstractAction implements Action{
+public class ActionHelper{
 	
 	/**
 	 * Type of the actions, the ordinal value will be passed to the slave 
@@ -27,13 +27,6 @@ public abstract class AbstractAction implements Action{
 		NOTIFY,
 		DISCONNECTED,
 	}
-	
-	/**
-	 * To indicate whether this is a server side action or a client side action
-	 */
-	protected boolean server;
-	
-	public abstract void execute();
 	
 	public static Action serverSideAction(ActionType type,DataOutputStream output, DataInputStream input){
 		if(type.equals(ActionType.INITIALIZE)){
@@ -72,5 +65,17 @@ public abstract class AbstractAction implements Action{
 		
 		
 		return null;
+	}
+
+	public static void requestMove(DataOutputStream output,Direction dir){
+		try {
+			System.out.println("Send move request");
+			output.writeInt(ActionType.MOVE.ordinal());
+			output.writeInt(dir.ordinal());
+			output.flush();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

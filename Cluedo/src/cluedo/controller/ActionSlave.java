@@ -13,8 +13,8 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import cluedo.Test.MockSlave;
-import cluedo.controller.action.AbstractAction;
-import cluedo.controller.action.AbstractAction.ActionType;
+import cluedo.controller.action.ActionHelper;
+import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.server.Move;
 import cluedo.controller.action.server.Move.Direction;
 import cluedo.controller.action.Action;
@@ -38,6 +38,7 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener,A
 		frame = new BoardFrame("cludo",new Board(null),this,this);
 		frame.addKeyListener(this);
 		frame.setFocusable(true);
+		frame.requestFocus();
 		//enable the popup to ask user for user name and token
 		//then send to server
 	}
@@ -129,7 +130,7 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener,A
 		}else if(keyCode == KeyEvent.VK_RIGHT){
 			dir = Direction.RIGHT;
 		}
-		Move.sendMove(connection.getOutput(), dir);
+		ActionHelper.requestMove(connection.getOutput(), dir);
 	}
 
 	@Override

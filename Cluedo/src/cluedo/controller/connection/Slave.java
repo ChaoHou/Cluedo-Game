@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.Socket;
 
 import cluedo.controller.ActionHandler;
-import cluedo.controller.action.AbstractAction;
+import cluedo.controller.action.ActionHelper;
 import cluedo.controller.action.Action;
-import cluedo.controller.action.AbstractAction.ActionType;
+import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.client.Notify;
 
 public class Slave extends AbstractConnection{

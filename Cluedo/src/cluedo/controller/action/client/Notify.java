@@ -4,13 +4,13 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import cluedo.controller.action.AbstractAction;
-import cluedo.controller.action.AbstractAction.ActionType;
+import cluedo.controller.action.Action;
+import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.server.Move.Direction;
 import cluedo.controller.connection.Master;
 import cluedo.controller.connection.Slave;
 
-public class Notify extends AbstractAction {
+public class Notify implements Action{
 	
 	private DataInputStream input;
 	
@@ -29,7 +29,6 @@ public class Notify extends AbstractAction {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		server = false;
 	}
 
 	@Override
