@@ -16,7 +16,7 @@ public class Notify implements SlaveAction{
 	
 	public Notify(DataInputStream input){
 		try {
-			actionType = ActionType.values()[input.readInt()];
+			//actionType = ActionType.values()[input.readInt()];
 			System.out.println("Recieved Action Type: "+actionType);
 			
 			int lenght = input.readInt();
@@ -33,22 +33,13 @@ public class Notify implements SlaveAction{
 		//update the board
 		try {
 			game.fromByte(state);
+			System.out.println("Slave board updated");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
-		if(actionType.equals(ActionType.INITIALIZE)){
-			//check current player's status see whether need to start the game
-			//which is enable user from dice
-		}
-		if(actionType.equals(ActionType.ROLL)){
-			//enable player to move
-		}
-		if(actionType.equals(ActionType.MOVE)){
-			System.out.println("Move confirmed");
-		}
+		//check player's status then change the ui correspondingly
 	}
 
 }

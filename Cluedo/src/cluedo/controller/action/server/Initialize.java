@@ -52,9 +52,10 @@ public class Initialize implements MasterAction{
 			assert(connections != null);
 			assert(game != null);
 			
+			//update the player info
 			String name = new String(nameBytes,"UTF-8");
 			System.out.println("Server update user id: "+connection.uid()+" name: "+name);
-			//update the player info
+			System.out.println("Server update user character: "+character);
 			Player player = game.getPlayer(connection.uid());
 			player.setCharacter(new Chara(character));
 			player.setUName(name);
@@ -67,7 +68,7 @@ public class Initialize implements MasterAction{
 		}
 		
 		//breadcast the state
-		ActionHelper.broadcast(connections, ActionType.INITIALIZE,game);
+		ActionHelper.broadcast(connections,game);
 	}
 	
 	

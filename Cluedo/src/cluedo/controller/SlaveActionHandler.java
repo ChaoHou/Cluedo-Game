@@ -47,7 +47,7 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 	
 	public void run(){
 		System.out.println("CLIENT RUNNING");
-		//TODO, the return value could be name(String),Index of chara(int)
+		
 		String[] playerInfo = frame.initPlayer();
 		Card.CHARACTER character = Card.CHARACTER.valueOf(playerInfo[1]);
 		System.out.println(character);

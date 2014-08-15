@@ -14,6 +14,8 @@ public abstract class AbstractConnection extends Thread{
 	protected DataOutputStream output;
 	protected DataInputStream input;
 	
+	protected int uid;
+	
 	public AbstractConnection(Socket socket,int clock){
 		this.socket = socket;
 		boardcastClock = clock;
@@ -21,7 +23,6 @@ public abstract class AbstractConnection extends Thread{
 		try{
 			output = new DataOutputStream(socket.getOutputStream());
 			input = new DataInputStream(socket.getInputStream());
-			
 		}catch(IOException e) {
 			System.err.println("I/O Error: " + e.getMessage());
 			e.printStackTrace(System.err);

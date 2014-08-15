@@ -13,6 +13,12 @@ public class SlaveConnection extends AbstractConnection{
 
 	public SlaveConnection(Socket socket,int clock){
 		super(socket,clock);
+		try {
+			uid = input.readInt();
+			System.out.println("Slave UID: "+uid);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -25,13 +31,9 @@ public class SlaveConnection extends AbstractConnection{
 					
 					assert(actionType.equals(ActionType.NOTIFY));
 					
-					System.out.println("Notify recieved");
+					System.out.println("Slave Action offered");
 					
 					handler.offerAction(new Notify(input));
-					
-					//all the action recieved will be a notify action
-					//depends on the type of the notify, update the view
-					
 				}
 				
 				Thread.sleep(boardcastClock);

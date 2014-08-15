@@ -29,7 +29,7 @@ public class ActionHelper{
 		ACCUSATION,
 		REFUTE,
 		NOTIFY,
-		DISCONNECTED,
+		DISCONNECT,
 	}
 	
 	public static Action genServerAction(MasterConnection connection,ActionType type){
@@ -141,18 +141,18 @@ public class ActionHelper{
 	/**
 	 * Server broadcast
 	 */
-	public static void broadcast(MasterConnection[] connections,ActionType type,Board game){
+	public static void broadcast(MasterConnection[] connections,Board game){
 		try {
 			assert(connections != null);
 			
-			System.out.println("Send "+type.toString()+" broadcast to all");
+			System.out.println("Send broadcast to all");
 			for(MasterConnection connection:connections){
 				assert(connection != null);
 				
-				System.out.println("Send "+type.toString()+" broadcast to uid: "+connection.uid());
+				System.out.println("Send broadcast to uid: "+connection.uid());
 				DataOutputStream output = connection.getOutput();
 				output.writeInt(ActionType.NOTIFY.ordinal());
-				output.writeInt(type.ordinal());
+				//output.writeInt(type.ordinal());
 				
 				byte[] state = game.toByte();
 				output.writeInt(state.length);

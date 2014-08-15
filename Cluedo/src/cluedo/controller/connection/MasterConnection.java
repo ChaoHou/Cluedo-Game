@@ -11,12 +11,15 @@ import cluedo.model.Board;
 
 public class MasterConnection extends AbstractConnection{
 	
-	private int uid;
-	
 	public MasterConnection(Socket socket,int clock, int id) {
 		super(socket,clock);
 		uid = id;
-		
+		try {
+			output.writeInt(uid);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
