@@ -5,25 +5,14 @@ import java.net.Socket;
 
 import cluedo.controller.ActionHandler;
 import cluedo.controller.action.ActionHelper;
-import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.Action;
-import cluedo.model.Board;
+import cluedo.controller.action.ActionHelper.ActionType;
+import cluedo.controller.action.client.Notify;
 
-public class Master extends AbstractConnection{
-	
-	private int uid;
-	private Master[] connections;
-	private Board game;
-	
-	public Master(Socket socket,int clock, int id) {
+public class SlaveConnection extends AbstractConnection{
+
+	public SlaveConnection(Socket socket,int clock){
 		super(socket,clock);
-		uid = id;
-		
-	}
-	
-	public void initialize(Master[] cons,Board board){
-		connections = cons;
-		game = board;
 	}
 	
 	@Override
@@ -33,9 +22,19 @@ public class Master extends AbstractConnection{
 				if(input.available() != 0){
 					int index = input.readInt();
 					ActionType actionType = ActionType.values()[index];
-					Action action = ActionHelper.genServerAction(connections,this,game,actionType);
 					
-					handler.offerAction(action);
+					assert(actionType.equals(ActionType.NOTIFY));
+					
+					System.out.println("Notify recieved");
+					
+					handler.offerAction(new Notify(input));
+					
+					//all the action recieved will be a notify action
+					//depends on the type of the notify, update the view
+					
+					//Action action = AbstractAction.actionFromMaster(actionType, input);
+					
+					//handler.offerAction(action);
 				}
 				
 				Thread.sleep(boardcastClock);
@@ -45,9 +44,5 @@ public class Master extends AbstractConnection{
 				e.printStackTrace();
 			}
 		}
-	}
-
-	public int uid(){
-		return uid;
 	}
 }

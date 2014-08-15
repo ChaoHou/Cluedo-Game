@@ -9,17 +9,17 @@ import cluedo.controller.Round;
 import cluedo.controller.action.Action;
 import cluedo.controller.action.ActionHelper;
 import cluedo.controller.action.ActionHelper.ActionType;
-import cluedo.controller.connection.Master;
-import cluedo.controller.connection.Slave;
+import cluedo.controller.connection.MasterConnection;
+import cluedo.controller.connection.SlaveConnection;
 import cluedo.model.Board;
 
 public class Initialize implements Action{
 	
 	private Board game;
-	private Master[] connections;
-	private Master connection;
+	private MasterConnection[] connections;
+	private MasterConnection connection;
 	
-	public Initialize(Master[] cons,Master master, Board game) {
+	public Initialize(MasterConnection[] cons,MasterConnection master, Board game) {
 		connections = cons;
 		this.connection = master;
 		this.game = game;

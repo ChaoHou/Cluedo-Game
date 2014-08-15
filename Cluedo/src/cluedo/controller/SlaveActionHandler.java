@@ -18,19 +18,19 @@ import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.server.Move;
 import cluedo.controller.action.server.Move.Direction;
 import cluedo.controller.action.Action;
-import cluedo.controller.connection.Slave;
+import cluedo.controller.connection.SlaveConnection;
 import cluedo.model.Board;
 import cluedo.view.BoardFrame;
 
 public class SlaveActionHandler extends Thread implements ActionHandler,MouseListener,ActionListener,KeyListener{
 
-	private Slave connection;
+	private SlaveConnection connection;
 	private Board game;
 	private int gameClock;
 	private BoardFrame frame;
 	private Queue<Action> actionQueue = new ConcurrentLinkedQueue<Action>();
 	
-	public SlaveActionHandler(Slave con,int clock){
+	public SlaveActionHandler(SlaveConnection con,int clock){
 		connection = con;
 		gameClock = clock;
 		

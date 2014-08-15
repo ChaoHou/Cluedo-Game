@@ -7,8 +7,8 @@ import java.io.IOException;
 import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.server.Move;
 import cluedo.controller.action.server.Move.Direction;
-import cluedo.controller.connection.Master;
-import cluedo.controller.connection.Slave;
+import cluedo.controller.connection.MasterConnection;
+import cluedo.controller.connection.SlaveConnection;
 import cluedo.model.Board;
 
 public class ActionHelper{
@@ -30,7 +30,7 @@ public class ActionHelper{
 		DISCONNECTED,
 	}
 	
-	public static Action genServerAction(Master[] connections,Master connection,Board game,ActionType type){
+	public static Action genServerAction(MasterConnection[] connections,MasterConnection connection,Board game,ActionType type){
 		if(type.equals(ActionType.INITIALIZE)){
 			//return new Initialize(slave);
 		}
@@ -73,7 +73,7 @@ public class ActionHelper{
 	 * @param playerInfo 
 	 * @param output 
 	 */
-	public static void requestInitialize(Slave connection, String[] playerInfo){
+	public static void requestInitialize(SlaveConnection connection, String[] playerInfo){
 		try {
 			assert(connection != null);
 			assert(playerInfo.length == 2);
@@ -91,7 +91,7 @@ public class ActionHelper{
 	/**
 	 * Client request
 	 */
-	public static void requestRoll(Slave connection){
+	public static void requestRoll(SlaveConnection connection){
 		try {
 			assert(connection != null);
 			
@@ -105,7 +105,7 @@ public class ActionHelper{
 	/**
 	 * Client request
 	 */
-	public static void requestMove(Slave connection,Direction dir){
+	public static void requestMove(SlaveConnection connection,Direction dir){
 		try {
 			assert(connection != null);
 			assert(dir != null);
@@ -142,12 +142,12 @@ public class ActionHelper{
 	/**
 	 * Server broadcast
 	 */
-	public static void broadcast(Master[] connections,ActionType type){
+	public static void broadcast(MasterConnection[] connections,ActionType type){
 		try {
 			assert(connections != null);
 			
 			System.out.println("Send "+type.toString()+" broadcast to all");
-			for(Master connection:connections){
+			for(MasterConnection connection:connections){
 				assert(connection != null);
 				
 				System.out.println("Send "+type.toString()+" broadcast to uid: "+connection.uid());

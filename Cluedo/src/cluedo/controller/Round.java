@@ -1,6 +1,6 @@
 package cluedo.controller;
 
-import cluedo.controller.connection.Master;
+import cluedo.controller.connection.MasterConnection;
 
 public class Round {
 	
@@ -11,11 +11,11 @@ public class Round {
 		ENDTURN,
 	}
 	
-	private Master[] connections;
+	private MasterConnection[] connections;
 	
-	private Master playerInTurn;
+	private MasterConnection playerInTurn;
 	
-	public Round(Master[] con){
+	public Round(MasterConnection[] con){
 		connections = con;
 	}
 	

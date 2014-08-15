@@ -5,13 +5,13 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import cluedo.controller.action.Action;
-import cluedo.controller.connection.Master;
+import cluedo.controller.connection.MasterConnection;
 import cluedo.model.Board;
 import cluedo.model.Player;
 
 public class MasterActionHandler extends Thread implements ActionHandler{
 	
-	private Master[] connections;
+	private MasterConnection[] connections;
 	
 	private Queue<Action> actionQueue = new ConcurrentLinkedQueue<Action>();
 	
@@ -19,7 +19,7 @@ public class MasterActionHandler extends Thread implements ActionHandler{
 	private Round round;
 	private int gameClock;
 	
-	public MasterActionHandler(Master[] con, int clock){
+	public MasterActionHandler(MasterConnection[] con, int clock){
 		connections = con;
 		gameClock = clock;
 		
@@ -34,7 +34,7 @@ public class MasterActionHandler extends Thread implements ActionHandler{
 		game = new Board(players);
 		
 		//initialize and start the connections
-		for(Master master:connections){
+		for(MasterConnection master:connections){
 			master.setActionHandler(this);
 			master.initialize(connections, game);
 			
@@ -72,7 +72,7 @@ public class MasterActionHandler extends Thread implements ActionHandler{
 	}
 	
 	private boolean allConnectionAlive(){
-		for(Master master:connections){
+		for(MasterConnection master:connections){
 			if(master.isClosed()) return false;
 		}
 		return true;
