@@ -32,9 +32,6 @@ public class SlaveConnection extends AbstractConnection{
 					//all the action recieved will be a notify action
 					//depends on the type of the notify, update the view
 					
-					//Action action = AbstractAction.actionFromMaster(actionType, input);
-					
-					//handler.offerAction(action);
 				}
 				
 				Thread.sleep(boardcastClock);

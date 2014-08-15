@@ -40,11 +40,11 @@ public class Move implements MasterAction{
 	
 	@Override
 	public void execute(MasterConnection[] connections,Board game) {
-		System.out.println("Move recieved");
+		System.out.println("Server move recieved");
 		//make the board moving the player
-		
-		ActionHelper.broadcast(connections, ActionType.MOVE);
-		System.out.println("Sent confirmition to client");
+		game.movePlayer(connection.uid(), direction);
+		System.out.println("Server Player moved");
+		ActionHelper.broadcast(connections, ActionType.MOVE,game);
 	}
 
 }
