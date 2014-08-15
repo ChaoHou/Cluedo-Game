@@ -36,12 +36,7 @@ public class Board {
     /**
      * stores all players
      */
-    private ArrayList<Player> players;
-
-    /**
-     * number of players 3..6
-     */
-    private int nPlayers;
+    private final ArrayList<Player> players;
 
     /**
      * constructor
@@ -51,14 +46,14 @@ public class Board {
      */
     public Board(ArrayList<Player> players) {
         this.players = players;
-        this.nPlayers = players.size();
 
         setupBoard();
         dealCardToPlayers();
     }
 
     public Board() {
-        
+        players = new ArrayList<Player>();
+
         setupBoard();
         dealCardToPlayers();
     }
@@ -179,7 +174,7 @@ public class Board {
         }
 
         //stores number of players
-        dos.writeByte(nPlayers);
+        dos.writeByte(players.size());
 
         //stores player info
         for (Player p : players) {
