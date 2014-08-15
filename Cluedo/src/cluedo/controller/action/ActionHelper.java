@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import cluedo.controller.action.ActionHelper.ActionType;
+import cluedo.controller.action.server.Initialize;
 import cluedo.controller.action.server.Move;
 import cluedo.controller.action.server.Move.Direction;
 import cluedo.controller.connection.MasterConnection;
@@ -30,19 +31,12 @@ public class ActionHelper{
 		DISCONNECTED,
 	}
 	
-	public static Action genServerAction(MasterConnection[] connections,MasterConnection connection,Board game,ActionType type){
+	public static Action genServerAction(MasterConnection connection,ActionType type){
 		if(type.equals(ActionType.INITIALIZE)){
-			//return new Initialize(slave);
+			return new Initialize(connection);
 		}
 		if(type.equals(ActionType.MOVE)){
-			
-			try {
-				Direction dir = Direction.values()[connection.getInput().readInt()];
-				return new Move(connections,game,connection.uid(),dir);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
+			return new Move(connection);
 		}
 		if(type.equals(ActionType.SUGGESTION)){
 			

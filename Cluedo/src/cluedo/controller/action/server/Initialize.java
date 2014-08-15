@@ -13,20 +13,16 @@ import cluedo.controller.connection.MasterConnection;
 import cluedo.controller.connection.SlaveConnection;
 import cluedo.model.Board;
 
-public class Initialize implements Action{
+public class Initialize implements MasterAction{
 	
-	private Board game;
-	private MasterConnection[] connections;
 	private MasterConnection connection;
 	
-	public Initialize(MasterConnection[] cons,MasterConnection master, Board game) {
-		connections = cons;
+	public Initialize(MasterConnection master) {
 		this.connection = master;
-		this.game = game;
 	}
 
 	@Override
-	public void execute() {
+	public void execute(MasterConnection[] connections,Board game) {
 		//get the player from the  board using UID
 		//update the player's user name, character, status
 		//broadcast the board bytes

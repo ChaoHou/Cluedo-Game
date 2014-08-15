@@ -15,6 +15,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import cluedo.Test.MockSlave;
 import cluedo.controller.action.ActionHelper;
 import cluedo.controller.action.ActionHelper.ActionType;
+import cluedo.controller.action.client.SlaveAction;
 import cluedo.controller.action.server.Move;
 import cluedo.controller.action.server.Move.Direction;
 import cluedo.controller.action.Action;
@@ -28,7 +29,7 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 	private Board game;
 	private int gameClock;
 	private BoardFrame frame;
-	private Queue<Action> actionQueue = new ConcurrentLinkedQueue<Action>();
+	private Queue<SlaveAction> actionQueue = new ConcurrentLinkedQueue<SlaveAction>();
 	
 	public SlaveActionHandler(SlaveConnection con,int clock){
 		connection = con;
@@ -52,7 +53,7 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 		while(1 == 1){
 			try {
 				if(!actionQueue.isEmpty()){
-					Action action = actionQueue.poll();
+					SlaveAction action = actionQueue.poll();
 					action.execute();
 				}
 				
@@ -77,7 +78,8 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 
 	@Override
 	public void offerAction(Action action) {
-		actionQueue.offer(action);
+		assert(action instanceof SlaveAction);
+		actionQueue.offer((SlaveAction)action);
 	}
 
 	@Override
