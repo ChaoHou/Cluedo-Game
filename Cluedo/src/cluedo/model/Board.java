@@ -192,8 +192,14 @@ public class Board {
      * @param uid
      * @return
      */
-    public Player getPlayer(int uid) {
-        return null;
+    public Player getPlayer(int uid) throws IllegalRequestException{
+        if (!players.isEmpty())
+        for (Player p: players) {
+            if (p.getUid() == uid) {
+                return p;
+            }
+        }
+        throw new IllegalRequestException("uid not exists");
     }
 
     /**

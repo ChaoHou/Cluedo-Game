@@ -16,7 +16,7 @@ public class Player {
         ELIMINATED,
     }
 
-    private final long uid;
+    private final int uid;
     private STATUS status;
     private String uName;
     private ArrayList<Card> cards;
@@ -24,7 +24,7 @@ public class Player {
     private int dice;
     private int stepsRemain;
 
-    public Player(long uid) {
+    public Player(int uid) {
         this.uid = uid;
 
     }
@@ -88,6 +88,10 @@ public class Player {
 
     public void setStepsRemain(int stepsRemain) {
         this.stepsRemain = stepsRemain;
+    }
+
+    public int getUid() {
+        return uid;
     }
 
     public ArrayList<Card> getCards(){
