@@ -1,4 +1,11 @@
-Method for Player class:
+Method for Frame class:
 
-##done##
-public STATUS getStatus()//return the current status
+for enable methods, can make the method behave more automatic? 
+For example, if I enableRoll, the other action will be disabled automatically
+Same to other enable method,
+
+Found Something useful:
+
+The issue page on the github could be use to schedule the thing or comment bugs,
+It can be synchronized locally into IDEs just like using git,
+So I think it's a great tool to communicate, we can use that to replace this text file

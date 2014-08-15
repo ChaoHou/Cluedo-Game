@@ -44,13 +44,12 @@ public class MasterActionHandler extends Thread implements ActionHandler{
 					MasterAction action = actionQueue.poll();
 					action.execute(connections,game);
 					
-					round.tick();
+					round.tick(game);
 				}
 				
 				
 				Thread.sleep(gameClock);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
