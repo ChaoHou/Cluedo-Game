@@ -45,6 +45,9 @@ public class ActionSlave extends Thread implements ActionHandler,MouseListener,A
 	
 	public void run(){
 		System.out.println("CLIENT RUNNING");
+		//TODO, the return value could be name(String),Index of chara(int)
+		String[] playerInfo = frame.initPlayer();
+		ActionHelper.requestInitialize(connection.getOutput(),playerInfo);
 		
 		while(1 == 1){
 			try {

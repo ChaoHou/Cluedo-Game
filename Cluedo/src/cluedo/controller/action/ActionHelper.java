@@ -19,16 +19,16 @@ public class ActionHelper{
 	 */
 	public enum ActionType {
 		INITIALIZE,
+		ROLL,
 		MOVE,
 		SUGGESTION,
 		ACCUSATION,
-		ROLL,
 		REFUTE,
 		NOTIFY,
 		DISCONNECTED,
 	}
 	
-	public static Action serverSideAction(ActionType type,DataOutputStream output, DataInputStream input){
+	public static Action genServerAction(ActionType type,DataOutputStream output, DataInputStream input){
 		if(type.equals(ActionType.INITIALIZE)){
 			//return new Initialize(slave);
 		}
@@ -61,14 +61,51 @@ public class ActionHelper{
 		throw new IllegalArgumentException("INVALID TYPE");
 	}
 
-	public static Action clientSideAction(ActionType type, DataInputStream input) {
-		
+	public static Action genClientAction(ActionType type, DataInputStream input) {
 		
 		return null;
 	}
-
+	
+	/**
+	 * Client request
+	 * @param playerInfo 
+	 * @param output 
+	 */
+	public static void requestInitialize(DataOutputStream output, String[] playerInfo){
+		try {
+			assert(output != null);
+			assert(playerInfo.length == 2);
+			
+			System.out.println("Send initialize request");
+			output.writeInt(ActionType.INITIALIZE.ordinal());
+			output.writeUTF(playerInfo[0]);
+			output.flush();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * Client request
+	 */
+	public static void requestRoll(DataOutputStream output){
+		try {
+			assert(output != null);
+			
+			System.out.println("Send roll request");
+			output.writeInt(ActionType.ROLL.ordinal());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * Client request
+	 */
 	public static void requestMove(DataOutputStream output,Direction dir){
 		try {
+			assert(output != null);
+			assert(dir != null);
+			
 			System.out.println("Send move request");
 			output.writeInt(ActionType.MOVE.ordinal());
 			output.writeInt(dir.ordinal());
@@ -78,4 +115,60 @@ public class ActionHelper{
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Client request
+	 */
+	public static void requestSuggestion(){
+		
+	}
+	/**
+	 * Client request
+	 */
+	public static void requestAccusation(){
+		
+	}
+	/**
+	 * Client request
+	 */
+	public static void requestRefute(){
+		
+	}
+	/**
+	 * Server broadcast
+	 */
+	public static void broadcastInit(){
+		
+	}
+	/**
+	 * Server broadcast
+	 */
+	public static void broadcastMove(){
+		
+	}
+	/**
+	 * Server broadcast
+	 */
+	public static void broadcastRoll(){
+		
+	}
+	/**
+	 * Server broadcast
+	 */
+	public static void broadcastSuggestion(){
+		
+	}
+	/**
+	 * Server broadcast
+	 */
+	public static void broadcastAccusation(){
+		
+	}
+	/**
+	 * Server broadcast
+	 */
+	public static void broadcastRefute(){
+		
+	}
+	
+	
 }
