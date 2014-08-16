@@ -7,34 +7,46 @@ So I think it's a great tool to communicate, we can use that to replace this tex
 
 Method for Board class:
 
+##Done##
+##Could you implement it?##
 Delete the method deal Card to Player, because there is no card before the initialize finished.
 I can do it in actions, If you want to do it in board class, let me kown
 
+
+##Done##
 for movePlayer method: 
 if a player is moving into a room, take a unused room inner coordinate to the player
 if player is moving out of a room, take the door which meet the player's direction
 
+##done##
 Require: public Chara getCharacter(Card.CHARACTER character)//which returns a Chara with given CHARACTER type
 
+##It's already Done, isn't it?##
+##Each character is set on each starting point when its created.(look at the Chara's constructor)
 For setUpBoard method, the Chara in the player should have a start position on board(whether random or certain)
 
+##done##
 For setSolution method, can you delete the throw declaration for method header? because it can't be fixed in run time
 
 
 For Room class:
-
+##half Done##
 Field: list of Characters, list of weapons, array of inner coordinates
 
 
 For Player class:
 
+##Done##
 need to add "Initializing" to STATUS enum 
 
 
 Method for Frame class:
 
+##Done##
+##So each characters can perform only one action, right?##
 for enable methods, can make the method behave more automatic? 
 For example, if I enableRoll, the other action will be disabled automatically
 Same to other enable method,
 
+##will do it##
 for initPlayer() method, can you check the characters already own by other players, do not add them to the dropdown

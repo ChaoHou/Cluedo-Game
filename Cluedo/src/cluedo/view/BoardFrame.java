@@ -63,10 +63,10 @@ public class BoardFrame extends JFrame {
         p.add(as);
 
         //message console
-//        JTextArea textArea = new JTextArea();
-//        p.add(textArea,BorderLayout.SOUTH);
+        JTextArea textArea = new JTextArea();
+        p.add(textArea,BorderLayout.SOUTH);
 
-//        add(p,BorderLayout.SOUTH);
+        add(p,BorderLayout.SOUTH);
 
         //pack components nicely
         pack();
@@ -101,6 +101,8 @@ public class BoardFrame extends JFrame {
 
     public void enableRoll() {
         rollDisabled = false;
+        disableAction();
+        disableRefute();
     }
 
     /**
@@ -116,6 +118,8 @@ public class BoardFrame extends JFrame {
         for (JButton b: buttons) {
             b.setEnabled(true);
         }
+        disableRoll();
+        disableRefute();
     }
 
     /**
@@ -128,6 +132,8 @@ public class BoardFrame extends JFrame {
 
     public void enableRefute() {
         refuteDisabled = false;
+        disableRoll();
+        disableAction();
     }
 
     /**

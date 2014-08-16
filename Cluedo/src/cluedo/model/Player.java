@@ -14,6 +14,7 @@ public class Player {
         ROLLING,
         REFUTING,
         ELIMINATED,
+        INITIALIZING,
     }
 
     private final int uid;
@@ -88,6 +89,10 @@ public class Player {
 
     public void setCharacter(Chara character){
         this.character = character;
+    }
+
+    public Chara getCharacter() {
+        return character;
     }
 
     public void setDice(int dice) {

@@ -48,17 +48,12 @@ public class Board {
         this.players = players;
 
         setupBoard();
-        dealCardToPlayers();
     }
 
     public Board() {
         players = new ArrayList<Player>();
 
         setupBoard();
-        dealCardToPlayers();
-    }
-
-    private void dealCardToPlayers() {
     }
 
     /**
@@ -90,11 +85,7 @@ public class Board {
      *
      * @param solution
      */
-    public void setSolution(Card[] solution) throws IllegalRequestException { //this Exception needs to be original Exception
-        if (solution[0].getType() != Card.TYPE.CHARCTER
-                || solution[1].getType() != Card.TYPE.ROOM
-                || solution[2].getType() != Card.TYPE.WEAPON) {
-            throw new IllegalRequestException("given solution is 0 != character || 1 != room || 2 != weapon. please check it");}
+    public void setSolution(Card[] solution) {
         this.solution = solution;
     }
 
@@ -210,7 +201,8 @@ public class Board {
      * if it's possible move a player's token to given direction
      * subtract stepsRemain stored in a player class
      * other wise do nothing
-     *
+     *if a player is moving into a room, take a unused room inner coordinate to the player
+     *if player is moving out of a room, take the door which meet the player's direction
      * @param uid
      * @param direction
      */
