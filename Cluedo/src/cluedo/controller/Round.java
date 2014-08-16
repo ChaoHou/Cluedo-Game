@@ -1,10 +1,13 @@
 package cluedo.controller;
 
+import java.util.Random;
+
 import org.omg.CORBA.INITIALIZE;
 
 import cluedo.controller.connection.MasterConnection;
 import cluedo.exception.IllegalRequestException;
 import cluedo.model.Board;
+import cluedo.model.Card;
 import cluedo.model.Player;
 
 public class Round {
@@ -15,6 +18,8 @@ public class Round {
 		INTURN,
 		ENDTURN,
 	}
+	
+	private Random random = new Random();
 	
 	private MasterConnection[] connections;
 	
@@ -32,19 +37,25 @@ public class Round {
 				try {
 					Player player = game.getPlayer(connection.uid());
 					
-					//if(player.)
-					//check All player's status,
-					//if all the play finished initialize
+					if(player.getStatus() == null){
+						return;
+					}
 
 				} catch (IllegalRequestException e) {
 					e.printStackTrace();
 				}
 			}
 			
-			//
+			
 		}
 		if(status.equals(State.INTURN)){
 			
 		}
+	}
+	
+	private void initCards(Board game){
+		Card.CHARACTER sCharacter = Card.CHARACTER.values()[random.nextInt(7)];
+		Card.ROOM sRoom = Card.ROOM.values()[random.nextInt(10)];
+		Card.WEAPON sWeapon = Card.WEAPON.values()[random.nextInt(7)];
 	}
 }

@@ -48,6 +48,10 @@ public class Notify implements SlaveAction{
 			Player.STATUS status = player.getStatus();
 			if(status.equals(Player.STATUS.ROLLING)){
 				frame.enableRoll();
+			}else if(status.equals(Player.STATUS.MOVING)){
+				//frame.
+			}else if(status.equals(Player.STATUS.MAKINGANNOUNCEMENT)){
+				frame.enableAction();
 			}
 			//if the play's status is rolling, enable the roll
 			//if it's moving enable moving

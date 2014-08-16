@@ -67,7 +67,7 @@ public class Initialize implements MasterAction{
 			e.printStackTrace();
 		}
 		
-		//breadcast the state
+		//broadcast the state
 		ActionHelper.broadcast(connections,game);
 	}
 	
