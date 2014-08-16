@@ -31,7 +31,7 @@ public class Player {
     }
 
     public void toOutputStream(DataOutputStream dos) throws IOException{
-        dos.writeLong(uid);
+        dos.writeByte(uid);
         dos.writeByte(status.ordinal());
         dos.writeByte(uName.length());
         byte[] b = uName.getBytes("UTF-8");
@@ -60,7 +60,9 @@ public class Player {
 
         //read cards
         temp.getCards().clear();
-        for (int i = 0; i < dis.readByte(); ++i) {
+        int size = dis.readByte();
+//        System.out.printf("%d\n",size);
+        for (int i = 0; i < size; ++i) {
             temp.getCards().add(Card.newCardFromByte(dis));
         }
 
@@ -109,5 +111,26 @@ public class Player {
 
     public ArrayList<Card> getCards(){
         return cards;
+    }
+
+    public boolean equals(Object o) {
+        if (o instanceof Player) {
+            Player temp =(Player) o;
+            return temp.getUid() == this.uid && temp.getUName().equals(this.uName);
+        }
+
+        return false;
+    }
+
+    public String getUName() {
+        return uName;
+    }
+
+    public int getStepsRemain() {
+        return stepsRemain;
+    }
+
+    public int getDice() {
+        return dice;
     }
 }
