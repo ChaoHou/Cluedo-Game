@@ -20,8 +20,10 @@ import cluedo.controller.action.server.Move;
 import cluedo.controller.action.server.Move.Direction;
 import cluedo.controller.action.Action;
 import cluedo.controller.connection.SlaveConnection;
+import cluedo.exception.IllegalRequestException;
 import cluedo.model.Board;
 import cluedo.model.Card;
+import cluedo.model.Player;
 import cluedo.view.BoardFrame;
 
 public class SlaveActionHandler extends Thread implements ActionHandler,MouseListener,ActionListener,KeyListener{
@@ -50,8 +52,7 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 		
 		String[] playerInfo = frame.initPlayer();
 		Card.CHARACTER character = Card.CHARACTER.valueOf(playerInfo[1]);
-		System.out.println(character);
-		ActionHelper.requestInitialize(connection,playerInfo[0],character);
+		//ActionHelper.requestInitialize(connection,playerInfo[0],character);
 		
 		while(1 == 1){
 			try {
@@ -114,20 +115,30 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent arg) {
+		System.out.println(arg.getActionCommand());
 		
 	}
 
 	@Override
 	public void keyPressed(KeyEvent arg) {
 		System.out.println("Key preessed");
-		//TODO check the state of the board, if allows to move
+		Player player = null;
+		
+		try {
+			player = game.getPlayer(connection.uid());
+		} catch (IllegalRequestException e) {
+			e.printStackTrace();
+		}
+		assert(player != null);
+		//check the state of the board, if allows to move
+		if(!player.getStatus().equals(Player.STATUS.MOVING)){
+			return;
+		}
+		
 		
 		int keyCode = arg.getKeyCode();
 		Direction dir = null;
@@ -147,13 +158,9 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 }

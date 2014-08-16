@@ -44,6 +44,7 @@ public class Move implements MasterAction{
 		//make the board moving the player
 		game.movePlayer(connection.uid(), direction);
 		System.out.println("Server Player moved");
+		
 		ActionHelper.broadcast(connections,game);
 	}
 
