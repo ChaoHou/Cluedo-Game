@@ -1,10 +1,3 @@
-Method for Frame class:
-
-for enable methods, can make the method behave more automatic? 
-For example, if I enableRoll, the other action will be disabled automatically
-Same to other enable method,
-
-
 Found Something useful:
 
 The issue page on the github could be use to schedule the thing or comment bugs,
@@ -22,9 +15,23 @@ if player is moving out of a room, take the door which meet the player's directi
 
 Require getCharacter(Card.CHARACTER character)//which returns a Chara with given CHARACTER type
 
-For setUpBoard method, the Chara in the player should have a start position on board
+For setUpBoard method, the Chara in the player should have a start position on board(whether random or certain)
 
 
 For Room class:
 
 Field: list of Characters, list of weapons, array of inner coordinates
+
+
+For Player class:
+
+need to add "Initializing" to STATUS enum 
+
+
+Method for Frame class:
+
+for enable methods, can make the method behave more automatic? 
+For example, if I enableRoll, the other action will be disabled automatically
+Same to other enable method,
+
+for initPlayer() method, can you check the characters already own by other players, do not add them to the dropdown
