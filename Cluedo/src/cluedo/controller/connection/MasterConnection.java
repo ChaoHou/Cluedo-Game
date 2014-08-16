@@ -23,6 +23,8 @@ public class MasterConnection extends AbstractConnection{
 	
 	@Override
 	public void run(){
+		if(handler == null) throw new RuntimeException("Require to set an action handler");
+		
 		while(!socket.isClosed()){
 			try {
 				if(input.available() != 0){

@@ -37,6 +37,8 @@ public class Round {
 				try {
 					Player player = game.getPlayer(connection.uid());
 					
+					//TODO
+					//initialize the status with initializing, not null
 					if(player.getStatus() == null){
 						return;
 					}
@@ -46,16 +48,32 @@ public class Round {
 				}
 			}
 			
+			//all the player finished initialize, 
+			//initialize the solution, deal cards, 
+			//select one player to start the turn
+			//change the state of round to INTURN
 			
-		}
-		if(status.equals(State.INTURN)){
-			
+			//broadcast the board state in order to start the game
+		}else if(status.equals(State.INTURN)){
+			//check if all the player is watching or eliminated, means this round is finished
+			//if all the player is eliminated, stop the game,
 		}
 	}
 	
 	private void initCards(Board game){
-		Card.CHARACTER sCharacter = Card.CHARACTER.values()[random.nextInt(7)];
-		Card.ROOM sRoom = Card.ROOM.values()[random.nextInt(10)];
-		Card.WEAPON sWeapon = Card.WEAPON.values()[random.nextInt(7)];
+		Card.CHARACTER sCharacter = Card.CHARACTER.values()[random.nextInt(Card.CHARACTER.values().length+1)];
+		Card.ROOM sRoom = Card.ROOM.values()[random.nextInt(Card.ROOM.values().length+1)];
+		Card.WEAPON sWeapon = Card.WEAPON.values()[random.nextInt(Card.WEAPON.values().length+1)];
+		
+		Card[] solution = {
+				new Card(Card.TYPE.CHARCTER,sCharacter.toString()),
+				new Card(Card.TYPE.ROOM,sRoom.toString()),
+				new Card(Card.TYPE.WEAPON,sWeapon.toString()),
+		};
+		
+		//game.setSolution(solution);
+		//set the solution on board
+		
+		//deal the rest of cards to players
 	}
 }

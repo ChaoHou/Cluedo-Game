@@ -57,6 +57,12 @@ public class Initialize implements MasterAction{
 			System.out.println("Server update user id: "+connection.uid()+" name: "+name);
 			System.out.println("Server update user character: "+character);
 			Player player = game.getPlayer(connection.uid());
+			
+			//TODO
+			//check whether the character is in use,
+			//if someone is using, make this player's status to initializing
+			//then broadcast
+			
 			player.setCharacter(new Chara(character));
 			player.setUName(name);
 			player.setStatus(STATUS.WATCHING);
