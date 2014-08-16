@@ -4,14 +4,27 @@ for enable methods, can make the method behave more automatic?
 For example, if I enableRoll, the other action will be disabled automatically
 Same to other enable method,
 
+
 Found Something useful:
 
 The issue page on the github could be use to schedule the thing or comment bugs,
 It can be synchronized locally into IDEs just like using git,
 So I think it's a great tool to communicate, we can use that to replace this text file
 
+
 Method for Board class:
-Delete the method deal Card to Player
+
+Delete the method deal Card to Player, because there is no card before the initialize finished.
+
+for movePlayer method: 
+if a player is moving into a room, take a unused room inner coordinate to the player
+if player is moving out of a room, take the door which meet the player's direction
+
+Require getCharacter(Card.CHARACTER character)//which returns a Chara with given CHARACTER type
+
+For setUpBoard method, the Chara in the player should have a start position on board
+
 
 For Room class:
+
 Field: list of Characters, list of weapons, array of inner coordinates
