@@ -23,7 +23,6 @@ public class BoardFrame extends JFrame {
         //does this line necessary?
         setLayout(new BorderLayout());
 
-        add(canvas, BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //create JButtons and add ActionListener received
@@ -31,8 +30,8 @@ public class BoardFrame extends JFrame {
         buttons[0] = ac;
         JButton as = new JButton("ASSUMPTION");
         buttons[1] = as;
-//        ac.addActionListener(action);
-//        as.addActionListener(action);
+        ac.addActionListener(action);
+        as.addActionListener(action);
 
         //create combo boxes
         Card.CHARACTER[] charaT = Card.CHARACTER.values();
@@ -49,7 +48,6 @@ public class BoardFrame extends JFrame {
             rooms[i] = roomT[i].toString();
         }
 
-
         JComboBox chara = new JComboBox(charas);
         JComboBox weapon = new JComboBox(weapons);
         JComboBox room = new JComboBox(rooms);
@@ -63,10 +61,13 @@ public class BoardFrame extends JFrame {
         p.add(as);
 
         //message console
+        JPanel q = new JPanel();
         JTextArea textArea = new JTextArea();
-        p.add(textArea,BorderLayout.SOUTH);
+        q.add(textArea, BorderLayout.SOUTH);
 
-        add(p,BorderLayout.SOUTH);
+        add(canvas, BorderLayout.NORTH);
+        add(p,BorderLayout.CENTER);
+        add(textArea,BorderLayout.SOUTH);
 
         //pack components nicely
         pack();
