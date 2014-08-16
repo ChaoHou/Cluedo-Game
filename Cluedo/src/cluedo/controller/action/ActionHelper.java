@@ -8,6 +8,7 @@ import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.server.Initialize;
 import cluedo.controller.action.server.Move;
 import cluedo.controller.action.server.Move.Direction;
+import cluedo.controller.action.server.Roll;
 import cluedo.controller.connection.MasterConnection;
 import cluedo.controller.connection.SlaveConnection;
 import cluedo.model.Board;
@@ -46,7 +47,7 @@ public class ActionHelper{
 			
 		}
 		if(type.equals(ActionType.ROLL)){
-			
+			return new Roll(connection);
 		}
 		if(type.equals(ActionType.REFUTE)){
 	
@@ -97,6 +98,8 @@ public class ActionHelper{
 			System.out.println("Send roll request");
 			DataOutputStream output = connection.getOutput();
 			output.writeInt(ActionType.ROLL.ordinal());
+			output.flush();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
