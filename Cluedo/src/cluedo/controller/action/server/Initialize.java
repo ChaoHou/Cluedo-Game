@@ -65,7 +65,7 @@ public class Initialize implements MasterAction{
 			
 			player.setCharacter(new Chara(character));
 			player.setUName(name);
-			player.setStatus(STATUS.INITIALIZING);
+			player.setStatus(STATUS.WATCHING);
 			
 		} catch (IOException e) {
 			e.printStackTrace();

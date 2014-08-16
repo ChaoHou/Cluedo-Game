@@ -125,14 +125,24 @@ public class ActionHelper{
 	/**
 	 * Client request
 	 */
-	public static void requestSuggestion(){
-		
-	}
-	/**
-	 * Client request
-	 */
-	public static void requestAccusation(){
-		
+	public static void requestAnnouncement(SlaveConnection connection,ActionType actionType,Card.CHARACTER character,Card.WEAPON weapon,Card.ROOM room){
+		try {
+			assert(connection != null);
+			assert(character != null);
+			assert(weapon != null);
+			assert(room != null);
+			
+			System.out.println("Send suggestion request");
+			DataOutputStream output = connection.getOutput();
+			output.writeInt(actionType.ordinal());
+			output.writeInt(character.ordinal());
+			output.writeInt(weapon.ordinal());
+			output.writeInt(room.ordinal());
+			output.flush();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * Client request

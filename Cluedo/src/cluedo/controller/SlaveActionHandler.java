@@ -119,8 +119,31 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 
 	@Override
 	public void actionPerformed(ActionEvent arg) {
-		System.out.println(arg.getActionCommand());
+		Player player = null;
 		
+		try {
+			player = game.getPlayer(connection.uid());
+		} catch (IllegalRequestException e) {
+			e.printStackTrace();
+		}
+		assert(player != null);
+		
+		if(!player.getStatus().equals(Player.STATUS.MAKINGANNOUNCEMENT)){
+			return;
+		}
+		
+		//TODO
+		//get character, room, weapon of the announcement
+		
+		String button = arg.getActionCommand();
+		
+		if(button.equals("ASSUMPTION")){
+			//ActionHelper.requestAnnouncement(connection, ActionType.SUGGESTION, character, weapon, room);
+		}else if(button.equals("ACCUSATION")){
+			//ActionHelper.requestAnnouncement(connection, ActionType.ACCUSATION, character, weapon, room);
+		}else{
+			throw new IllegalArgumentException();
+		}
 	}
 
 	@Override

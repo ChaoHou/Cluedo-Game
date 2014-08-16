@@ -39,9 +39,7 @@ public class Round {
 				try {
 					Player player = game.getPlayer(connection.uid());
 					
-					//TODO
-					//initialize the status with initializing, not null
-					if(player.getStatus() == null){
+					if(player.getStatus().equals(Player.STATUS.INITIALIZING)){
 						return;
 					}
 
@@ -50,6 +48,7 @@ public class Round {
 				}
 			}
 			
+			System.out.println("All the players finished Initialization");
 			//all the player finished initialize, 
 			//initialize the solution, deal cards, 
 			//select one player to start the turn
@@ -95,10 +94,19 @@ public class Round {
 		
 		Collections.shuffle(cards);
 		
+		//TODO:temp solution: get single player base on uid
 		//get the list of player
 		//Player[] players = game.get
 		while(!cards.isEmpty()){
-			//deal cards to players
+			for(MasterConnection connection:connections){
+				try {
+					Player player = game.getPlayer(connection.uid());
+					//add card to player
+				} catch (IllegalRequestException e) {
+					e.printStackTrace();
+				}
+			}
+		
 		}
 		
 		//deal the rest of cards to players
