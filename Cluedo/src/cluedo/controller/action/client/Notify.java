@@ -47,21 +47,22 @@ public class Notify implements SlaveAction{
 			
 			Player.STATUS status = player.getStatus();
 			if(status.equals(Player.STATUS.INITIALIZING)){
-			
+				//the player is not initialized properly, need to initialize again
+				frame.initPlayer();
 			}else if(status.equals(Player.STATUS.ROLLING)){
 				frame.enableRoll();
 			}else if(status.equals(Player.STATUS.MOVING)){
 				//frame.
 			}else if(status.equals(Player.STATUS.MAKINGANNOUNCEMENT)){
 				frame.enableAction();
+			}else if(status.equals(Player.STATUS.WATCHING)){
+				//update messages
+			}else if(status.equals(Player.STATUS.REFUTING)){
+				//enable refuting
+			}else if(status.equals(Player.STATUS.ELIMINATED)){
+				//disable all user actions
 			}
-			//if the play's status is rolling, enable the roll
-			//if it's moving enable moving
-			//if it's making announcement enable buttons
-			//if it's refuting, enable refute
-			//if it's eliminated, disable actions other than refute
 		} catch (IllegalRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
