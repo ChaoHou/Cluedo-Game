@@ -1,5 +1,7 @@
 package cluedo.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import org.omg.CORBA.INITIALIZE;
@@ -71,8 +73,33 @@ public class Round {
 				new Card(Card.TYPE.WEAPON,sWeapon.toString()),
 		};
 		
-		//game.setSolution(solution);
-		//set the solution on board
+		game.setSolution(solution);
+		
+		ArrayList<Card> cards = new ArrayList<Card>();
+		for(Card.CHARACTER chara:Card.CHARACTER.values()){
+			if(!chara.equals(sCharacter)){
+				cards.add(new Card(Card.TYPE.CHARCTER,chara.toString()));
+			}
+		}
+		for(Card.ROOM room:Card.ROOM.values()){
+			if(!room.equals(sRoom)){
+				cards.add(new Card(Card.TYPE.ROOM,room.toString()));
+			}
+		}
+		for(Card.WEAPON weap:Card.WEAPON.values()){
+			if(!weap.equals(sWeapon)){
+				cards.add(new Card(Card.TYPE.WEAPON,weap.toString()));
+			}
+		}
+		assert(cards.size() == (Card.ROOM.values().length+Card.CHARACTER.values().length+Card.WEAPON.values().length-3));
+		
+		Collections.shuffle(cards);
+		
+		//get the list of player
+		//Player[] players = game.get
+		while(!cards.isEmpty()){
+			//deal cards to players
+		}
 		
 		//deal the rest of cards to players
 	}
