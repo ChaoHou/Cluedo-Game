@@ -28,6 +28,7 @@ public class Player {
     public Player(int uid) {
         this.uid = uid;
         cards = new ArrayList<Card>();
+        setStatus(STATUS.INITIALIZING);
     }
 
     public void toOutputStream(DataOutputStream dos) throws IOException{
