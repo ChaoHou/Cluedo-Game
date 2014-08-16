@@ -52,7 +52,7 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 		
 		String[] playerInfo = frame.initPlayer();
 		Card.CHARACTER character = Card.CHARACTER.valueOf(playerInfo[1]);
-		//ActionHelper.requestInitialize(connection,playerInfo[0],character);
+		ActionHelper.requestInitialize(connection,playerInfo[0],character);
 		
 		while(1 == 1){
 			try {
