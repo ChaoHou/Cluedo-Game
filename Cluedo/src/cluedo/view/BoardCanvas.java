@@ -2,6 +2,7 @@ package cluedo.view;
 
 import cluedo.model.*;
 import cluedo.view.drawing.Arrow;
+import cluedo.view.drawing.Dice;
 import cluedo.view.drawing.Hand;
 
 import java.awt.*;
@@ -83,6 +84,7 @@ public class BoardCanvas extends Canvas {
                     g2.fillOval(c.getX() * cell, c.getY() * cell, cell, cell);
                 }
 
+                //draw lines for assisting making GUI
 //                for (int X = 480; X < getBounds().width; X+=10) {
 //                    g2.drawLine(X,0,X,getBounds().height);
 //                }
@@ -104,6 +106,9 @@ public class BoardCanvas extends Canvas {
                 } catch (Exception e) {
                     System.out.printf("No user! %d\n",uid);
                 }
+
+                testP.setStepsRemain(5);
+                Dice.drawDice(g2,testP.getStepsRemain());
 
 //                System.out.println(x+", "+y);
             }
