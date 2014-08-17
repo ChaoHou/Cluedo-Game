@@ -10,7 +10,9 @@ public class Dice {
     public static void drawDice(Graphics2D g, int steps) {
 
         g.drawRect(630,440,50,50);
-        g.drawString(Integer.toString(steps),655,465);
+        g.drawString(Integer.toString(steps),652,467);
+        g.drawRect(510,450,80,20);
+        g.drawString("ROLL A DIE",510,465);
     }
 
 }
