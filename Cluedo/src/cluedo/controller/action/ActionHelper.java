@@ -9,6 +9,7 @@ import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.server.Initialize;
 import cluedo.controller.action.server.Move;
 import cluedo.controller.action.server.Move.Direction;
+import cluedo.controller.action.server.Refute;
 import cluedo.controller.action.server.Roll;
 import cluedo.controller.connection.MasterConnection;
 import cluedo.controller.connection.SlaveConnection;
@@ -46,7 +47,7 @@ public class ActionHelper{
 		}else if(type.equals(ActionType.ROLL)){
 			return new Roll(connection);
 		}else if(type.equals(ActionType.REFUTE)){
-	
+			return new Refute(connection);
 		}
 		
 		throw new IllegalArgumentException("INVALID TYPE");
@@ -141,18 +142,25 @@ public class ActionHelper{
 	public static void requestRefute(SlaveConnection connection,Card card){
 		try {
 			assert(connection != null);
-			assert(card != null);
 			
 			System.out.println("Send refute request");
 			DataOutputStream output = connection.getOutput();
 			output.writeInt(ActionType.REFUTE.ordinal());
 			
-			//send the card to server
-			output.writeInt(card.getType().ordinal());
-			String name = card.getName();
-			byte[] nameByte = name.getBytes("UTF-8");
-			output.writeInt(nameByte.length);
-			output.write(nameByte);
+			
+			if(card == null){
+				//handle the null case which is the pass
+				output.writeBoolean(false);
+			}else{
+				//true means there is a card
+				output.writeBoolean(true);
+				//send the card to server
+				output.writeInt(card.getType().ordinal());
+				String name = card.getName();
+				byte[] nameByte = name.getBytes("UTF-8");
+				output.writeInt(nameByte.length);
+				output.write(nameByte);
+			}
 
 			output.flush();
 			

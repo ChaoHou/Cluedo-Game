@@ -15,6 +15,7 @@ public class Refute implements MasterAction{
 
 	private MasterConnection connection;
 	
+	private boolean hasCard;
 	private Card.TYPE type;
 	private byte[] nameBytes;
 	
@@ -26,11 +27,17 @@ public class Refute implements MasterAction{
 			System.out.println("Server Refute recieved");
 			DataInputStream input = connection.getInput();
 			//read the player info from client
-			type = Card.TYPE.values()[input.readInt()];
-			int length;
-			length = input.readInt();
-			nameBytes = new byte[length];
-			input.read(nameBytes);
+			
+			hasCard = input.readBoolean();
+			
+			if(hasCard){
+				type = Card.TYPE.values()[input.readInt()];
+				int length;
+				length = input.readInt();
+				nameBytes = new byte[length];
+				input.read(nameBytes);
+			}
+			
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -41,10 +48,17 @@ public class Refute implements MasterAction{
 	public void execute(MasterConnection[] connections,Board game) {
 		
 		try {
-			String name = new String(nameBytes,"UTF-8");
+			if(hasCard){
+				//if the user didn't pass
+				String name = new String(nameBytes,"UTF-8");
+				
+				//TODO
+				//Update player's message.
+				//update player's status
+			}else{
+				//if the user choose to pass
+			}
 			
-			//Update player's message.
-			//update player's status
 			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

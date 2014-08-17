@@ -96,7 +96,28 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 		int x = arg.getX();
 		int y = arg.getY();
 		
-		//Move.sendMove(connection.getOutput(), x, y);
+		try {
+			Player player = game.getPlayer(connection.uid());
+			Player.STATUS status = player.getStatus();
+			if(status.equals(Player.STATUS.ROLLING)){
+				//check if user is clicking on the dice
+				//ActionHelper.requestRoll(connection);
+			}else if(status.equals(Player.STATUS.REFUTING)){
+				//check user is clicking on the cards 
+				//or clicking on the pass
+				//get the card it clicked on
+				//ActionHelper.requestRefute(connection, card);
+				
+				
+			}else{
+				//do nothing if not in the status
+				return;
+			}
+			
+		} catch (IllegalRequestException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
