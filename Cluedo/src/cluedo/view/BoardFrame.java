@@ -18,10 +18,10 @@ public class BoardFrame extends JFrame {
     private JButton[] buttons = new JButton[2];
     private JComboBox[] combos = new JComboBox[3];
 
-    public BoardFrame(String title, Board game, MouseListener mouse, ActionListener action) {
+    public BoardFrame(String title, Board game,int uid, MouseListener mouse, ActionListener action) {
         super(title);
 
-        canvas = new BoardCanvas(game,1/*mouse.getUid()*/);
+        canvas = new BoardCanvas(game, uid);
         canvas.addMouseListener(mouse);
 
         //does this line necessary?
