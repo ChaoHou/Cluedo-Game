@@ -84,12 +84,14 @@ public class Chara {
     }
 
     public void toOutputStream(DataOutputStream dos) throws IOException{
+        dos.writeByte(getName().ordinal());
         dos.writeByte(xCoordinate);
         dos.writeByte(yCoordinate);
     }
 
-    public void fromInputStream(DataInputStream dis) throws IOException{
-        xCoordinate = dis.readByte();
-        yCoordinate = dis.readByte();
+    public static Chara fromInputStream(DataInputStream dis) throws IOException{
+        Chara temp = new Chara(Card.CHARACTER.values()[dis.readByte()]);
+        temp.setPosition(dis.readByte(),dis.readByte());
+        return temp;
     }
 }

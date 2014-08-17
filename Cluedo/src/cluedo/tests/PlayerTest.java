@@ -24,6 +24,7 @@ public class PlayerTest extends Player{
         getCards().add(new Card(Card.TYPE.CHARCTER, "SCARLETT"));
         getCards().add(new Card(Card.TYPE.CHARCTER, "WHITE"));
         getCards().add(new Card(Card.TYPE.CHARCTER, "GREEN"));
+        getCharacter().setPosition(8,8);
 
         ByteArrayOutputStream bout = new ByteArrayOutputStream();
         DataOutputStream dout = new DataOutputStream(bout);
@@ -40,6 +41,8 @@ public class PlayerTest extends Player{
         System.out.printf("UName: %s %s\n",this.getUName(),test.getUName());
         System.out.printf("dice: %d %d\n", this.getDice(), test.getDice());
         System.out.printf("stepRemain: %d %d\n",this.getStepsRemain(),test.getStepsRemain());
+        System.out.printf("x: %d %d\n",this.getCharacter().getX(),test.getCharacter().getX());
+        System.out.printf("y: %d %d\n",this.getCharacter().getY(),test.getCharacter().getY());
 
         assert(this.equals(test));
     }

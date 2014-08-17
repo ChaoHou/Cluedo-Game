@@ -37,7 +37,7 @@ public class Player {
         dos.writeByte(uName.length());
         byte[] b = uName.getBytes("UTF-8");
         dos.write(b);
-        dos.writeByte(character.getName().ordinal());
+        character.toOutputStream(dos);
         dos.writeByte(dice);
         dos.writeByte(stepsRemain);
         //write numbers of cards
@@ -55,7 +55,8 @@ public class Player {
         byte[] nTemp = new byte[nameLength];
         dis.read(nTemp);
         temp.setUName(new String(nTemp,"UTF-8"));
-        temp.setCharacter(new Chara(Card.CHARACTER.values()[dis.readByte()]));
+        Chara tempC = Chara.fromInputStream(dis);
+        temp.setCharacter(tempC);
         temp.setDice(dis.readByte());
         temp.setStepsRemain(dis.readByte());
 
