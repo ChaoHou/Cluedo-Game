@@ -52,6 +52,8 @@ public class Notify implements SlaveAction{
 			System.out.println("Player uid: "+connection.uid()+" status: "+status);
 			
 			if(status.equals(Player.STATUS.INITIALIZING)){
+				System.out.println("Need initialize the user");
+				frame.showMessage("Initialize user");
 				String[] playerInfo = frame.initPlayer();
 				Card.CHARACTER character = Card.CHARACTER.valueOf(playerInfo[1]);
 				ActionHelper.requestInitialize(connection,playerInfo[0],character);
