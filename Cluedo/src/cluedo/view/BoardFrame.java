@@ -2,7 +2,6 @@ package cluedo.view;
 
 import cluedo.controller.action.server.Move;
 import cluedo.model.*;
-import com.sun.codemodel.internal.JOp;
 
 import javax.swing.*;
 import java.awt.*;
