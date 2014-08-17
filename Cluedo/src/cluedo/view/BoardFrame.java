@@ -207,7 +207,9 @@ public class BoardFrame extends JFrame {
      */
     public boolean clickOnDie(int x, int y) {
         String[] temp = canvas.defineClick(x,y);
-        if (temp[0].equals("Dice")) {return true;}
+        if (temp[0] != null && temp[0].equals("Dice")) {
+            System.out.println("true!");
+            return true;}
         return false;
     }
 
@@ -219,7 +221,9 @@ public class BoardFrame extends JFrame {
      */
     public Card clickOnHand(int x, int y) {
         String[] temp = canvas.defineClick(x,y);
-        if (temp[0].equals("Card")) {return new Card(Card.TYPE.values()[Integer.parseInt(temp[1])], temp[2]);}
+        if (temp[0] != null && temp[0].equals("Card")) {
+            System.out.println("true!");
+            return new Card(Card.TYPE.values()[Integer.parseInt(temp[1])], temp[2]);}
         return null;
     }
 
@@ -231,7 +235,9 @@ public class BoardFrame extends JFrame {
      */
     public Move.Direction clickOnArrow(int x, int y) {
         String[] temp = canvas.defineClick(x,y);
-        if (temp[0].equals("Move")) {return Move.Direction.values()[Integer.parseInt(temp[1])];}
+        if (temp[0] != null && temp[0].equals("Move")) {
+            System.out.println(temp[1]);
+            return Move.Direction.values()[Integer.parseInt(temp[1])];}
         return null;
     }
 }

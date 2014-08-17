@@ -118,27 +118,27 @@ public class BoardCanvas extends Canvas {
      */
     public String[] defineClick(int x, int y) {
         String[] temp = new String[3];
-        try {
-            Player p = board.getPlayer(uid);
+//        try {
+//            Player p = board.getPlayer(uid);
             if (x >= 510 && x <= 590 && y >= 450 && y <= 470) {
                 temp[0] = "Dice";
             }
-            if (x >= 500 && x <= 683 && y >= 140 && y <= 383) {
-                int index = getCardIndex(x - 500, y - 140);
-                if (index >= p.getCards().size()) {return temp;}
-                    temp[0] = "Card";
-                    temp[1] = Integer.toString(p.getCards().get(index).getType().ordinal());
-                    temp[2] = p.getCards().get(index).getName();
-            }
-            if (x >= 495 && x <= 645 && y >= 10 && y <= 110) {
-                int direction = getArrowDirection(x-595,y-10);
+//            if (x >= 500 && x <= 683 && y >= 140 && y <= 383) {
+//                int index = getCardIndex(x - 500, y - 140);
+//                if (index >= p.getCards().size()) {return temp;}
+//                    temp[0] = "Card";
+//                    temp[1] = Integer.toString(p.getCards().get(index).getType().ordinal());
+//                    temp[2] = p.getCards().get(index).getName();
+//            }
+            if (x >= 545 && x <= 645 && y >= 10 && y <= 110) {
+                int direction = getArrowDirection(x-545,y-10);
                 if (direction == -1) {return temp;}
                 temp[0] = "Move";
                 temp[1] = Integer.toString(direction);
             }
-        } catch (Exception e) {
+//        } catch (Exception e) {
 
-        }
+//        }
         return temp;
     }
 
