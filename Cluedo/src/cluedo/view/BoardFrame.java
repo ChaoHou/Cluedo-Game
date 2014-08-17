@@ -174,8 +174,12 @@ public class BoardFrame extends JFrame {
 
         }
 
-        input[0] = JOptionPane.showInputDialog(this, "What's your name?");
+        while(input[0] == null || input[0].equals("")) {
+            input[0] = JOptionPane.showInputDialog(this, "What's your name?");
+        }
+        while(input[1] == null) {
         input[1] =(String) JOptionPane.showInputDialog(this, "Select a character.", "Character select", JOptionPane.INFORMATION_MESSAGE, null, charas, charas[0]);
+        }
 
         return input;
     }
