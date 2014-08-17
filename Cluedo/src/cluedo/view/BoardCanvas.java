@@ -88,13 +88,14 @@ public class BoardCanvas extends Canvas {
 //                testP.getCards().add(new Card(Card.TYPE.CHARCTER, "GREEN"));
                 //ends
                 try {
-                    Hand.drawHands(g2,board.getPlayer(uid));
-                } catch (Exception e) {
+                    Player p = board.getPlayer(uid);
+                    Hand.drawHands(g2,p);
 //                    System.out.printf("No user! %d\n",uid);
-                }
 
-//                testP.setDice(5);
-//                Dice.drawDice(g2,testP.getStepsRemain());
+//                    p.setDice(100);
+                    Dice.drawDice(g2,p.getStepsRemain());
+                } catch (Exception e){
+                }
 
 //                System.out.println(x+", "+y);
             }
