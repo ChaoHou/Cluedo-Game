@@ -28,7 +28,7 @@ public class Hand {
         g.translate(-(500+61*ty),-(140+81*j));
 
         g.setColor(Color.YELLOW);
-        g.fillRect(561,390,60,20);
+        g.fillRect(560,390,60,20);
         g.setColor(Color.BLACK);
         g.drawString("PASS",571,405);
 

@@ -234,8 +234,15 @@ public class BoardFrame extends JFrame {
     public Move.Direction clickOnArrow(int x, int y) {
         String[] temp = canvas.defineClick(x,y);
         if (temp[0] != null && temp[0].equals("Move")) {
-            System.out.println(temp[1]);
             return Move.Direction.values()[Integer.parseInt(temp[1])];}
         return null;
+    }
+
+    public boolean clickOnPass(int x, int y) {
+        String[] temp = canvas.defineClick(x,y);
+        if(temp[0] != null && temp[0].equals("Pass")) {
+            return true;
+        }
+        return false;
     }
 }

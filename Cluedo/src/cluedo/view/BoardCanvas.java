@@ -143,6 +143,9 @@ public class BoardCanvas extends Canvas {
                 temp[0] = "Move";
                 temp[1] = Integer.toString(direction);
             }
+            if (x >= 560 && y >= 390 && x <= 620 && y <= 410) {
+                temp[0] = "Pass";
+            }
         } catch (Exception e) {
 
         }
