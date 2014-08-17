@@ -18,6 +18,7 @@ import cluedo.controller.ActionHandler;
 import cluedo.controller.SlaveActionHandler;
 import cluedo.controller.action.Action;
 import cluedo.controller.action.ActionHelper;
+import cluedo.controller.action.client.Notify;
 import cluedo.controller.action.client.SlaveAction;
 import cluedo.controller.connection.MasterConnection;
 import cluedo.controller.connection.SlaveConnection;
@@ -45,8 +46,11 @@ public class SlaveTest {
 						players.add(new Player(uid));
 						Board game = new Board(players);
 						
+						//TODO:bug in board is not fixed
+						//broadcast the board state
 						ActionHelper.broadcast(masters, game);
 						
+						//disconnect the slave
 						ActionHelper.requestDisconnect(socket);
 						
 						socket.close();
@@ -85,6 +89,10 @@ public class SlaveTest {
 			slave.setActionHandler(handler);
 			slave.run();
 
+			Action action1 = handler.pollAction();
+			
+			assert(action1 instanceof Notify);
+			
 			assert(slave.isClosed()):"Socket should be closed";
 			
 		} catch (UnknownHostException e) {
