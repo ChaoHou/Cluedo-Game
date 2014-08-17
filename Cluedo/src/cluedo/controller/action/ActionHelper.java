@@ -51,11 +51,6 @@ public class ActionHelper{
 		
 		throw new IllegalArgumentException("INVALID TYPE");
 	}
-
-	public static Action genClientAction(ActionType type, DataInputStream input) {
-		
-		return null;
-	}
 	
 	/**
 	 * Client request
@@ -143,8 +138,27 @@ public class ActionHelper{
 	/**
 	 * Client request
 	 */
-	public static void requestRefute(){
-		
+	public static void requestRefute(SlaveConnection connection,Card card){
+		try {
+			assert(connection != null);
+			assert(card != null);
+			
+			System.out.println("Send refute request");
+			DataOutputStream output = connection.getOutput();
+			output.writeInt(ActionType.REFUTE.ordinal());
+			
+			//send the card to server
+			output.writeInt(card.getType().ordinal());
+			String name = card.getName();
+			byte[] nameByte = name.getBytes("UTF-8");
+			output.writeInt(nameByte.length);
+			output.write(nameByte);
+
+			output.flush();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void requestDisconnect(Socket socket){
