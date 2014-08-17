@@ -20,7 +20,7 @@ public class BoardFrame extends JFrame {
     public BoardFrame(String title, Board game, MouseListener mouse, ActionListener action) {
         super(title);
 
-        canvas = new BoardCanvas(/* uid,*/game);
+        canvas = new BoardCanvas(game,1/*mouse.getUid()*/);
         canvas.addMouseListener(mouse);
 
         //does this line necessary?

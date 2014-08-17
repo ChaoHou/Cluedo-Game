@@ -2,11 +2,13 @@ package cluedo.view;
 
 import cluedo.model.*;
 import cluedo.view.drawing.Arrow;
+import cluedo.view.drawing.Hand;
 
 import java.awt.*;
 
 public class BoardCanvas extends Canvas {
     private final Board board;
+    private final int uid;
 
     // C = collidor R = room D = door S = start J = jump
     private final String[] map = {
@@ -42,8 +44,9 @@ public class BoardCanvas extends Canvas {
      * constructor
      * @param board
      */
-    public BoardCanvas(Board board) {
+    public BoardCanvas(Board board, int uid) {
         this.board = board;
+        this.uid = uid;
 
         setSize(new Dimension(board.width(),board.height()));
     }
@@ -80,17 +83,27 @@ public class BoardCanvas extends Canvas {
                     g2.fillOval(c.getX() * cell, c.getY() * cell, cell, cell);
                 }
 
+//                for (int X = 480; X < getBounds().width; X+=10) {
+//                    g2.drawLine(X,0,X,getBounds().height);
+//                }
+//                for (int Y = 0; Y < 520; Y+=10) {
+//                    g2.drawLine(480,Y,getBounds().width,Y);
+//                }
 
                 //height = 520, 480 < width < 710 is control panel
-                g2.translate(595,10);
-                Arrow.drawArrow(g2,Arrow.DIRECTION.UP);
-                g2.translate(0,100);
-                Arrow.drawArrow(g2,Arrow.DIRECTION.DOWN);
-                g2.translate(50,-50);
-                Arrow.drawArrow(g2,Arrow.DIRECTION.RIGHT);
-                g2.translate(-100,0);
-                Arrow.drawArrow(g2,Arrow.DIRECTION.LEFT);
-                g2.translate(-545,-60);
+                Arrow.drawArrow(g2);
+                // creates imitaition player for test purpose
+                Player testP = new Player(uid);
+                testP.getCards().add(new Card(Card.TYPE.CHARCTER, "SCARLETT"));
+                testP.getCards().add(new Card(Card.TYPE.CHARCTER, "WHITE"));
+                testP.getCards().add(new Card(Card.TYPE.CHARCTER, "GREEN"));
+
+                //ends
+                try {
+                    Hand.drawHands(g2,testP/*board.getPlayer(uid)*/);
+                } catch (Exception e) {
+                    System.out.printf("No user! %d\n",uid);
+                }
 
 //                System.out.println(x+", "+y);
             }
