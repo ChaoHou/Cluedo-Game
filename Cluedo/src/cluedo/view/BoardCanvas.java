@@ -58,6 +58,7 @@ public class BoardCanvas extends Canvas {
                     g2.fillRect(x * cell + 1, y * cell + 1, cell, cell);
                 } else if (board.map[y].charAt(x) == 'D') {
                     g2.setColor(new Color(58, 233, 22));
+//                   System.out.printf("%d %d\n",x,y);
                     g2.fillRect(x * cell+1, y * cell+1, cell, cell);
                 } else {
                     g2.setColor(new Color(0, 141, 255));
@@ -81,20 +82,19 @@ public class BoardCanvas extends Canvas {
                 //height = 520, 480 < width < 710 is control panel
                 Arrow.drawArrow(g2);
                 // creates imitaition player for test purpose
-                Player testP = new Player(uid);
-                testP.getCards().add(new Card(Card.TYPE.CHARCTER, "SCARLETT"));
-                testP.getCards().add(new Card(Card.TYPE.CHARCTER, "WHITE"));
-                testP.getCards().add(new Card(Card.TYPE.CHARCTER, "GREEN"));
-
+//                Player testP = new Player(uid);
+//                testP.getCards().add(new Card(Card.TYPE.CHARCTER, "SCARLETT"));
+//                testP.getCards().add(new Card(Card.TYPE.CHARCTER, "WHITE"));
+//                testP.getCards().add(new Card(Card.TYPE.CHARCTER, "GREEN"));
                 //ends
                 try {
-                    Hand.drawHands(g2,testP/*board.getPlayer(uid)*/);
+                    Hand.drawHands(g2,board.getPlayer(uid));
                 } catch (Exception e) {
                     System.out.printf("No user! %d\n",uid);
                 }
 
-                testP.setDice(5);
-                Dice.drawDice(g2,testP.getStepsRemain());
+//                testP.setDice(5);
+//                Dice.drawDice(g2,testP.getStepsRemain());
 
 //                System.out.println(x+", "+y);
             }
@@ -154,12 +154,12 @@ public class BoardCanvas extends Canvas {
     public String[] defineClick(int x, int y) {
         String[] temp = new String[3];
         try {
-//            Player p = board.getPlayer(uid);
+            Player p = board.getPlayer(uid);
             // creates imitaition player for test purpose
-            Player p = new Player(uid);
-            p.getCards().add(new Card(Card.TYPE.CHARCTER, "SCARLETT"));
-            p.getCards().add(new Card(Card.TYPE.CHARCTER, "WHITE"));
-            p.getCards().add(new Card(Card.TYPE.CHARCTER, "GREEN"));
+//            Player p = new Player(uid);
+//            p.getCards().add(new Card(Card.TYPE.CHARCTER, "SCARLETT"));
+//            p.getCards().add(new Card(Card.TYPE.CHARCTER, "WHITE"));
+//            p.getCards().add(new Card(Card.TYPE.CHARCTER, "GREEN"));
             //ends
             if (x >= 510 && x <= 590 && y >= 450 && y <= 470) {
                 temp[0] = "Dice";
