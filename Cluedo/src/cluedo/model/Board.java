@@ -1,6 +1,7 @@
 package cluedo.model;
 
 
+import cluedo.controller.action.server.MasterAction;
 import cluedo.controller.action.server.Move;
 import cluedo.exception.IllegalRequestException;
 

@@ -248,4 +248,16 @@ public class BoardFrame extends JFrame {
         }
         return false;
     }
+
+    /**
+     * return current selected value by combobox
+     * @return
+     */
+    public String[] getAnnouncement() {
+        String[] temp = new String[3];
+        for (int i = 0; i < 3; ++i) {
+            temp[i] =(String) combos[i].getSelectedItem();
+        }
+        return temp;
+    }
 }
