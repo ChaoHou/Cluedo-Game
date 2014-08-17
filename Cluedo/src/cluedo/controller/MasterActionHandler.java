@@ -5,6 +5,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import cluedo.controller.action.Action;
+import cluedo.controller.action.ActionHelper;
 import cluedo.controller.action.server.MasterAction;
 import cluedo.controller.connection.MasterConnection;
 import cluedo.model.Board;
@@ -33,6 +34,10 @@ public class MasterActionHandler extends Thread implements ActionHandler{
 		}
 		//initialize the board
 		game = new Board(players);
+		
+		
+		//initial broadcast
+		ActionHelper.broadcast(con, game);
 	}
 	
 	@Override

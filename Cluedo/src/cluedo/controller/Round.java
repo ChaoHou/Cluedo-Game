@@ -41,6 +41,8 @@ public class Round {
 					Player player = game.getPlayer(connection.uid());
 					
 					if(player.getStatus().equals(Player.STATUS.INITIALIZING)){
+						System.out.println("Player id: "+connection.uid()+" status:"+player.getStatus());
+						
 						return;
 					}
 

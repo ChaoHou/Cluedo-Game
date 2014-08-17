@@ -51,11 +51,9 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 	public void run(){
 		System.out.println("CLIENT RUNNING");
 		
-		String[] playerInfo = frame.initPlayer();
-		Card.CHARACTER character = Card.CHARACTER.valueOf(playerInfo[1]);
-		ActionHelper.requestInitialize(connection,playerInfo[0],character);
 		
-		while(1 == 1){
+		
+		while(!connection.isClosed()){
 			try {
 				if(!actionQueue.isEmpty()){
 					SlaveAction action = actionQueue.poll();
@@ -119,6 +117,13 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 						ActionHelper.requestRefute(connection, null);
 					}
 				}
+				
+			}else if(status.equals(Player.STATUS.MOVING)){
+				Direction direction = frame.clickOnArrow(x, y);
+				if(direction != null){
+					ActionHelper.requestMove(connection, direction);
+				}
+				
 				
 			}else{
 				//do nothing if not in the status

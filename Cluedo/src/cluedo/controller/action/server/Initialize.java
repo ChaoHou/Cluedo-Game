@@ -62,10 +62,25 @@ public class Initialize implements MasterAction{
 			//check whether the character is in use,
 			//if someone is using, make this player's status to initializing
 			//then broadcast
+			ArrayList<Player> players = game.getPlayers();
+			boolean inUse = false;
+			for(Player tPlayer:players){
+				if(tPlayer.getCharacter() != null){
+					if(tPlayer.getCharacter().equals(character)){
+						inUse = true;
+						break;
+					}
+				}
+			}
 			
-			player.setCharacter(new Chara(character));
-			player.setUName(name);
-			player.setStatus(STATUS.WATCHING);
+			if(!inUse){
+				player.setCharacter(new Chara(character));
+				player.setUName(name);
+				player.setStatus(STATUS.WATCHING);
+				
+				System.out.println("UID: "+connection.uid()+" Status: "+player.getStatus());
+			}
+			
 			
 		} catch (IOException e) {
 			e.printStackTrace();

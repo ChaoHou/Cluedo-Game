@@ -5,11 +5,13 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import cluedo.controller.action.Action;
+import cluedo.controller.action.ActionHelper;
 import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.server.Move.Direction;
 import cluedo.controller.connection.SlaveConnection;
 import cluedo.exception.IllegalRequestException;
 import cluedo.model.Board;
+import cluedo.model.Card;
 import cluedo.model.Player;
 import cluedo.view.BoardFrame;
 
@@ -50,8 +52,9 @@ public class Notify implements SlaveAction{
 			System.out.println("Player uid: "+connection.uid()+" status: "+status);
 			
 			if(status.equals(Player.STATUS.INITIALIZING)){
-				System.out.println("Can't init player with pre Character, need to init again.");
-				frame.initPlayer();
+				String[] playerInfo = frame.initPlayer();
+				Card.CHARACTER character = Card.CHARACTER.valueOf(playerInfo[1]);
+				ActionHelper.requestInitialize(connection,playerInfo[0],character);
 			}else if(status.equals(Player.STATUS.ROLLING)){
 				System.out.println("Enable roll");
 				frame.enableRoll();
