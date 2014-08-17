@@ -37,20 +37,15 @@ public class ActionHelper{
 	public static Action genServerAction(MasterConnection connection,ActionType type){
 		if(type.equals(ActionType.INITIALIZE)){
 			return new Initialize(connection);
-		}
-		if(type.equals(ActionType.MOVE)){
+		}else if(type.equals(ActionType.MOVE)){
 			return new Move(connection);
-		}
-		if(type.equals(ActionType.SUGGESTION)){
+		}else if(type.equals(ActionType.SUGGESTION)){
 			
-		}
-		if(type.equals(ActionType.ACCUSATION)){
+		}else if(type.equals(ActionType.ACCUSATION)){
 			
-		}
-		if(type.equals(ActionType.ROLL)){
+		}else if(type.equals(ActionType.ROLL)){
 			return new Roll(connection);
-		}
-		if(type.equals(ActionType.REFUTE)){
+		}else if(type.equals(ActionType.REFUTE)){
 	
 		}
 		

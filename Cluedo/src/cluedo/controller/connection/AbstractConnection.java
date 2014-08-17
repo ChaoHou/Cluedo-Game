@@ -52,4 +52,8 @@ public abstract class AbstractConnection extends Thread{
 	public int uid(){
 		return uid;
 	}
+	
+	public Socket getSocket(){
+		return socket;
+	}
 }

@@ -26,7 +26,7 @@ import cluedo.model.Player;
 import cluedo.tests.MockSlave;
 import cluedo.view.BoardFrame;
 
-public class SlaveActionHandler extends Thread implements ActionHandler,MouseListener,ActionListener,KeyListener{
+public class SlaveActionHandler extends Thread implements ActionHandler,MouseListener,ActionListener,KeyListener,WindowListener{
 
 	private SlaveConnection connection;
 	private Board game;
@@ -43,6 +43,7 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 		frame.addKeyListener(this);
 		frame.setFocusable(true);
 		frame.requestFocus();
+		frame.addWindowListener(this);
 		//enable the popup to ask user for user name and token
 		//then send to server
 	}
@@ -185,5 +186,39 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
+	}
+
+	@Override
+	public void windowActivated(WindowEvent arg0) {
+	}
+
+	@Override
+	public void windowClosed(WindowEvent arg0) {
+	}
+
+	@Override
+	public void windowClosing(WindowEvent arg0) {
+		ActionHelper.requestDisconnect(connection.getSocket());
+		try {
+			connection.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent arg0) {
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent arg0) {
+	}
+
+	@Override
+	public void windowIconified(WindowEvent arg0) {
+	}
+
+	@Override
+	public void windowOpened(WindowEvent arg0) {
 	}
 }

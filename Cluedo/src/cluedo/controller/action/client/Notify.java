@@ -52,7 +52,7 @@ public class Notify implements SlaveAction{
 			}else if(status.equals(Player.STATUS.ROLLING)){
 				frame.enableRoll();
 			}else if(status.equals(Player.STATUS.MOVING)){
-				//frame.
+				frame.requestFocus();
 			}else if(status.equals(Player.STATUS.MAKINGANNOUNCEMENT)){
 				frame.enableAction();
 			}else if(status.equals(Player.STATUS.WATCHING)){

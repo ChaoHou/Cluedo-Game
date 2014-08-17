@@ -31,14 +31,14 @@ public class MasterConnection extends AbstractConnection{
 					int index = input.readInt();
 					ActionType actionType = ActionType.values()[index];
 					System.out.println("Server ActionType recieved: "+actionType);
-					Action action = ActionHelper.genServerAction(this,actionType);
 					
 					if(actionType.equals(ActionType.DISCONNECT)){
-						
+						System.out.println("Master recieved disconnect request.");
 						socket.close();
 						break;
 					}
 					
+					Action action = ActionHelper.genServerAction(this,actionType);
 					handler.offerAction(action);
 				}
 				

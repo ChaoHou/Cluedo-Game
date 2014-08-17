@@ -38,7 +38,7 @@ public class MasterActionHandler extends Thread implements ActionHandler{
 	@Override
 	public void run(){
 		System.out.println("MASTER RUNNING");
-		while(1 == 1){
+		while(allConnectionAlive()){
 			try {
 				if(!actionQueue.isEmpty()){
 					MasterAction action = actionQueue.poll();

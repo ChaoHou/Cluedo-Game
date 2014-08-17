@@ -146,7 +146,9 @@ public class Main {
 					}
 					actionMaster.run();
 					//System.out.println("ALL CLIENTS DISCONNECTED --- GAME OVER");
-					return; // done
+					// done
+					// close the server
+					ss.close();
 				}
 			}
 		} catch(IOException e) {
