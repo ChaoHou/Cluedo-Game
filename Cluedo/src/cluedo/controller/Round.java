@@ -17,15 +17,15 @@ public class Round {
 	public enum State{
 		INITIALIZING,
 		WAITING,
-		INTURN,
-		ENDTURN,
+		STARTED,
+		FINISHING,
 	}
 	
 	private Random random = new Random();
 	
 	private MasterConnection[] connections;
 	
-	private MasterConnection playerInTurn;
+	//private MasterConnection playerInTurn;
 	
 	private State status = State.INITIALIZING;
 	
@@ -55,7 +55,10 @@ public class Round {
 			//change the state of round to INTURN
 			
 			//broadcast the board state in order to start the game
-		}else if(status.equals(State.INTURN)){
+		}else if(status.equals(State.STARTED)){
+			//check all player's status check if next to refute is the player in turn,
+			//start the next player's turn
+			
 			//check if all the player is watching or eliminated, means this round is finished
 			//if all the player is eliminated, stop the game,
 		}
