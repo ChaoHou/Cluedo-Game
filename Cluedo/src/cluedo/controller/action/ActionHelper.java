@@ -3,6 +3,7 @@ package cluedo.controller.action;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 
 import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.server.Initialize;
@@ -149,6 +150,15 @@ public class ActionHelper{
 	 */
 	public static void requestRefute(){
 		
+	}
+	
+	public static void requestDisconnect(Socket socket){
+		try {
+			DataOutputStream output = new DataOutputStream(socket.getOutputStream());
+			output.writeInt(ActionType.DISCONNECT.ordinal());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

@@ -31,9 +31,14 @@ public class SlaveConnection extends AbstractConnection{
 					int index = input.readInt();
 					ActionType actionType = ActionType.values()[index];
 					
-					assert(actionType.equals(ActionType.NOTIFY));
+					assert(actionType.equals(ActionType.NOTIFY) || actionType.equals(ActionType.DISCONNECT));
 					
 					System.out.println("Slave Action offered");
+					
+					if(actionType.equals(ActionType.DISCONNECT)){
+						socket.close();
+						break;
+					}
 					
 					handler.offerAction(new Notify(this));
 				}

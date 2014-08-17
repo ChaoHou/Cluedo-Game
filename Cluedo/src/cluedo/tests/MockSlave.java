@@ -1,4 +1,4 @@
-package cluedo.Test;
+package cluedo.tests;
 
 import cluedo.model.*;
 import cluedo.view.*;

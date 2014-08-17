@@ -33,6 +33,12 @@ public class MasterConnection extends AbstractConnection{
 					System.out.println("Server ActionType recieved: "+actionType);
 					Action action = ActionHelper.genServerAction(this,actionType);
 					
+					if(actionType.equals(ActionType.DISCONNECT)){
+						
+						socket.close();
+						break;
+					}
+					
 					handler.offerAction(action);
 				}
 				

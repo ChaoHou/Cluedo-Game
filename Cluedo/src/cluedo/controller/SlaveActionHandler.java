@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import cluedo.Test.MockSlave;
 import cluedo.controller.action.ActionHelper;
 import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.client.SlaveAction;
@@ -24,6 +23,7 @@ import cluedo.exception.IllegalRequestException;
 import cluedo.model.Board;
 import cluedo.model.Card;
 import cluedo.model.Player;
+import cluedo.tests.MockSlave;
 import cluedo.view.BoardFrame;
 
 public class SlaveActionHandler extends Thread implements ActionHandler,MouseListener,ActionListener,KeyListener{
