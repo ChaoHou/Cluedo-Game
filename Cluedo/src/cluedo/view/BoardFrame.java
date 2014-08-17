@@ -13,6 +13,7 @@ public class BoardFrame extends JFrame {
     private boolean refuteDisabled;
 
     private JButton[] buttons = new JButton[2];
+    private JComboBox[] combos = new JComboBox[3];
 
     public BoardFrame(String title, Board game, MouseListener mouse, ActionListener action) {
         super(title);
@@ -49,8 +50,11 @@ public class BoardFrame extends JFrame {
         }
 
         JComboBox chara = new JComboBox(charas);
+        combos[0] = chara;
         JComboBox weapon = new JComboBox(weapons);
+        combos[1] = weapon;
         JComboBox room = new JComboBox(rooms);
+        combos[2] = room;
 
         //create panel for buttons and combo box
         JPanel p = new JPanel();
@@ -114,11 +118,17 @@ public class BoardFrame extends JFrame {
         for (JButton b: buttons) {
             b.setEnabled(false);
         }
+        for (JComboBox c: combos) {
+            c.setEnabled(false);
+        }
     }
 
     public void enableAction() {
         for (JButton b: buttons) {
             b.setEnabled(true);
+        }
+        for (JComboBox c: combos) {
+            c.setEnabled(true);
         }
         disableRoll();
         disableRefute();
