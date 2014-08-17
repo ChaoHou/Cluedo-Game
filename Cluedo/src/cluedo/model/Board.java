@@ -198,6 +198,14 @@ public class Board {
     }
 
     /**
+     * return players in the game!
+     * @return
+     */
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    /**
      * if it's possible move a player's token to given direction
      * subtract stepsRemain stored in a player class
      * other wise do nothing
