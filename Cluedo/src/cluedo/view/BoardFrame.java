@@ -22,6 +22,7 @@ public class BoardFrame extends JFrame {
 
         canvas = new BoardCanvas(game, uid);
         canvas.addMouseListener(mouse);
+        canvas.setPreferredSize(new Dimension(715,520));
 
         //does this line necessary?
         setLayout(new BorderLayout());

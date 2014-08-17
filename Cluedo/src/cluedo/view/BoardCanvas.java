@@ -90,7 +90,7 @@ public class BoardCanvas extends Canvas {
                 try {
                     Hand.drawHands(g2,board.getPlayer(uid));
                 } catch (Exception e) {
-                    System.out.printf("No user! %d\n",uid);
+//                    System.out.printf("No user! %d\n",uid);
                 }
 
 //                testP.setDice(5);
