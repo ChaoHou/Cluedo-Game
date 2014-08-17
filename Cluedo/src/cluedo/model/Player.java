@@ -19,7 +19,7 @@ public class Player {
 
     private final int uid;
     private STATUS status;
-    private String uName;
+    private String uName = "";
     private ArrayList<Card> cards;
     private Chara character;
     private int dice;
