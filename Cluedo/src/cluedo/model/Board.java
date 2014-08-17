@@ -79,8 +79,8 @@ public class Board {
      * solution is an array stores Cards
      * each index stores certain cards.
      * 0 = Character
-     * 1 = Room
-     * 2 = Weapon
+     * 1 = Weapon
+     * 2 = Room
      * throws exception when an index stores different type of card
      *
      * @param solution

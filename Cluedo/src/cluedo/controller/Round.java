@@ -54,6 +54,8 @@ public class Round {
 			//select one player to start the turn
 			//change the state of round to INTURN
 			
+			initCards(game);
+			
 			//broadcast the board state in order to start the game
 		}else if(status.equals(State.STARTED)){
 			//check all player's status check if next to refute is the player in turn,
@@ -65,15 +67,21 @@ public class Round {
 	}
 	
 	private void initCards(Board game){
-		Card.CHARACTER sCharacter = Card.CHARACTER.values()[random.nextInt(Card.CHARACTER.values().length+1)];
-		Card.ROOM sRoom = Card.ROOM.values()[random.nextInt(Card.ROOM.values().length+1)];
-		Card.WEAPON sWeapon = Card.WEAPON.values()[random.nextInt(Card.WEAPON.values().length+1)];
+		Card.CHARACTER sCharacter = Card.CHARACTER.values()[random.nextInt(Card.CHARACTER.values().length)];
+		Card.WEAPON sWeapon = Card.WEAPON.values()[random.nextInt(Card.WEAPON.values().length)];
+		Card.ROOM sRoom = Card.ROOM.values()[random.nextInt(Card.ROOM.values().length)];
 		
 		Card[] solution = {
 				new Card(Card.TYPE.CHARCTER,sCharacter.toString()),
-				new Card(Card.TYPE.ROOM,sRoom.toString()),
 				new Card(Card.TYPE.WEAPON,sWeapon.toString()),
+				new Card(Card.TYPE.ROOM,sRoom.toString()),
 		};
+		
+		for(Card c:solution){
+			System.out.println(c.getName());
+		}
+		
+		if(true) return;
 		
 		game.setSolution(solution);
 		
