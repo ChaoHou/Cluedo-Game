@@ -127,20 +127,26 @@ public class Board {
         DataInputStream dis = new DataInputStream(bais);
 
         //retrieve tokens positions
-        for (Chara c: characters) {
-            c.fromInputStream(dis);
+        if (dis.readByte() != 0) {
+            for (Chara c : characters) {
+                c.fromInputStream(dis);
+            }
         }
 
         //retrieve weapon tokens positions
-        for (Weapon w: weapons) {
-            w.fromInputStream(dis);
+        if (dis.readByte() != 0) {
+            for (Weapon w : weapons) {
+                w.fromInputStream(dis);
+            }
         }
 
         int nPlayers = dis.readByte();
-        players.clear();
+        if (nPlayers != 0) {
+            players.clear();
 
-        for (int i = 0; i < nPlayers; ++i) {
-            players.add(Player.fromInputStream(dis));
+            for (int i = 0; i < nPlayers; ++i) {
+                players.add(Player.fromInputStream(dis));
+            }
         }
 
     }
@@ -158,22 +164,30 @@ public class Board {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
 
+        dos.writeByte(characters.length);
         //stores tokens positions
-        for (Chara c : characters) {
-            c.toOutputStream(dos);
+        if (characters.length != 0) {
+            for (Chara c : characters) {
+                c.toOutputStream(dos);
+            }
         }
 
+        dos.writeByte(characters.length);
         //stores weapon tokens positions
-        for (Weapon w : weapons) {
-            w.toOutputStream(dos);
+        if (weapons.length != 0) {
+            for (Weapon w : weapons) {
+                w.toOutputStream(dos);
+            }
         }
 
         //stores number of players
         dos.writeByte(players.size());
 
         //stores player info
-        for (Player p : players) {
-            p.toOutputStream(dos);
+        if (!players.isEmpty()) {
+            for (Player p : players) {
+                p.toOutputStream(dos);
+            }
         }
 
         dos.flush();
@@ -229,4 +243,6 @@ public class Board {
     public Weapon[] getWeapons() {
         return weapons;
     }
+
+
 }
