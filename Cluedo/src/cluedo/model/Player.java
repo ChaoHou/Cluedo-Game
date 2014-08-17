@@ -27,6 +27,7 @@ public class Player {
     private Chara character;
     private int dice;
     private int stepsRemain;
+    private String message;
 
     public Player(int uid) {
         this.uid = uid;
@@ -40,6 +41,9 @@ public class Player {
         dos.writeByte(uName.length());
         byte[] b = uName.getBytes("UTF-8");
         dos.write(b);
+        dos.writeByte(message.length());
+        byte[] m = message.getBytes("UTF-8");
+        dos.write(m);
         if (character != null) {
             dos.writeBoolean(true);
             character.toOutputStream(dos);
@@ -59,6 +63,10 @@ public class Player {
         //read name
         int nameLength = dis.readByte();
         byte[] nTemp = new byte[nameLength];
+        dis.read(nTemp);
+        temp.setUName(new String(nTemp,"UTF-8"));
+        int mesgLength = dis.readByte();
+        nTemp = new byte[mesgLength];
         dis.read(nTemp);
         temp.setUName(new String(nTemp,"UTF-8"));
         if (dis.readBoolean()) {
@@ -142,5 +150,13 @@ public class Player {
 
     public int getDice() {
         return dice;
+    }
+
+    public void setString(String str) {
+        message = str;
+    }
+
+    public String getString() {
+        return message;
     }
 }

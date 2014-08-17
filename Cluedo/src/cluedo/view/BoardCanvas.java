@@ -89,9 +89,9 @@ public class BoardCanvas extends Canvas {
 //                    System.out.printf("No user! %d\n",uid);
 
 //                    p.setDice(100);
-                    Dice.drawDice(g2,p.getStepsRemain());
+                    Dice.drawDice(g2, p.getStepsRemain());
                     g2.setColor(Color.BLACK);
-                    g2.drawString("You're: "+p.getCharacter().getName().toString(),510,495);
+                    g2.drawString("You're: " + p.getCharacter().getName().toString(), 510, 495);
                 } catch (Exception e){
                 }
 
@@ -183,5 +183,23 @@ public class BoardCanvas extends Canvas {
         if (y > 162) {temp += 6;}
         else if (y > 81) {temp += 3;}
         return temp;
+    }
+
+    public String getMessage() {
+        try {
+            return board.getPlayer(uid).getString();
+        } catch (Exception e){
+
+        }
+        return null;
+    }
+
+    public void setMessage(String s) {
+        try {
+            board.getPlayer(uid).setString(s);
+        } catch (Exception e){
+
+        }
+
     }
 }
