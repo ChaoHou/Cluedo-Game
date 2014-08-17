@@ -206,6 +206,7 @@ public class BoardFrame extends JFrame {
      * @return
      */
     public boolean clickOnDie(int x, int y) {
+        if (rollDisabled){return false;}
         String[] temp = canvas.defineClick(x,y);
         if (temp[0] != null && temp[0].equals("Dice")) {
             return true;}
@@ -219,6 +220,7 @@ public class BoardFrame extends JFrame {
      * @return a Card clicked or return null if not on any cards
      */
     public Card clickOnHand(int x, int y) {
+        if (refuteDisabled) {return null;}
         String[] temp = canvas.defineClick(x,y);
         if (temp[0] != null && temp[0].equals("Card")) {
             return new Card(Card.TYPE.values()[Integer.parseInt(temp[1])], temp[2]);}
@@ -239,6 +241,7 @@ public class BoardFrame extends JFrame {
     }
 
     public boolean clickOnPass(int x, int y) {
+        if (refuteDisabled) {return false;}
         String[] temp = canvas.defineClick(x,y);
         if(temp[0] != null && temp[0].equals("Pass")) {
             return true;
