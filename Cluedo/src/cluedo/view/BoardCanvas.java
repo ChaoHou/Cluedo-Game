@@ -28,7 +28,11 @@ public class BoardCanvas extends Canvas {
      * @param g
      */
     public void paint(Graphics g) {
-        Graphics2D g2 =(Graphics2D) g;
+    	Image offScreen = createImage(this.getWidth(),this.getHeight());
+    	Graphics g1 = offScreen.getGraphics();
+    	
+        Graphics2D g2 =(Graphics2D) g1;
+        
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         int cell = board.width()/24;
@@ -87,6 +91,8 @@ public class BoardCanvas extends Canvas {
             }
 
         }
+        
+        g.drawImage(offScreen, 0, 0, null);
 
     }
 

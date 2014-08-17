@@ -37,6 +37,7 @@ public class Notify implements SlaveAction{
 		try {
 			game.fromByte(state);
 			System.out.println("Slave board updated");
+			frame.repaint();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

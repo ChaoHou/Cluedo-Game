@@ -20,7 +20,7 @@ public class MockSlave implements MouseListener{
 
 
     public void run() {
-        new BoardFrame("test",board,this,null);
+        new BoardFrame("test",board,0,this,null);
     }
 
 
