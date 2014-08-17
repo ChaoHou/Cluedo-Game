@@ -23,7 +23,7 @@ public class Roll implements MasterAction{
 			System.out.println("Server response to roll");
 			Player player = game.getPlayer(connection.uid());
 			Random r = new Random();
-			player.setDice(r.nextInt(7));
+			player.setDice(r.nextInt(6)+1);
 			
 			player.setStatus(Player.STATUS.MOVING);
 			
