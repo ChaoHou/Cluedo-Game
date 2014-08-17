@@ -20,11 +20,12 @@ public class Roll implements MasterAction{
 	@Override
 	public void execute(MasterConnection[] connections,Board game) {
 		try {
+			System.out.println("Server response to roll");
 			Player player = game.getPlayer(connection.uid());
 			Random r = new Random();
 			player.setDice(r.nextInt(7));
 			
-			player.setStatus(Player.STATUS.ROLLING);
+			player.setStatus(Player.STATUS.MOVING);
 			
 		} catch (IllegalRequestException e) {
 			e.printStackTrace();

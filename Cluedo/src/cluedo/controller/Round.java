@@ -57,6 +57,7 @@ public class Round {
 			
 			initCards(game);
 			
+			status = State.STARTED;
 			//broadcast the board state in order to start the game
 		}else if(status.equals(State.STARTED)){
 			//check all player's status check if next to refute is the player in turn,
