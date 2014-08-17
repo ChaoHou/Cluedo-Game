@@ -70,7 +70,7 @@ public class BoardFrame extends JFrame {
 
         //message console
         JPanel q = new JPanel();
-        textArea = new JTextArea();
+        textArea = new JTextArea(5,50);
         textArea.setEditable(false);
         q.add(textArea, BorderLayout.SOUTH);
 
