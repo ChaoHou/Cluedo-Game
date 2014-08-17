@@ -77,12 +77,6 @@ public class Round {
 				new Card(Card.TYPE.ROOM,sRoom.toString()),
 		};
 		
-		for(Card c:solution){
-			System.out.println(c.getName());
-		}
-		
-		if(true) return;
-		
 		game.setSolution(solution);
 		
 		ArrayList<Card> cards = new ArrayList<Card>();
