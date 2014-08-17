@@ -4,6 +4,7 @@ package cluedo.model;
 import cluedo.controller.action.server.MasterAction;
 import cluedo.controller.action.server.Move;
 import cluedo.exception.IllegalRequestException;
+import cluedo.view.drawing.Coordinates;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -262,6 +263,10 @@ public class Board {
     public void movePlayer(int uid, Move.Direction direction) {
         try {
             Player p = getPlayer(uid);
+            //get currenti pos
+            int cXPos = p.getCharacter().getX();
+            int cYPos = p.getCharacter().getY();
+            char curC = map[cYPos].charAt(cXPos);
 
             //get destination x & y
             int[] des = getDireInXY(direction);
@@ -270,8 +275,18 @@ public class Board {
             char desC = map[dYPos].charAt(dXPos);
 
             //moved decrement stepsRemain()
-            if (desC == 'C' || desC == 'D') {
-                p.getCharacter().setPosition(dXPos,dYPos);
+            //moving on corridor
+            if ((curC == 'C' || curC == 'c' )&& (desC == 'c' || desC == 'C')) {
+                p.getCharacter().setPosition(dXPos, dYPos);
+                p.decStepR();
+                // go into a room
+            } else if ((curC == 'c' && desC == 'D')) {
+                p.getCharacter().setInRoom(this,dXPos,dYPos);
+                p.decStepR();
+                // get out from a room
+            } else if (p.getCharacter().isInRoom()) {
+                Coordinates c = p.getCharacter().getRoom().getC(direction);
+                p.getCharacter().setPosition(c.x, c.y);
                 p.decStepR();
             }
             else {return;}
