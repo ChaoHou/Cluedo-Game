@@ -208,7 +208,6 @@ public class BoardFrame extends JFrame {
     public boolean clickOnDie(int x, int y) {
         String[] temp = canvas.defineClick(x,y);
         if (temp[0] != null && temp[0].equals("Dice")) {
-            System.out.println("true!");
             return true;}
         return false;
     }
@@ -222,7 +221,6 @@ public class BoardFrame extends JFrame {
     public Card clickOnHand(int x, int y) {
         String[] temp = canvas.defineClick(x,y);
         if (temp[0] != null && temp[0].equals("Card")) {
-            System.out.println("true!");
             return new Card(Card.TYPE.values()[Integer.parseInt(temp[1])], temp[2]);}
         return null;
     }
