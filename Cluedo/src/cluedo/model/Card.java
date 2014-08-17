@@ -93,4 +93,13 @@ public class Card {
         dis.read(tName);
         return new Card(Card.TYPE.values()[type],new String(tName, "UTF-8"));
     }
+
+    public boolean equals(Object o) {
+        if (o instanceof Card) {
+            Card temp =(Card) o;
+            return temp.getType().equals(this.getType()) && temp.getName().equals(this.getName());
+        }
+
+        return false;
+    }
 }
