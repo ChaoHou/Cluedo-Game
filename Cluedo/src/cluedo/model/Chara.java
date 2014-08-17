@@ -1,5 +1,8 @@
 package cluedo.model;
 
+import cluedo.view.drawing.Coordinates;
+
+import java.awt.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -8,6 +11,8 @@ public class Chara {
     private final Card.CHARACTER name;
     private int xCoordinate;
     private int yCoordinate;
+    private boolean isInRoom; // is it in a room?
+    private Room room; // yes, where? no, null
 
     public Chara(Card.CHARACTER name) {
         this.name = name;
@@ -91,7 +96,51 @@ public class Chara {
 
     public static Chara fromInputStream(DataInputStream dis) throws IOException{
         Chara temp = new Chara(Card.CHARACTER.values()[dis.readByte()]);
-        temp.setPosition(dis.readByte(),dis.readByte());
+        temp.setPosition(dis.readByte(), dis.readByte());
         return temp;
+    }
+
+    public void setInRoom(Board board, int dXPos, int dYPos) {
+        isInRoom = true;
+        Room temp = board.getRooms()[Room.getRoomIndex(new Coordinates(dXPos, dYPos))];
+        temp.setInRoom(this);
+    }
+
+    public boolean isInRoom() {
+        return isInRoom;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void draw(Graphics2D g2, int cell) {
+        if (isInRoom) {return;}
+            g2.setColor(getCColor(getName()));
+            g2.fillOval(getX() * cell, getY() * cell, cell, cell);
+    }
+
+    /**
+     * help method for drawing chara
+     * @param c
+     * @return
+     */
+    public Color getCColor(Card.CHARACTER c) {
+        switch (c.ordinal()) {
+            case 0:
+                return Color.red;
+            case 1:
+                return Color.yellow;
+            case 2:
+                return Color.white;
+            case 3:
+                return Color.green;
+            case 4:
+                return Color.blue;
+            case 5:
+                return new Color(255, 0, 255);
+            default:
+                return null;
+        }
     }
 }
