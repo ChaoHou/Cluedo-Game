@@ -51,7 +51,7 @@ public class SlaveTest {
 						ActionHelper.broadcast(masters, game);
 						
 						//disconnect the slave
-						ActionHelper.requestDisconnect(socket);
+						ActionHelper.requestDisconnect(socket,uid);
 						
 						socket.close();
 						

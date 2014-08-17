@@ -43,7 +43,7 @@ public class MasterActionHandler extends Thread implements ActionHandler{
 	@Override
 	public void run(){
 		System.out.println("MASTER RUNNING");
-		while(allConnectionAlive()){
+		while(atLeastOneConnecting()){
 			try {
 				if(!actionQueue.isEmpty()){
 					MasterAction action = actionQueue.poll();
@@ -68,11 +68,11 @@ public class MasterActionHandler extends Thread implements ActionHandler{
 		return actionQueue.poll();
 	}
 	
-	private boolean allConnectionAlive(){
+	private boolean atLeastOneConnecting(){
 		for(MasterConnection master:connections){
-			if(master.isClosed()) return false;
+			if(!master.isClosed()) return true;
 		}
-		return true;
+		return false;
 	}
 
 	@Override

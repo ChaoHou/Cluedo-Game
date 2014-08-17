@@ -33,9 +33,14 @@ public class MasterConnection extends AbstractConnection{
 					System.out.println("Server ActionType recieved: "+actionType);
 					
 					if(actionType.equals(ActionType.DISCONNECT)){
-						System.out.println("Master recieved disconnect request.");
-						socket.close();
-						break;
+						
+						int uid = input.readInt();
+						if(uid == this.uid){
+							System.out.println("Disconnect uid:"+uid);
+							socket.close();
+							break;
+						}
+						
 					}
 					
 					Action action = ActionHelper.genServerAction(this,actionType);
