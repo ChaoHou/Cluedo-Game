@@ -1,9 +1,11 @@
 package cluedo.view;
 
 import cluedo.model.*;
+import com.sun.codemodel.internal.JOp;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
@@ -70,9 +72,19 @@ public class BoardFrame extends JFrame {
         textArea.setEditable(false);
         q.add(textArea, BorderLayout.SOUTH);
 
+        //create menu bar
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("File");
+        JMenuItem exit = new JMenuItem(new CloseAction(this));
+
+        menu.add(exit);
+
+        menuBar.add(menu);
+
         add(canvas, BorderLayout.NORTH);
         add(p,BorderLayout.CENTER);
         add(textArea,BorderLayout.SOUTH);
+        setJMenuBar(menuBar);
 
         //pack components nicely
         pack();
@@ -181,4 +193,19 @@ public class BoardFrame extends JFrame {
     }
 
 
+    private class CloseAction extends AbstractAction {
+        private JFrame frame;
+        public CloseAction(JFrame frame) {
+            super("Exit");
+            this.frame = frame;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int responce = JOptionPane.showConfirmDialog(frame,"Are you sure you want to close the app?\nThe progress will be discarded.");
+            if (responce == JOptionPane.OK_OPTION) {
+                frame.setVisible(false);
+            }
+        }
+    }
 }
