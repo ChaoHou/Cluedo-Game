@@ -70,9 +70,10 @@ public class BoardFrame extends JFrame {
 
         //message console
         JPanel q = new JPanel();
-        textArea = new JTextArea(5,50);
+        textArea = new JTextArea();
         textArea.setEditable(false);
-        q.add(textArea, BorderLayout.SOUTH);
+        JScrollPane scp = new JScrollPane(textArea);
+//        q.add(scp, BorderLayout.SOUTH);
 
         //create menu bar
         JMenuBar menuBar = new JMenuBar();
@@ -85,7 +86,7 @@ public class BoardFrame extends JFrame {
 
         add(canvas, BorderLayout.NORTH);
         add(p,BorderLayout.CENTER);
-        add(textArea,BorderLayout.SOUTH);
+        add(scp,BorderLayout.SOUTH);
         setJMenuBar(menuBar);
 
         //pack components nicely

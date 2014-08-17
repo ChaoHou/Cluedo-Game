@@ -88,7 +88,7 @@ public class BoardCanvas extends Canvas {
                     Hand.drawHands(g2,p);
 //                    System.out.printf("No user! %d\n",uid);
 
-                    p.setDice(100);
+//                    p.setDice(100);
                     Dice.drawDice(g2,p.getStepsRemain());
                     g2.setColor(Color.BLACK);
                     g2.drawString("You're: "+p.getCharacter().getName().toString(),510,495);
