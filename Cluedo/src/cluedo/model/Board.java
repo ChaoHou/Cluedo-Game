@@ -13,6 +13,36 @@ public class Board {
     private final int width = 20 * 24;
     private final int height = 20 * 26;
 
+    // C = collidor R = room D = door S = start J = jump
+    public final String[] map = {
+            "#########S####S#########",
+            "RRRRRJ#CCCRRRRCCC#RRRRRR",
+            "RRRRRRCCRRRRRRRRCCRRRRRR",
+            "RRRRRRCCRRRRRRRRCCRRRRRR",
+            "RRRRRRCCRRRRRRRRCCRRRRRR",
+            "RRRRRRCCRRRRRRRRCCDRRRRR",
+            "#RRRDRCCDRRRRRRDCCC#####",
+            "CCCCCCCCRRRRRRRRCCCCCCCS",
+            "#CCCCCCCRDRRRRDRCCCCCCC#",
+            "RRRRRCCCCCCCCCCCCCRRRRRR",
+            "RRRRRRRRCCCCCCCCCCRRRRRR",
+            "RRRRRRRRCC#####CCCRRRRRR",
+            "RRRRRRRRCC#####CCCRRRRRR",
+            "RRRRRRRDCC#####CCCRRRRRR",
+            "RRRRRRRRCC#####CCCCCCCC#",
+            "RRRRRRRRCC#####CCCRRRRR#",
+            "RRRRRRDRCC#####CCRRRRRRR",
+            "#CCCCCCCCC#####CCDRRRRRR",
+            "SCCCCCCCCCCCCCCCCRRRRRRR",
+            "#CCCCCCCCRRRRRRCCCRRRRR#",
+            "JRRRRRRCCRRRRRRCCCCCCCCS",
+            "RRRRRRRCCRRRRRRCCCCCCCC#",
+            "RRRRRRRCCRRRRRRCCRRRRRRJ",
+            "RRRRRRRCCRRRRRRCCRRRRRRR",
+            "RRRRRRRCCRRRRRRCCRRRRRRR",
+            "RRRRRR#S#RRRRRR#C#RRRRRR",
+    };
+
     /**
      * stores solution
      */
@@ -229,7 +259,24 @@ public class Board {
      * @param direction
      */
     public void movePlayer(int uid, Move.Direction direction) {
+        try {
+            Player p = getPlayer(uid);
 
+            //get destination x & y
+            int[] des = getDireInXY(direction);
+            int dXPos = p.getCharacter().getX()+des[0];
+            int dYPos = p.getCharacter().getY()+des[1];
+            char desC = map[dYPos].charAt(dXPos);
+
+            //moved decrement stepsRemain()
+            if (desC == 'C' || desC == 'D') {
+                p.getCharacter().setPosition(dXPos,dYPos);
+                p.decStepR();
+            }
+            else {return;}
+        } catch (Exception e) {
+
+        }
     }
 
     public Room[] getRooms() {
@@ -242,6 +289,29 @@ public class Board {
 
     public Weapon[] getWeapons() {
         return weapons;
+    }
+
+    private int[] getDireInXY(Move.Direction dire) {
+        int[] temp = new int[2];
+        switch (dire.ordinal()) {
+            case 0:
+                temp[0] = 0;
+                temp[1] = -1;
+                break;
+            case 1:
+                temp[0] = 0;
+                temp[1] = 1;
+                break;
+            case 2:
+                temp[0] = -1;
+                temp[1] = 0;
+                break;
+            default:
+                temp[0] = 1;
+                temp[1] = 0;
+                break;
+        }
+        return temp;
     }
 
 

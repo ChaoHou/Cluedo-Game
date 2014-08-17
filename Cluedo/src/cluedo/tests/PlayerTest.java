@@ -20,7 +20,6 @@ public class PlayerTest extends Player{
         setUName("Kyohei");
         setCharacter(new Chara(Card.CHARACTER.SCARLETT));
         setDice(7);
-        setStepsRemain(9);
         getCards().add(new Card(Card.TYPE.CHARCTER, "SCARLETT"));
         getCards().add(new Card(Card.TYPE.CHARCTER, "WHITE"));
         getCards().add(new Card(Card.TYPE.CHARCTER, "GREEN"));
@@ -55,7 +54,6 @@ public class PlayerTest extends Player{
         setUName("Kyohei");
         setCharacter(new Chara(Card.CHARACTER.SCARLETT));
         setDice(7);
-        setStepsRemain(9);
         getCards().add(new Card(Card.TYPE.CHARCTER, "SCARLETT"));
         getCards().add(new Card(Card.TYPE.CHARCTER, "WHITE"));
         getCards().add(new Card(Card.TYPE.CHARCTER, "GREEN"));
@@ -66,7 +64,6 @@ public class PlayerTest extends Player{
         p2.setUName("Chao");
         p2.setCharacter(new Chara(Card.CHARACTER.GREEN));
         p2.setDice(7);
-        p2.setStepsRemain(9);
         p2.getCards().add(new Card(Card.TYPE.WEAPON, "DAGGER"));
         p2.getCards().add(new Card(Card.TYPE.WEAPON, "ROPE"));
         p2.getCards().add(new Card(Card.TYPE.WEAPON, "REVOLVER"));
@@ -114,7 +111,6 @@ public class PlayerTest extends Player{
         setStatus(STATUS.INITIALIZING);
         setUName("Kyohei");
         setDice(7);
-        setStepsRemain(9);
         getCards().add(new Card(Card.TYPE.CHARCTER, "SCARLETT"));
         getCards().add(new Card(Card.TYPE.CHARCTER, "WHITE"));
         getCards().add(new Card(Card.TYPE.CHARCTER, "GREEN"));

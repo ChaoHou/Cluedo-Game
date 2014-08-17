@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Player {
 
+
     public enum STATUS {
         WATCHING,
         MOVING,
@@ -44,7 +45,6 @@ public class Player {
         }
         else {dos.writeBoolean(false);}
         dos.writeByte(dice);
-        dos.writeByte(stepsRemain);
         //write numbers of cards
         dos.writeByte(cards.size());
         for (Card c: cards) {
@@ -65,7 +65,6 @@ public class Player {
             temp.setCharacter(tempC);
         }
         temp.setDice(dis.readByte());
-        temp.setStepsRemain(dis.readByte());
 
         //read cards
         temp.getCards().clear();
@@ -108,10 +107,11 @@ public class Player {
 
     public void setDice(int dice) {
         this.dice = dice;
+        this.stepsRemain = dice;
     }
 
-    public void setStepsRemain(int stepsRemain) {
-        this.stepsRemain = stepsRemain;
+    public void decStepR() {
+        --stepsRemain;
     }
 
     public int getUid() {

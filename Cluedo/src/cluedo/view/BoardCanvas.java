@@ -11,35 +11,6 @@ public class BoardCanvas extends Canvas {
     private final Board board;
     private final int uid;
 
-    // C = collidor R = room D = door S = start J = jump
-    private final String[] map = {
-            "#########S####S#########",
-            "RRRRRJ#CCCRRRRCCC#RRRRRR",
-            "RRRRRRCCRRRRRRRRCCRRRRRR",
-            "RRRRRRCCRRRRRRRRCCRRRRRR",
-            "RRRRRRCCRRRRRRRRCCRRRRRR",
-            "RRRRRRCCRRRRRRRRCCDRRRRR",
-            "#RRRDRCCDRRRRRRDCCC#####",
-            "CCCCCCCCRRRRRRRRCCCCCCCS",
-            "#CCCCCCCRDRRRRDRCCCCCCC#",
-            "RRRRRCCCCCCCCCCCCCRRRRRR",
-            "RRRRRRRRCCCCCCCCCCRRRRRR",
-            "RRRRRRRRCC#####CCCRRRRRR",
-            "RRRRRRRRCC#####CCCRRRRRR",
-            "RRRRRRRDCC#####CCCRRRRRR",
-            "RRRRRRRRCC#####CCCCCCCC#",
-            "RRRRRRRRCC#####CCCRRRRR#",
-            "RRRRRRDRCC#####CCRRRRRRR",
-            "#CCCCCCCCC#####CCDRRRRRR",
-            "SCCCCCCCCCCCCCCCCRRRRRRR",
-            "#CCCCCCCCRRRRRRCCCRRRRR#",
-            "JRRRRRRCCRRRRRRCCCCCCCCS",
-            "RRRRRRRCCRRRRRRCCCCCCCC#",
-            "RRRRRRRCCRRRRRRCCRRRRRRJ",
-            "RRRRRRRCCRRRRRRCCRRRRRRR",
-            "RRRRRRRCCRRRRRRCCRRRRRRR",
-            "RRRRRR#S#RRRRRR#C#RRRRRR",
-    };
 
     /**
      * constructor
@@ -65,12 +36,14 @@ public class BoardCanvas extends Canvas {
         for (int x = 0; x < 24;x++) {
             for (int y = 0; y < 26; y++) {
                 //draw board
-                if (map[y].charAt(x) == 'C' || map[y].charAt(x) == 'S') {
+                if (board.map[y].charAt(x) == 'C' || board.map[y].charAt(x) == 'S') {
                     g2.setColor(new Color(255, 237, 0));
                     g2.fillRect(x*cell, y*cell, cell, cell);
                     g2.setColor(Color.BLACK);
                     g2.drawRect(x*cell, y*cell, cell, cell);
-                } else if (map[y].charAt(x) == 'R' || map[y].charAt(x) == 'D' || map[y].charAt(x) == 'J' ) {
+                } else if (board.map[y].charAt(x) == 'R'
+                        || board.map[y].charAt(x) == 'D'
+                        || board.map[y].charAt(x) == 'J' ) {
                     g2.setColor(new Color(58, 233, 22));
                     g2.fillRect(x*cell,y*cell,cell,cell);
                 } else {
@@ -107,7 +80,7 @@ public class BoardCanvas extends Canvas {
                     System.out.printf("No user! %d\n",uid);
                 }
 
-                testP.setStepsRemain(5);
+                testP.setDice(5);
                 Dice.drawDice(g2,testP.getStepsRemain());
 
 //                System.out.println(x+", "+y);
