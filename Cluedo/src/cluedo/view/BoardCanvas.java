@@ -109,7 +109,54 @@ public class BoardCanvas extends Canvas {
         }
     }
 
-    public String defineClick() {
-        return null;
+    /**
+     *
+     * @return an array of String
+     * 0 = Dice, Card or Move
+     * 1 = number of enum index
+     * 2 = Card's name
+     */
+    public String[] defineClick(int x, int y) {
+        String[] temp = new String[3];
+        try {
+            Player p = board.getPlayer(uid);
+            if (x >= 510 && x <= 590 && y >= 450 && y <= 470) {
+                temp[0] = "Dice";
+            }
+            if (x >= 500 && x <= 683 && y >= 140 && y <= 383) {
+                int index = getCardIndex(x - 500, y - 140);
+                if (index >= p.getCards().size()) {return temp;}
+                    temp[0] = "Card";
+                    temp[1] = Integer.toString(p.getCards().get(index).getType().ordinal());
+                    temp[2] = p.getCards().get(index).getName();
+            }
+            if (x >= 495 && x <= 645 && y >= 10 && y <= 110) {
+                int direction = getArrowDirection(x-595,y-10);
+                if (direction == -1) {return temp;}
+                temp[0] = "Move";
+                temp[1] = Integer.toString(direction);
+            }
+        } catch (Exception e) {
+
+        }
+        return temp;
+    }
+
+    private int getArrowDirection(int x, int y) {
+        int temp = -1;
+        if (x >= 35 && x <= 65 && y >= 0 && y <= 40) {return 0;}
+        if (x >= 35 && x <= 65 && y >= 70 && y <= 100) {return 1;}
+        if (x >= 0 && x <= 30 && y >= 35 && y <= 65) {return 2;}
+        if (x >= 70 && x <= 100 && y >= 35 && y <= 65) {return 3;}
+        return temp;
+    }
+
+    private int getCardIndex(int x, int y) {
+        int temp = 0;
+        if (x > 122) {temp = 2;}
+        else if (x > 61) {temp = 1;}
+        if (y > 162) {temp += 6;}
+        else if (y > 81) {temp += 3;}
+        return temp;
     }
 }

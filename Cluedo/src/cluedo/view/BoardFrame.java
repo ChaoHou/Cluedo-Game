@@ -1,5 +1,6 @@
 package cluedo.view;
 
+import cluedo.controller.action.server.Move;
 import cluedo.model.*;
 import com.sun.codemodel.internal.JOp;
 
@@ -93,21 +94,6 @@ public class BoardFrame extends JFrame {
 
         //set UI visible
         setVisible(true);
-    }
-
-    /**
-     * returns string where user clicked
-     * REFUTE returned with a number which is index of card (user may have from 3 to 6 cards)
-     *
-     *
-     * @return String
-     * UP, DOWN, LEFT, RIGHT
-     * REFUTE[0-5]
-     * ROLL
-     * NULL
-     */
-    public String defineClick() {
-        return canvas.defineClick();
     }
 
     /**
@@ -211,5 +197,41 @@ public class BoardFrame extends JFrame {
                 frame.setVisible(false);
             }
         }
+    }
+
+    /**
+     * check whether the (x,y) is on dice and return a boolean
+     * @param x
+     * @param y
+     * @return
+     */
+    public boolean clickOnDie(int x, int y) {
+        String[] temp = canvas.defineClick(x,y);
+        if (temp[0].equals("Dice")) {return true;}
+        return false;
+    }
+
+    /**
+     * check whether the (x,y) is on a card
+     * @param x
+     * @param y
+     * @return a Card clicked or return null if not on any cards
+     */
+    public Card clickOnHand(int x, int y) {
+        String[] temp = canvas.defineClick(x,y);
+        if (temp[0].equals("Card")) {return new Card(Card.TYPE.values()[Integer.parseInt(temp[1])], temp[2]);}
+        return null;
+    }
+
+    /**
+     * check whether clicking on an arrow
+     * @param x
+     * @param y
+     * @return the direction, if not on an arrow, return null
+     */
+    public Move.Direction clickOnArrow(int x, int y) {
+        String[] temp = canvas.defineClick(x,y);
+        if (temp[0].equals("Move")) {return Move.Direction.values()[Integer.parseInt(temp[1])];}
+        return null;
     }
 }

@@ -29,6 +29,9 @@ public class Arrow {
         int[] xs = {-15,0,15};
         int[] ys = {30,0,30};
         g.rotate((Math.PI/2)*direction.ordinal());
+        g.setColor(Color.WHITE);
+        g.fillRect(-15,0,30,30);
+        g.setColor(Color.BLUE);
         g.fillPolygon(xs,ys,3);
         g.rotate(-(Math.PI/2)*direction.ordinal());
 

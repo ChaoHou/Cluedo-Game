@@ -27,17 +27,17 @@ public class Hand {
         else {ty = s%3;}
         g.translate(-(500+61*ty),-(140+81*j));
 
+        g.setColor(Color.YELLOW);
         g.fillRect(561,390,60,20);
         g.setColor(Color.BLACK);
         g.drawString("PASS",571,405);
-        g.setColor(new Color(255,0,255));
 
     }
 
     private static void drawSingleHand(Graphics2D g, Card c) {
+        g.setColor(Color.CYAN);
         g.fillRect(0,0,60,80);
         g.setColor(Color.BLACK);
         g.drawString(c.getName(),0,30);
-        g.setColor(new Color(255,0,255));
     }
 }
