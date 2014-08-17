@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.omg.CORBA.INITIALIZE;
 
+import cluedo.controller.action.ActionHelper;
 import cluedo.controller.connection.MasterConnection;
 import cluedo.exception.IllegalRequestException;
 import cluedo.model.Board;
@@ -64,6 +65,8 @@ public class Round {
 			//check if all the player is watching or eliminated, means this round is finished
 			//if all the player is eliminated, stop the game,
 		}
+		
+		ActionHelper.broadcast(connections, game);
 	}
 	
 	private void initCards(Board game){
@@ -99,21 +102,26 @@ public class Round {
 		
 		Collections.shuffle(cards);
 		
-		//TODO:temp solution: get single player base on uid
-		//get the list of player
-		//Player[] players = game.get
+		//deal the rest of cards to players
+		ArrayList<Player> players = game.getPlayers();
 		while(!cards.isEmpty()){
-			for(MasterConnection connection:connections){
-				try {
-					Player player = game.getPlayer(connection.uid());
-					//add card to player
-				} catch (IllegalRequestException e) {
-					e.printStackTrace();
+			for(Player player:players){
+				player.getCards().add(cards.remove(0));
+				if(cards.isEmpty()){
+					break;
 				}
 			}
 		
 		}
 		
-		//deal the rest of cards to players
+		assert(cards.isEmpty());
+		
+		//select a random player to start
+		randomStartPlayer(players);
+	}
+
+	private void randomStartPlayer(ArrayList<Player> players){
+		int index = random.nextInt(players.size());
+		players.get(index).setStatus(Player.STATUS.ROLLING);
 	}
 }

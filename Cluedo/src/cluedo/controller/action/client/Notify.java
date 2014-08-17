@@ -46,10 +46,13 @@ public class Notify implements SlaveAction{
 			Player player = game.getPlayer(connection.uid());
 			
 			Player.STATUS status = player.getStatus();
+			System.out.println("Player uid: "+connection.uid()+" status: "+status);
+			
 			if(status.equals(Player.STATUS.INITIALIZING)){
-				//the player is not initialized properly, need to initialize again
+				System.out.println("Can't init player with pre Character, need to init again.");
 				frame.initPlayer();
 			}else if(status.equals(Player.STATUS.ROLLING)){
+				System.out.println("Enable roll");
 				frame.enableRoll();
 			}else if(status.equals(Player.STATUS.MOVING)){
 				frame.requestFocus();

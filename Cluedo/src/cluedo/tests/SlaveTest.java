@@ -48,7 +48,7 @@ public class SlaveTest {
 						
 						//TODO:bug in board is not fixed
 						//broadcast the board state
-						//ActionHelper.broadcast(masters, game);
+						ActionHelper.broadcast(masters, game);
 						
 						//disconnect the slave
 						ActionHelper.requestDisconnect(socket);
@@ -99,9 +99,9 @@ public class SlaveTest {
 			slave.setActionHandler(handler);
 			slave.run();
 
-			//Action action1 = handler.pollAction();
+			Action action1 = handler.pollAction();
 			
-			//assert(action1 instanceof Notify);
+			assert(action1 instanceof Notify);
 			
 			assert(slave.isClosed()):"Socket should be closed";
 			
