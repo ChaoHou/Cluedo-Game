@@ -36,8 +36,11 @@ public class SlaveConnection extends AbstractConnection{
 					System.out.println("Slave Action offered");
 					
 					if(actionType.equals(ActionType.DISCONNECT)){
-						socket.close();
-						break;
+						int uid = input.readInt();
+						if(uid == this.uid){
+							socket.close();
+							break;
+						}
 					}
 					
 					handler.offerAction(new Notify(this));

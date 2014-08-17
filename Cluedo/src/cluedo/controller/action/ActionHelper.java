@@ -169,10 +169,11 @@ public class ActionHelper{
 		}
 	}
 	
-	public static void requestDisconnect(Socket socket){
+	public static void requestDisconnect(Socket socket,int uid){
 		try {
 			DataOutputStream output = new DataOutputStream(socket.getOutputStream());
 			output.writeInt(ActionType.DISCONNECT.ordinal());
+			output.writeInt(uid);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

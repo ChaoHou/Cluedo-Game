@@ -235,7 +235,7 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 
 	@Override
 	public void windowClosing(WindowEvent arg0) {
-		ActionHelper.requestDisconnect(connection.getSocket());
+		ActionHelper.requestDisconnect(connection.getSocket(),connection.uid());
 		try {
 			connection.close();
 		} catch (IOException e) {
