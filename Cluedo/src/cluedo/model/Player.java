@@ -15,6 +15,7 @@ public class Player {
         REFUTING,
         ELIMINATED,
         INITIALIZING,
+        WAITING,
     }
 
     private final int uid;
