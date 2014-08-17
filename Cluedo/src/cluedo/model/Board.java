@@ -14,34 +14,34 @@ public class Board {
     private final int width = 20 * 24;
     private final int height = 20 * 26;
 
-    // C = collidor R = room D = door S = start J = jump
+    // C = corridor c = corridor next a door R = room D = door S = start J = jump j = jump
     public final String[] map = {
             "#########S####S#########",
-            "RRRRRJ#CCCRRRRCCC#RRRRRR",
+            "jRRRRR#CCCRRRRCCC#RRRRRJ",
             "RRRRRRCCRRRRRRRRCCRRRRRR",
             "RRRRRRCCRRRRRRRRCCRRRRRR",
             "RRRRRRCCRRRRRRRRCCRRRRRR",
             "RRRRRRCCRRRRRRRRCCDRRRRR",
-            "#RRRDRCCDRRRRRRDCCC#####",
-            "CCCCCCCCRRRRRRRRCCCCCCCS",
+            "#RRRDRCcDRRRRRRDcCcRRRR#",
+            "CCCCcCCCRRRRRRRRCCCCCCCS",
             "#CCCCCCCRDRRRRDRCCCCCCC#",
-            "RRRRRCCCCCCCCCCCCCRRRRRR",
-            "RRRRRRRRCCCCCCCCCCRRRRRR",
+            "RRRRRCCCCcCCCCcCCCRRRRRR",
+            "RRRRRRRRCCCCCCCCCcDRRRRR",
             "RRRRRRRRCC#####CCCRRRRRR",
             "RRRRRRRRCC#####CCCRRRRRR",
-            "RRRRRRRDCC#####CCCRRRRRR",
-            "RRRRRRRRCC#####CCCCCCCC#",
-            "RRRRRRRRCC#####CCCRRRRR#",
+            "RRRRRRRDcC#####CCCRRRRDR",
+            "RRRRRRRRCC#####CCCCCcCc#",
+            "RRRRRRRRCC#####CCCRRDRR#",
             "RRRRRRDRCC#####CCRRRRRRR",
-            "#CCCCCCCCC#####CCDRRRRRR",
-            "SCCCCCCCCCCCCCCCCRRRRRRR",
-            "#CCCCCCCCRRRRRRCCCRRRRR#",
-            "JRRRRRRCCRRRRRRCCCCCCCCS",
-            "RRRRRRRCCRRRRRRCCCCCCCC#",
-            "RRRRRRRCCRRRRRRCCRRRRRRJ",
+            "#CCCCCcCCC#####CcDRRRRRR",
+            "SCCCCCCCCCCccCCCCRRRRRRR",
+            "#CCCCCcCCRRDDRRCCCRRRRR#",
+            "RRRRRRDCCRRRRRRCCCCCCCCS",
+            "RRRRRRRCCRRRRRDcCcCCCCC#",
+            "RRRRRRRCCRRRRRRCCDRRRRRR",
             "RRRRRRRCCRRRRRRCCRRRRRRR",
             "RRRRRRRCCRRRRRRCCRRRRRRR",
-            "RRRRRR#S#RRRRRR#C#RRRRRR",
+            "JRRRRR#S#RRRRRR#C#RRRRRj",
     };
 
     /**

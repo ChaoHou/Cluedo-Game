@@ -38,14 +38,23 @@ public class BoardCanvas extends Canvas {
                 //draw board
                 if (board.map[y].charAt(x) == 'C' || board.map[y].charAt(x) == 'S') {
                     g2.setColor(new Color(255, 237, 0));
-                    g2.fillRect(x*cell, y*cell, cell, cell);
+                    g2.fillRect(x * cell, y * cell, cell, cell);
                     g2.setColor(Color.BLACK);
-                    g2.drawRect(x*cell, y*cell, cell, cell);
-                } else if (board.map[y].charAt(x) == 'R'
-                        || board.map[y].charAt(x) == 'D'
-                        || board.map[y].charAt(x) == 'J' ) {
+                    g2.drawRect(x * cell, y * cell, cell, cell);
+                } else if (board.map[y].charAt(x) == 'c') {
+                    drawADoor(g2,x,y,cell);
+                } else if (board.map[y].charAt(x) == 'R') {
                     g2.setColor(new Color(58, 233, 22));
-                    g2.fillRect(x*cell,y*cell,cell,cell);
+                    g2.fillRect(x * cell + 1, y * cell + 1, cell, cell);
+                } else if (board.map[y].charAt(x) == 'j') {
+                    g2.setColor(new Color(142, 139, 146));
+                    g2.fillRect(x * cell + 1, y * cell + 1, cell, cell);
+                } else if (board.map[y].charAt(x) == 'J') {
+                    g2.setColor(new Color(48, 48, 48));
+                    g2.fillRect(x * cell + 1, y * cell + 1, cell, cell);
+                } else if (board.map[y].charAt(x) == 'D') {
+                    g2.setColor(new Color(58, 233, 22));
+                    g2.fillRect(x * cell+1, y * cell+1, cell, cell);
                 } else {
                     g2.setColor(new Color(0, 141, 255));
                     g2.fillRect(x*cell,y*cell,cell,cell);
@@ -86,6 +95,26 @@ public class BoardCanvas extends Canvas {
 //                System.out.println(x+", "+y);
             }
 
+        }
+
+    }
+
+    private void drawADoor(Graphics2D g2, int x, int y, int cell) {
+        g2.setColor(new Color(255, 237, 0));
+        g2.fillRect(x*cell+1, y*cell+1, cell, cell);
+
+        g2.setColor(Color.BLACK);
+        if (board.map[y-1].charAt(x) != 'D') {
+            g2.drawLine(x*cell, y*cell, x*cell+cell, y*cell);
+        }
+        if (board.map[y+1].charAt(x) != 'D') {
+            g2.drawLine(x*cell, y*cell+cell, x*cell+cell, y*cell+cell);
+        }
+        if (board.map[y].charAt(x-1) != 'D') {
+            g2.drawLine(x*cell, y*cell, x*cell, y*cell+cell);
+        }
+        if (board.map[y].charAt(x+1) != 'D') {
+            g2.drawLine(x*cell+cell, y*cell, x*cell+cell, y*cell+cell);
         }
 
     }
