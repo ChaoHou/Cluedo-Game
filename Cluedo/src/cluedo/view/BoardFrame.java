@@ -16,6 +16,7 @@ public class BoardFrame extends JFrame {
 
     private JButton[] buttons = new JButton[2];
     private JComboBox[] combos = new JComboBox[3];
+    private JTextArea textArea;
 
     public BoardFrame(String title, Board game,int uid, MouseListener mouse, ActionListener action) {
         super(title);
@@ -69,7 +70,7 @@ public class BoardFrame extends JFrame {
 
         //message console
         JPanel q = new JPanel();
-        JTextArea textArea = new JTextArea();
+        textArea = new JTextArea();
         textArea.setEditable(false);
         q.add(textArea, BorderLayout.SOUTH);
 
@@ -175,10 +176,11 @@ public class BoardFrame extends JFrame {
      * @param str
      */
     public void showMessage(String str) {
-        JOptionPane.showMessageDialog(this, str, "Listen!", JOptionPane.PLAIN_MESSAGE);
+        textArea.append(str);
     }
 
     public void repaint() {
+        showMessage("repainted\n");
         canvas.repaint();
     }
 

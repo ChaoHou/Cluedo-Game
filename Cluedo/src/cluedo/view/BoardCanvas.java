@@ -67,9 +67,11 @@ public class BoardCanvas extends Canvas {
 
                 //draw characters
                 for (Chara c: board.getCharacters()) {
-                    g2.setColor(getCColor(c.getName()));
-                    g2.fillOval(c.getX() * cell, c.getY() * cell, cell, cell);
+                    c.draw(g2,cell);
                 }
+//                for (Room r: board.getRooms()) {
+//                    r.draw(g2,cell);
+//                }
 
                 //draw lines for assisting making GUI
 //                for (int X = 480; X < getBounds().width; X+=10) {
@@ -81,19 +83,14 @@ public class BoardCanvas extends Canvas {
 
                 //height = 520, 480 < width < 710 is control panel
                 Arrow.drawArrow(g2);
-                // creates imitaition player for test purpose
-//                Player testP = new Player(uid);
-//                testP.getCards().add(new Card(Card.TYPE.CHARCTER, "SCARLETT"));
-//                testP.getCards().add(new Card(Card.TYPE.CHARCTER, "WHITE"));
-//                testP.getCards().add(new Card(Card.TYPE.CHARCTER, "GREEN"));
-                //ends
                 try {
                     Player p = board.getPlayer(uid);
                     Hand.drawHands(g2,p);
 //                    System.out.printf("No user! %d\n",uid);
 
-//                    p.setDice(100);
+                    p.setDice(100);
                     Dice.drawDice(g2,p.getStepsRemain());
+                    g2.drawString("You're: "+p.getCharacter().getName().toString(),510,495);
                 } catch (Exception e){
                 }
 
@@ -124,25 +121,6 @@ public class BoardCanvas extends Canvas {
             g2.drawLine(x*cell+cell, y*cell, x*cell+cell, y*cell+cell);
         }
 
-    }
-
-    private Color getCColor(Card.CHARACTER c) {
-        switch (c.ordinal()) {
-            case 0:
-                return Color.red;
-            case 1:
-                return Color.yellow;
-            case 2:
-                return Color.white;
-            case 3:
-                return Color.green;
-            case 4:
-                return Color.blue;
-            case 5:
-                return new Color(255, 0, 255);
-            default:
-                return null;
-        }
     }
 
     /**
