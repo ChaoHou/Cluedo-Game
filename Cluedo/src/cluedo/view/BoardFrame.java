@@ -176,7 +176,7 @@ public class BoardFrame extends JFrame {
      *  show messages to user
      * @param str
      */
-    public void showMessage(String str) {
+    public synchronized void showMessage(String str) {
         textArea.append(canvas.getMessage());
     }
 
@@ -256,7 +256,7 @@ public class BoardFrame extends JFrame {
      * return current selected value by combobox
      * @return
      */
-    public String[] getAnnouncement() {
+    public synchronized String[] getAnnouncement() {
         String[] temp = new String[3];
         for (int i = 0; i < 3; ++i) {
             temp[i] =(String) combos[i].getSelectedItem();

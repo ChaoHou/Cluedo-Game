@@ -155,7 +155,7 @@ public class Board {
      * @param input
      */
 
-    public void fromByte(byte[] input) throws IOException{
+    public synchronized void fromByte(byte[] input) throws IOException{
         ByteArrayInputStream bais = new ByteArrayInputStream(input);
         DataInputStream dis = new DataInputStream(bais);
 
@@ -193,7 +193,7 @@ public class Board {
      *
      * @return int
      */
-    public byte[] toByte() throws IOException {
+    public synchronized byte[] toByte() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
 
@@ -234,7 +234,7 @@ public class Board {
      * @param uid
      * @return
      */
-    public Player getPlayer(int uid) throws IllegalRequestException{
+    public synchronized Player getPlayer(int uid) throws IllegalRequestException{
         if (!players.isEmpty())
         for (Player p: players) {
             if (p.getUid() == uid) {
@@ -248,7 +248,7 @@ public class Board {
      * return players in the game!
      * @return
      */
-    public ArrayList<Player> getPlayers() {
+    public synchronized ArrayList<Player> getPlayers() {
         return players;
     }
 
@@ -261,7 +261,7 @@ public class Board {
      * @param uid
      * @param direction
      */
-    public void movePlayer(int uid, Move.Direction direction) {
+    public synchronized void movePlayer(int uid, Move.Direction direction) {
         try {
             Player p = getPlayer(uid);
             //get currenti pos
@@ -285,6 +285,7 @@ public class Board {
                 p.getCharacter().setInRoom(this,dXPos,dYPos);
                 p.decStepR();
                 // get out from a room
+                //currently cannot use warp and if there is 2 doors on same side it choose left one
             } else if (p.getCharacter().isInRoom()) {
                         Coordinates c = p.getCharacter().getRoom().getC(direction);
                 if (c != null) {
@@ -299,15 +300,15 @@ public class Board {
         }
     }
 
-    public Room[] getRooms() {
+    public synchronized Room[] getRooms() {
         return rooms;
     }
 
-    public Chara[] getCharacters() {
+    public synchronized Chara[] getCharacters() {
         return characters;
     }
 
-    public Weapon[] getWeapons() {
+    public synchronized Weapon[] getWeapons() {
         return weapons;
     }
 
@@ -341,17 +342,17 @@ public class Board {
      * @param player
      * @param weapon
      */
-     public void annoInRoom(Room room, Player player, Card.WEAPON weapon) {
+     public synchronized void annoInRoom(Room room, Player player, Card.WEAPON weapon) {
         player.getCharacter().setInRoom(room);
          weapons[weapon.ordinal()].outFromRoom(room);
         weapons[weapon.ordinal()].setInRoom(room);
     }
 
-    public Card[] getSuggestion() {
+    public synchronized Card[] getSuggestion() {
         return Suggestion;
     }
 
-    public void setSuggestion(Card[] suggestion) {
+    public synchronized void setSuggestion(Card[] suggestion) {
         Suggestion = suggestion;
     }
 }
