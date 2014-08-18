@@ -15,6 +15,12 @@ import cluedo.model.Card;
 import cluedo.model.Player;
 import cluedo.view.BoardFrame;
 
+/**
+ * Client side action, will update the board with the given infomation, 
+ * and update the UI base on current player's status
+ * @author C
+ *
+ */
 public class Notify implements SlaveAction{
 	
 	SlaveConnection connection;

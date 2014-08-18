@@ -20,6 +20,7 @@ public class Player {
         WAITING,
         FINISHREFUTE,
         FINISHTURN,
+        WIN,
     }
 
     private final int uid;
