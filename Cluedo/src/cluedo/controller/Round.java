@@ -67,6 +67,18 @@ public class Round {
 			//check all player's status check if next to refute is the player in turn,
 			//start the next player's turn
 			
+			ArrayList<Player> players = game.getPlayers();
+			for(int i=0;i<players.size();i++){
+				Player player = players.get(i);
+				if(player.getStatus().equals(Player.STATUS.FINISHTURN)){
+					int next = getNextIndex(i, players.size());
+					player.setStatus(Player.STATUS.WATCHING);
+					player.setString("Waiting");
+					players.get(next).setStatus(Player.STATUS.ROLLING);
+					players.get(next).setString("Rolling");
+				}
+			}
+			
 			//check if all the player is watching or eliminated, means this round is finished
 			//if all the player is eliminated, stop the game,
 			
@@ -131,5 +143,10 @@ public class Round {
 		int index = random.nextInt(players.size());
 		System.out.println("Random player in turn: "+index);
 		players.get(index).setStatus(Player.STATUS.ROLLING);
+	}
+	
+	private int getNextIndex(int i,int size){
+		if(i+1<size) return i+1;
+		else return 0;
 	}
 }
