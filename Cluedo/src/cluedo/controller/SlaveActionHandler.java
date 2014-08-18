@@ -28,6 +28,12 @@ import cluedo.model.Room;
 import cluedo.tests.MockSlave;
 import cluedo.view.BoardFrame;
 
+/**
+ * Client side action handler,
+ * Also implements some listeners to handle user input
+ * @author C
+ *
+ */
 public class SlaveActionHandler extends Thread implements ActionHandler,MouseListener,ActionListener,KeyListener,WindowListener{
 
 	private SlaveConnection connection;
@@ -183,7 +189,6 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 			return;
 		}
 		
-		//TODO
 		//get character, room, weapon of the announcement
 		String[] announcement = frame.getAnnouncement();
 		

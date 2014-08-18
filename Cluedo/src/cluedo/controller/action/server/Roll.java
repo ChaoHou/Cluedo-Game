@@ -8,6 +8,14 @@ import cluedo.exception.IllegalRequestException;
 import cluedo.model.Board;
 import cluedo.model.Player;
 
+/**
+ * Server side action
+ * 
+ * will return a random number between 1 to 6 to server for dice
+ * 
+ * @author C
+ *
+ */
 
 public class Roll implements MasterAction{
 

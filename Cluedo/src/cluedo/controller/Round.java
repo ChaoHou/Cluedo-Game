@@ -13,6 +13,12 @@ import cluedo.model.Board;
 import cluedo.model.Card;
 import cluedo.model.Player;
 
+/**
+ * The class to maitain the round
+ * After all the player finish initialization, will choose a random player to start the game
+ * @author C
+ *
+ */
 public class Round {
 	
 	public enum State{

@@ -2,6 +2,11 @@ package cluedo.controller;
 
 import cluedo.controller.action.Action;
 
+/**
+ * Interface for action handler
+ * @author C
+ *
+ */
 public interface ActionHandler {
 	/**
 	 * Check if the action queue is empty

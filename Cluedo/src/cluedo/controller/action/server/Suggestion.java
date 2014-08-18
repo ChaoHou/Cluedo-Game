@@ -12,7 +12,15 @@ import cluedo.model.Player;
 import cluedo.model.Player.STATUS;
 import cluedo.model.Room;
 
-
+/**
+ * Server side action
+ * 
+ * will read the suggestion from connection
+ * When executing
+ * 
+ * @author C
+ *
+ */
 public class Suggestion implements MasterAction{
 
 	private MasterConnection connection;
@@ -43,7 +51,8 @@ public class Suggestion implements MasterAction{
 
 		assert(connections != null);
 		assert(game != null);
-		
+		//set the suggestion to board
+		//update player's status
 		try {
 			Player player = game.getPlayer(connection.uid());
 			
@@ -70,12 +79,10 @@ public class Suggestion implements MasterAction{
 			
 			
 		} catch (IllegalRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		//set the suggestion to board
-		//update player's status
+
 		
 	}
 

@@ -11,6 +11,12 @@ import cluedo.controller.connection.MasterConnection;
 import cluedo.model.Board;
 import cluedo.model.Player;
 
+/**
+ * Master side action handler,
+ * will take an array of connections
+ * @author C
+ *
+ */
 public class MasterActionHandler extends Thread implements ActionHandler{
 	
 	private MasterConnection[] connections;
