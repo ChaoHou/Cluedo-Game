@@ -213,13 +213,7 @@ public class ActionHelper{
 	 * Server broadcast
 	 */
 	public static void broadcast(MasterConnection[] connections,Board game){
-		ArrayList<Player> players = game.getPlayers();
-		System.out.println("Start broadCast");
-		for(Player p:players){
-			if(p.getCharacter() != null)
-			System.out.println("Player uid:"+p.getUid()+" Pos x:"+p.getCharacter().getX()+" y:"+p.getCharacter().getY());
-		}
-		
+	
 		try {
 			assert(connections != null);
 			

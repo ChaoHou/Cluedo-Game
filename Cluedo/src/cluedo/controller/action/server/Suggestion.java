@@ -60,8 +60,12 @@ public class Suggestion implements MasterAction{
 			Room[] rooms = game.getRooms();
 			for(Room r:rooms){
 				if(r.getName().equals(room)){
-					if(r.getCharactersInside().contains(player)){
+					if(r.getCharactersInside().contains(player.getCharacter())){
 						// if in room, make suggestion
+						
+						System.out.println("Suggestion is made");
+						System.out.println("Suggestion, Character:"+character+" Weapon:"+weapon+" Room:"+room);
+						
 						Card[] suggestion = {
 								new Card(TYPE.CHARCTER, character.toString()),
 								new Card(TYPE.WEAPON,weapon.toString()),

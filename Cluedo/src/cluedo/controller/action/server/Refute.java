@@ -62,7 +62,7 @@ public class Refute implements MasterAction{
 			if(hasCard){
 				//if the user didn't pass
 				String name = new String(nameBytes,"UTF-8");
-				
+				System.out.println("User intend to refute");
 				//Update player's message.
 				//update player's status
 				player.setStatus(Player.STATUS.WATCHING);
@@ -75,7 +75,13 @@ public class Refute implements MasterAction{
 				
 			}else{
 				//if the user choose to pass
-				player.setStatus(Player.STATUS.FINISHREFUTE);
+				if(player.getStatus().equals(Player.STATUS.REFUTING)){
+					player.setStatus(Player.STATUS.FINISHREFUTE);
+				}else{
+					//should be eliminated refute
+					player.setStatus(Player.STATUS.ELIMINATEDFINISHREFUTE);
+				}
+				
 			}
 			
 			

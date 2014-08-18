@@ -82,7 +82,39 @@ public class Round {
 					player.setString("Waiting");
 					players.get(next).setStatus(Player.STATUS.ROLLING);
 					players.get(next).setString("Rolling");
+					break;
 				}
+				if(player.getStatus().equals(Player.STATUS.FINISHREFUTE)){
+					int next = getNextIndex(i, players.size());
+					Player nextP = players.get(next);
+					if(nextP.getStatus().equals(Player.STATUS.WAITING)){
+						//if next one is the one in turn
+						int nextTurn = getNextIndex(next, players.size());
+						player.setStatus(Player.STATUS.WATCHING);
+						nextP.setStatus(Player.STATUS.WATCHING);
+						players.get(nextTurn).setStatus(Player.STATUS.ROLLING);
+					}else{
+						//if next one is the one the refute
+						player.setStatus(Player.STATUS.WATCHING);
+						nextP.setStatus(Player.STATUS.REFUTING);
+					}
+					
+					
+					break;
+				}
+				//this should after the refute check
+				if(player.getStatus().equals(Player.STATUS.WAITING)){
+					int next = getNextIndex(i, players.size());
+					Player nextP = players.get(next);
+					if(nextP.getStatus().equals(Player.STATUS.ELIMINATED)){
+						nextP.setStatus(Player.STATUS.ELIMINATEDREFUTE);
+					}else{
+						nextP.setStatus(Player.STATUS.REFUTING);
+					}
+					
+					break;
+				}
+				
 			}
 			
 			//check if all the player is watching or eliminated, means this round is finished

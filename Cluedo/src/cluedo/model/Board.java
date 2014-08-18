@@ -286,8 +286,6 @@ public class Board {
             int dYPos = p.getCharacter().getY()+des[1];
             char desC = map[dYPos].charAt(dXPos);
 
-            System.out.println("Des P x:"+dXPos+" y:"+dYPos);
-            
             //moved decrement stepsRemain()
             //moving on corridor
             if ((curC == 'C' || curC == 'c' )&& (desC == 'c' || desC == 'C')) {
@@ -309,7 +307,6 @@ public class Board {
             }
             else {return;}
             
-            System.out.println("Coords after move: x:"+p.getCharacter().getX()+" y:"+p.getCharacter().getY());
         } catch (Exception e) {
 
         }
