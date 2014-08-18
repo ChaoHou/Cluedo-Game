@@ -19,6 +19,7 @@ public class Player {
         INITIALIZING,
         WAITING,
         FINISHREFUTE,
+        FINISHTURN,
     }
 
     private final int uid;

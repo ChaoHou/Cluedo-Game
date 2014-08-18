@@ -132,6 +132,12 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 				}
 				
 				
+			}else if(status.equals(Player.STATUS.MAKINGANNOUNCEMENT)){
+				System.out.println("x:"+x+"y:"+y);
+				if(frame.clickOnPass(x, y)){
+					System.out.println("Request pass");
+					ActionHelper.requestPassTurn(connection);
+				}
 			}else{
 				//do nothing if not in the status
 				return;

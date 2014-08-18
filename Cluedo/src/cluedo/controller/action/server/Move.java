@@ -54,7 +54,6 @@ public class Move implements MasterAction{
 			}
 			
 		} catch (IllegalRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -11,6 +11,7 @@ import cluedo.controller.action.server.Accusation;
 import cluedo.controller.action.server.Initialize;
 import cluedo.controller.action.server.Move;
 import cluedo.controller.action.server.Move.Direction;
+import cluedo.controller.action.server.PassTurn;
 import cluedo.controller.action.server.Refute;
 import cluedo.controller.action.server.Roll;
 import cluedo.controller.action.server.Suggestion;
@@ -37,6 +38,7 @@ public class ActionHelper{
 		REFUTE,
 		NOTIFY,
 		DISCONNECT,
+		PASS,
 	}
 	
 	public static Action genServerAction(MasterConnection connection,ActionType type){
@@ -52,6 +54,8 @@ public class ActionHelper{
 			return new Roll(connection);
 		}else if(type.equals(ActionType.REFUTE)){
 			return new Refute(connection);
+		}else if(type.equals(ActionType.PASS)){
+			return new PassTurn(connection);
 		}
 		
 		throw new IllegalArgumentException("INVALID TYPE");
@@ -140,6 +144,21 @@ public class ActionHelper{
 			e.printStackTrace();
 		}
 	}
+	
+	public static void requestPassTurn(SlaveConnection connection){
+		try {
+			assert(connection != null);
+			
+			System.out.println("Send pass request");
+			DataOutputStream output = connection.getOutput();
+			output.writeInt(ActionType.PASS.ordinal());
+			output.flush();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Client request
 	 */

@@ -259,7 +259,7 @@ public class BoardFrame extends JFrame {
     }
 
     public boolean clickOnPass(int x, int y) {
-        if (refuteDisabled) {return false;}
+        //if (refuteDisabled) {return false;}
         String[] temp = canvas.defineClick(x,y);
         if(temp[0] != null && temp[0].equals("Pass")) {
             return true;
