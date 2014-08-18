@@ -121,12 +121,36 @@ public class Room {
         return null;
     }
 
+    /**
+     * set given param in this room
+     * @param chara
+     */
     public void setInRoom(Chara chara) {
         charasInside.add(chara);
     }
 
+    /**
+     * set given param in the room
+     * @param weapon
+     */
     public void setInRoom(Weapon weapon) {
         weaponsInside.add(weapon);
+    }
+
+    /**
+     * remove given param from the room
+     * @param chara
+     */
+    public void outFromRoom(Chara chara) {
+        charasInside.remove(chara);
+    }
+
+    /**
+     * remove given param from the room
+     * @param weapon
+     */
+    public void outFromRoom(Weapon weapon) {
+        charasInside.remove(weapon);
     }
 
     public void draw(Graphics2D g2, int cell) {
