@@ -44,6 +44,8 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 		frame.setFocusable(true);
 		frame.requestFocus();
 		frame.addWindowListener(this);
+		
+		frame.repaint();
 		//enable the popup to ask user for user name and token
 		//then send to server
 	}
@@ -59,6 +61,7 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 					SlaveAction action = actionQueue.poll();
 					action.execute(game,frame);
 				}
+				
 				
 				
 				Thread.sleep(gameClock);
@@ -120,6 +123,7 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 				
 			}else if(status.equals(Player.STATUS.MOVING)){
 				Direction direction = frame.clickOnArrow(x, y);
+				System.out.println("Client request moving direction: "+direction);
 				if(direction != null){
 					ActionHelper.requestMove(connection, direction);
 				}
@@ -200,6 +204,8 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 			return;
 		}
 		
+		
+		System.out.println("Client request Move");
 		
 		int keyCode = arg.getKeyCode();
 		Direction dir = null;

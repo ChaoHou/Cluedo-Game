@@ -77,7 +77,9 @@ public class Notify implements SlaveAction{
 		} catch (IllegalRequestException e) {
 			e.printStackTrace();
 		}
+	
 		
+		frame.repaint();
 	}
 
 }

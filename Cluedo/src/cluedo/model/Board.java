@@ -18,14 +18,14 @@ public class Board {
 
     // C = corridor c = corridor next a door R = room D = door S = start J = jump j = jump
     public final String[] map = {
-            "#########S####S#########",
+            "#########C####C#########",
             "jRRRRR#CCCRRRRCCC#RRRRRJ",
             "RRRRRRCCRRRRRRRRCCRRRRRR",
             "RRRRRRCCRRRRRRRRCCRRRRRR",
             "RRRRRRCCRRRRRRRRCCRRRRRR",
             "RRRRRRCCRRRRRRRRCCDRRRRR",
             "#RRRDRCcDRRRRRRDcCcRRRR#",
-            "CCCCcCCCRRRRRRRRCCCCCCCS",
+            "CCCCcCCCRRRRRRRRCCCCCCCC",
             "#CCCCCCCRDRRRRDRCCCCCCC#",
             "RRRRRCCCCcCCCCcCCCRRRRRR",
             "RRRRRRRRCCCCCCCCCcDRRRRR",
@@ -36,14 +36,14 @@ public class Board {
             "RRRRRRRRCC#####CCCRRDRR#",
             "RRRRRRDRCC#####CCRRRRRRR",
             "#CCCCCcCCC#####CcDRRRRRR",
-            "SCCCCCCCCCCccCCCCRRRRRRR",
+            "CCCCCCCCCCCccCCCCRRRRRRR",
             "#CCCCCcCCRRDDRRCCCRRRRR#",
-            "RRRRRRDCCRRRRRRCCCCCCCCS",
+            "RRRRRRDCCRRRRRRCCCCCCCCC",
             "RRRRRRRCCRRRRRDcCcCCCCC#",
             "RRRRRRRCCRRRRRRCCDRRRRRR",
             "RRRRRRRCCRRRRRRCCRRRRRRR",
             "RRRRRRRCCRRRRRRCCRRRRRRR",
-            "JRRRRR#S#RRRRRR#C#RRRRRj",
+            "JRRRRR#C#RRRRRR#C#RRRRRj",
     };
 
     /**
@@ -272,6 +272,7 @@ public class Board {
             //get currenti pos
             int cXPos = p.getCharacter().getX();
             int cYPos = p.getCharacter().getY();
+            System.out.println("Coords pre move: x:"+cXPos+" y:"+cYPos);
             char curC = map[cYPos].charAt(cXPos);
 
             //get destination x & y
@@ -280,6 +281,8 @@ public class Board {
             int dYPos = p.getCharacter().getY()+des[1];
             char desC = map[dYPos].charAt(dXPos);
 
+            System.out.println("Des P x:"+dXPos+" y:"+dYPos);
+            
             //moved decrement stepsRemain()
             //moving on corridor
             if ((curC == 'C' || curC == 'c' )&& (desC == 'c' || desC == 'C')) {
@@ -300,6 +303,8 @@ public class Board {
                 }
             }
             else {return;}
+            
+            System.out.println("Coords after move: x:"+p.getCharacter().getX()+" y:"+p.getCharacter().getY());
         } catch (Exception e) {
 
         }

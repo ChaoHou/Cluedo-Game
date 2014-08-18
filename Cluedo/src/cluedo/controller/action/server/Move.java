@@ -29,13 +29,15 @@ public class Move implements MasterAction{
 	 * @param y
 	 */
 	public Move(MasterConnection con){
+		System.out.println("Move instance created");
+		
 		connection = con;
 		try {
 			direction = Direction.values()[connection.getInput().readInt()];
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-;
+
 	}
 	
 	@Override
