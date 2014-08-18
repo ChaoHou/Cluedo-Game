@@ -91,7 +91,7 @@ public class BoardCanvas extends Canvas {
 
 //                    p.setDice(100);
                     Dice.drawDice(g2, p.getStepsRemain());
-                    g2.setColor(Color.BLACK);
+                    g2.setColor(p.getCharacter().getCColor(p.getCharacter().getName()));
                     g2.drawString("You're: " + p.getCharacter().getName().toString(), 510, 495);
                 } catch (Exception e){
                 }
