@@ -295,7 +295,7 @@ public class Board {
                 p.decStepR();
                 // go into a room
             } else if ((curC == 'c' && desC == 'D')) {
-                p.getCharacter().setInRoom(this,dXPos,dYPos);
+                rooms[Room.getRoomIndex(new Coordinates(dXPos, dYPos))].setInRoom(p.getCharacter());
                 p.decStepR();
                 // get out from a room
                 //currently cannot use warp and if there is 2 doors on same side it choose left one
