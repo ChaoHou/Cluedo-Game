@@ -27,7 +27,7 @@ public class Player {
     private Chara character;
     private int dice;
     private int stepsRemain;
-    private String message;
+    private String message = "";
 
     public Player(int uid) {
         this.uid = uid;
