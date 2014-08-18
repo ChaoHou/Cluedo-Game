@@ -9,7 +9,9 @@ import cluedo.controller.action.ActionHelper;
 import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.client.Notify;
 import cluedo.controller.connection.MasterConnection;
+import cluedo.exception.IllegalRequestException;
 import cluedo.model.Board;
+import cluedo.model.Player;
 
 public class Move implements MasterAction{
 
@@ -44,7 +46,18 @@ public class Move implements MasterAction{
 	public void execute(MasterConnection[] connections,Board game) {
 		System.out.println("Server move recieved");
 		//make the board moving the player
-		game.movePlayer(connection.uid(), direction);
+		try {
+			game.movePlayer(connection.uid(), direction);
+			Player player = game.getPlayer(connection.uid());
+			if(!player.canMove()){
+				player.setStatus(Player.STATUS.MAKINGANNOUNCEMENT);
+			}
+			
+		} catch (IllegalRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		System.out.println("Server Player moved");
 		
 		ActionHelper.broadcast(connections,game);

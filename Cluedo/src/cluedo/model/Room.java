@@ -228,4 +228,8 @@ public class Room {
     public ArrayList<Weapon> getWeaponsInside() {
         return weaponsInside;
     }
+    
+    public ArrayList<Chara> getCharactersInside(){
+    	return charasInside;
+    }
 }

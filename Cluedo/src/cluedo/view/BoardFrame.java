@@ -192,11 +192,11 @@ public class BoardFrame extends JFrame {
      * @param str
      */
     public synchronized void showMessage(String str) {
-        textArea.append(canvas.getMessage());
+        textArea.setText(canvas.getMessage());
     }
 
     public void repaint() {
-        canvas.setMessage("repainted\n");
+        //canvas.setMessage("repainted\n");
         canvas.repaint();
     }
 
