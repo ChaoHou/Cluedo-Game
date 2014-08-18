@@ -157,11 +157,14 @@ public class BoardFrame extends JFrame {
     public String[] initPlayer() {
         String[] input = new String[2];
         JPanel panel = new JPanel();
+        ButtonGroup group = new ButtonGroup();
         Card.CHARACTER[] temps = Card.CHARACTER.values();
         for (int i = 0; i<6;++i) {
             radios[i] = new JRadioButton(temps[i].toString());
+            group.add(radios[i]);
             panel.add(radios[i]);
         }
+        radios[0].setSelected(true);
 
 
         String[] charas = new String[temps.length];

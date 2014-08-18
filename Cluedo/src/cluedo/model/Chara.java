@@ -102,10 +102,6 @@ public class Chara {
         return temp;
     }
 
-    public void setInRoom(Board board, int dXPos, int dYPos) {
-        Room temp = board.getRooms()[Room.getRoomIndex(new Coordinates(dXPos, dYPos))];
-        temp.setInRoom(this);
-    }
 
     public void setInRoom(Room room) {
         isInRoom = true;
@@ -121,7 +117,7 @@ public class Chara {
     }
 
     public void draw(Graphics2D g2, int cell) {
-        if (isInRoom) {return;}
+//        if (isInRoom) {return;}
             g2.setColor(getCColor(getName()));
             g2.fillOval(getX() * cell, getY() * cell, cell, cell);
     }
