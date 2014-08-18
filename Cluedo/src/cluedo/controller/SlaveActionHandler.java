@@ -119,10 +119,13 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 				//check user is clicking on the cards 
 				//or clicking on the pass
 				//get the card it clicked on
-				//ActionHelper.requestRefute(connection, card);
+				
+				
 				Card card = frame.clickOnHand(x, y);
 				if(card != null){
+					
 					ActionHelper.requestRefute(connection, card);
+					
 				}else{
 					if(frame.clickOnPass(x, y)){
 						ActionHelper.requestRefute(connection, null);
@@ -130,6 +133,11 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 				}
 				
 			}else if(status.equals(Player.STATUS.MOVING)){
+				if(frame.clickOnPass(x, y)){
+					System.out.println("Request pass");
+					ActionHelper.requestPassTurn(connection);
+				}
+				
 				if(!player.canMove()) return;
 				Direction direction = frame.clickOnArrow(x, y);
 				System.out.println("Client request moving direction: "+direction);

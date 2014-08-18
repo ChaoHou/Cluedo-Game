@@ -46,6 +46,8 @@ private MasterConnection connection;
 	
 	@Override
 	public void execute(MasterConnection[] connections,Board game) {
+		
+		System.out.println("Accusation recieved");
 		Card[] solution = game.getSolution();
 		
 		Card.CHARACTER sCharacter = Card.CHARACTER.valueOf(solution[0].getName());
@@ -62,13 +64,14 @@ private MasterConnection connection;
 				Player winner = game.getPlayer(connection.uid());
 				winner.setStatus(Player.STATUS.WIN);
 				winner.setString("You are winner");
+				System.out.println("Player: "+connection.uid()+" win.");
 			} catch (IllegalRequestException e) {
 				e.printStackTrace();
 			}
 		}else{
 			//update player's status to eliminated, and update player's message
 			try {
-							
+				System.out.println("Player: "+connection.uid()+" is eliminated");
 				Player eliminate = game.getPlayer(connection.uid());
 				eliminate.setStatus(Player.STATUS.ELIMINATED);
 				

@@ -65,13 +65,29 @@ public class Refute implements MasterAction{
 				System.out.println("User intend to refute");
 				//Update player's message.
 				//update player's status
-				player.setStatus(Player.STATUS.WATCHING);
-				player.setString("You refute with:"+name);
-				for(Player p:game.getPlayers()){
-					if(p.getStatus().equals(Player.STATUS.WAITING)){
-						p.setStatus(Player.STATUS.FINISHTURN);
+				Card card = new Card(type,name);
+
+				Card[] suggestion = game.getSuggestion();
+				
+				if((suggestion[0].getType().equals(card.getType())
+						&& suggestion[0].getName().equals(card.getName()))
+						|| (suggestion[0].getType().equals(card.getType())
+						&& suggestion[0].getName().equals(card.getName()))
+						||(suggestion[0].getType().equals(card.getType())
+						&& suggestion[0].getName().equals(card.getName()))){
+						
+						//check if user can refute with the card
+						
+						player.setStatus(Player.STATUS.WATCHING);
+						player.setString("You refute with:"+name);
+						for(Player p:game.getPlayers()){
+							if(p.getStatus().equals(Player.STATUS.WAITING)){
+								p.setStatus(Player.STATUS.FINISHTURN);
+							}
+						}
 					}
-				}
+				
+				
 				
 			}else{
 				//if the user choose to pass

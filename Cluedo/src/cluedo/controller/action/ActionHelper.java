@@ -217,11 +217,11 @@ public class ActionHelper{
 		try {
 			assert(connections != null);
 			
-			System.out.println("Send broadcast to all");
+			//System.out.println("Send broadcast to all");
 			for(MasterConnection connection:connections){
 				assert(connection != null);
 				
-				System.out.println("Send broadcast to uid: "+connection.uid());
+				//System.out.println("Send broadcast to uid: "+connection.uid());
 				DataOutputStream output = connection.getOutput();
 				output.writeInt(ActionType.NOTIFY.ordinal());
 				//output.writeInt(type.ordinal());
