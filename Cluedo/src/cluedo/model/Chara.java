@@ -95,6 +95,12 @@ public class Chara {
         dos.writeByte(yCoordinate);
     }
 
+    /**
+     * make a character from DataInputStream
+     * @param dis
+     * @return
+     * @throws IOException
+     */
     public static Chara fromInputStream(DataInputStream dis) throws IOException{
         Chara temp = new Chara(Card.CHARACTER.values()[dis.readByte()]);
         temp.isInRoom = dis.readBoolean();
@@ -106,6 +112,16 @@ public class Chara {
     public void setInRoom(Room room) {
         isInRoom = true;
         this.room = room;
+        setPosition(room.getRoomOrigin());
+    }
+
+    /**
+     * set position from Cooridnates class
+     * @param roomOrigin
+     */
+    private void setPosition(Coordinates roomOrigin) {
+        xCoordinate = roomOrigin.x;
+        yCoordinate = roomOrigin.y;
     }
 
     public boolean isInRoom() {
