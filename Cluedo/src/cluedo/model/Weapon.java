@@ -24,8 +24,9 @@ public class Weapon {
         dos.writeByte(getName().ordinal());
     }
 
-    public void fromInputStream(DataInputStream dis) throws IOException{
+    public static Weapon fromInputStream(DataInputStream dis) throws IOException{
         Weapon temp = new Weapon(Card.WEAPON.values()[dis.readByte()]);
+        return temp;
     }
 
     public void setInRoom(Room room) {
