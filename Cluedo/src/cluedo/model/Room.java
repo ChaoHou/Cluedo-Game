@@ -171,21 +171,21 @@ public class Room {
     }
 
     public void draw(Graphics2D g2, int cell) {
-        if (charasInside.isEmpty()){return;}
-        for (int i = 0; i<charasInside.size();++i) {
-            System.out.println("hogehogeRoom");
-            Chara chara = charasInside.get(i);
-            g2.setColor(chara.getCColor(chara.getName()));
-            Coordinates c = getRoomOrigin();
-            g2.fillOval((c.x+i) * cell, c.y * cell, cell, cell);
+        Coordinates c = getRoomOrigin();
+        if (!charasInside.isEmpty()) {
+            for (int i = 0; i < charasInside.size(); ++i) {
+                Chara chara = charasInside.get(i);
+                g2.setColor(chara.getCColor(chara.getName()));
+                g2.fillOval((c.x + i) * cell, c.y * cell, cell, cell);
+            }
         }
-        if (weaponsInside.isEmpty()) {return;}
-        for (int i = 0; i<weaponsInside.size();++i){
-            Weapon weapon = weaponsInside.get(i);
-            g2.setColor(Color.BLACK);
-            Coordinates c = getRoomOrigin();
-            g2.fillOval((c.x+1) * cell, (c.y+i) * cell, cell, cell);
+        if (!weaponsInside.isEmpty()) {
+            for (int i = 0; i < weaponsInside.size(); ++i) {
+                Weapon weapon = weaponsInside.get(i);
+                g2.setColor(Color.BLACK);
+                g2.drawString(weapon.getName().toString(), (c.x) * cell, (c.y + 1 + i)*cell);
 
+            }
         }
     }
 
