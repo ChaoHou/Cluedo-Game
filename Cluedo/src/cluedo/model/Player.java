@@ -30,12 +30,22 @@ public class Player {
     private int stepsRemain;
     private String message = "";
 
+    /**
+     * stores uid from constructor
+     * set default status WATCHING
+     * @param uid
+     */
     public Player(int uid) {
         this.uid = uid;
         cards = new ArrayList<Card>();
         setStatus(STATUS.INITIALIZING);
     }
 
+    /**
+     * make a Player into ByteArray information
+     * @param dos
+     * @throws IOException
+     */
     public void toOutputStream(DataOutputStream dos) throws IOException{
         dos.writeByte(uid);
         dos.writeByte(status.ordinal());
@@ -58,6 +68,12 @@ public class Player {
         }
     }
 
+    /**
+     * initialise a Player from ByteArray
+     * @param dis
+     * @return
+     * @throws IOException
+     */
     public static Player fromInputStream(DataInputStream dis) throws IOException{
         Player temp = new Player(dis.readByte());
         temp.setStatus(Player.STATUS.values()[dis.readByte()]);
@@ -103,31 +119,58 @@ public class Player {
         return status;
     }
 
+    /**
+     * set user name user picked
+     * @param name
+     */
     public void setUName(String name) {
         this.uName = name;
     }
 
+    /**
+     * set character user picked
+     * @param character
+     */
     public void setCharacter(Chara character){
         this.character = character;
     }
 
+    /**
+     * return character in the Player
+     * @return
+     */
     public Chara getCharacter() {
         return character;
     }
 
+    /**
+     * set dice and corresponding remain steps
+     * @param dice
+     */
     public void setDice(int dice) {
         this.dice = dice;
         this.stepsRemain = dice;
     }
 
+    /**
+     * decrement remaining steps
+     */
     public void decStepR() {
         --stepsRemain;
     }
 
+    /**
+     * return uid of the player
+     * @return
+     */
     public int getUid() {
         return uid;
     }
 
+    /**
+     * return hand's of the player
+     * @return
+     */
     public ArrayList<Card> getCards(){
         return cards;
     }
@@ -141,22 +184,42 @@ public class Player {
         return false;
     }
 
+    /**
+     * return user name input by user
+     * @return
+     */
     public String getUName() {
         return uName;
     }
 
+    /**
+     * return how many steps remain
+     * @return
+     */
     public int getStepsRemain() {
         return stepsRemain;
     }
 
+    /**
+     * return how much user have got
+     * @return
+     */
     public int getDice() {
         return dice;
     }
 
+    /**
+     * used for storing personal message on each player's canvas
+     * @param str
+     */
     public void setString(String str) {
         message = str;
     }
 
+    /**
+     * get stored personal information for the user
+     * @return
+     */
     public String getString() {
         return message;
     }

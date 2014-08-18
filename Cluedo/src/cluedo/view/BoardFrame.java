@@ -16,6 +16,7 @@ public class BoardFrame extends JFrame {
 
     private JButton[] buttons = new JButton[2];
     private JComboBox[] combos = new JComboBox[3];
+    private JRadioButton[] radios = new JRadioButton[6];
     private JTextArea textArea;
 
     public BoardFrame(String title, Board game,int uid, MouseListener mouse, ActionListener action) {
@@ -155,7 +156,14 @@ public class BoardFrame extends JFrame {
 
     public String[] initPlayer() {
         String[] input = new String[2];
+        JPanel panel = new JPanel();
         Card.CHARACTER[] temps = Card.CHARACTER.values();
+        for (int i = 0; i<6;++i) {
+            radios[i] = new JRadioButton(temps[i].toString());
+            panel.add(radios[i]);
+        }
+
+
         String[] charas = new String[temps.length];
         for (int i = 0; i < temps.length; i++) {
             charas[i] = temps[i].toString();
@@ -166,7 +174,14 @@ public class BoardFrame extends JFrame {
             input[0] = JOptionPane.showInputDialog(this, "What's your name?");
         }
         while(input[1] == null) {
-        input[1] =(String) JOptionPane.showInputDialog(this, "Select a character.", "Character select", JOptionPane.INFORMATION_MESSAGE, null, charas, charas[0]);
+            int inputI = JOptionPane.showOptionDialog(null, panel,
+                    "Radio Test", JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if (inputI == JOptionPane.OK_OPTION) {
+                for (JRadioButton r: radios) {
+                    if (r.isSelected()) {input[1] = r.getText();}
+                }
+            }
         }
 
         return input;
