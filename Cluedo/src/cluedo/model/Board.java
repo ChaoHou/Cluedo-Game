@@ -287,8 +287,11 @@ public class Board {
                 // get out from a room
             } else if (p.getCharacter().isInRoom()) {
                 Coordinates c = p.getCharacter().getRoom().getC(direction);
-                p.getCharacter().setPosition(c.x, c.y);
-                p.decStepR();
+                if (c != null) {
+                    p.getCharacter().outFromRoom();
+                    p.getCharacter().setPosition(c.x, c.y);
+                    p.decStepR();
+                }
             }
             else {return;}
         } catch (Exception e) {
@@ -340,6 +343,7 @@ public class Board {
      */
      public void annoInRoom(Room room, Player player, Card.WEAPON weapon) {
         player.getCharacter().setInRoom(room);
+         weapons[weapon.ordinal()].outFromRoom(room);
         weapons[weapon.ordinal()].setInRoom(room);
     }
 

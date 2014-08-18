@@ -31,4 +31,8 @@ public class Weapon {
     public void setInRoom(Room room) {
         room.setInRoom(this);
     }
+
+    public void outFromRoom(Room room) {
+        room.outFromRoom(this);
+    }
 }

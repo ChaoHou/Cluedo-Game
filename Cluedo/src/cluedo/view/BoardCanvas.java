@@ -69,9 +69,10 @@ public class BoardCanvas extends Canvas {
                 for (Chara c: board.getCharacters()) {
                     c.draw(g2,cell);
                 }
-//                for (Room r: board.getRooms()) {
-//                    r.draw(g2,cell);
-//                }
+                //draw rooms
+                for (Room r: board.getRooms()) {
+                    r.draw(g2,cell);
+                }
 
                 //draw lines for assisting making GUI
 //                for (int X = 480; X < getBounds().width; X+=10) {

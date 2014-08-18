@@ -108,6 +108,7 @@ public class Chara {
 
     public void setInRoom(Room room) {
         isInRoom = true;
+        this.room = room;
         room.setInRoom(this);
     }
 
@@ -147,5 +148,10 @@ public class Chara {
             default:
                 return null;
         }
+    }
+
+    public void outFromRoom() {
+        isInRoom = false;
+        room.outFromRoom(this);
     }
 }
