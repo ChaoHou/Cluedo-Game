@@ -85,7 +85,7 @@ public class Player {
         int mesgLength = dis.readByte();
         nTemp = new byte[mesgLength];
         dis.read(nTemp);
-        temp.setUName(new String(nTemp,"UTF-8"));
+        temp.setString(new String(nTemp,"UTF-8"));
         if (dis.readBoolean()) {
             Chara tempC = Chara.fromInputStream(dis);
             temp.setCharacter(tempC);
