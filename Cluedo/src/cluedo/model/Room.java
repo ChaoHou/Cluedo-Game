@@ -142,6 +142,7 @@ public class Room {
      * @param chara
      */
     public void setInRoom(Chara chara) {
+        chara.setInRoom(this);
         charasInside.add(chara);
     }
 

@@ -90,18 +90,19 @@ public class Chara {
 
     public void toOutputStream(DataOutputStream dos) throws IOException{
         dos.writeByte(getName().ordinal());
+        dos.writeBoolean(isInRoom);
         dos.writeByte(xCoordinate);
         dos.writeByte(yCoordinate);
     }
 
     public static Chara fromInputStream(DataInputStream dis) throws IOException{
         Chara temp = new Chara(Card.CHARACTER.values()[dis.readByte()]);
+        temp.isInRoom = dis.readBoolean();
         temp.setPosition(dis.readByte(), dis.readByte());
         return temp;
     }
 
     public void setInRoom(Board board, int dXPos, int dYPos) {
-        isInRoom = true;
         Room temp = board.getRooms()[Room.getRoomIndex(new Coordinates(dXPos, dYPos))];
         temp.setInRoom(this);
     }
@@ -109,7 +110,6 @@ public class Chara {
     public void setInRoom(Room room) {
         isInRoom = true;
         this.room = room;
-        room.setInRoom(this);
     }
 
     public boolean isInRoom() {
