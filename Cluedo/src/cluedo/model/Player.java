@@ -15,6 +15,7 @@ public class Player {
         ROLLING,
         REFUTING,
         ELIMINATED,
+        REINITIALIZING,
         INITIALIZING,
         WAITING,
         FINISHREFUTE,
