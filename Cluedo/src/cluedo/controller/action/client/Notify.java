@@ -58,6 +58,7 @@ public class Notify implements SlaveAction{
 				Card.CHARACTER character = Card.CHARACTER.valueOf(playerInfo[1]);
 				ActionHelper.requestInitialize(connection,playerInfo[0],character);
 			}else if(status.equals(Player.STATUS.ROLLING)){
+				System.out.println("It your turn!");
 				System.out.println("Enable roll");
 				frame.enableRoll();
 			}else if(status.equals(Player.STATUS.MOVING)){

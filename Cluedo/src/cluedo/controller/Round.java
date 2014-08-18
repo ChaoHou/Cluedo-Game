@@ -67,6 +67,8 @@ public class Round {
 			
 			//check if all the player is watching or eliminated, means this round is finished
 			//if all the player is eliminated, stop the game,
+			
+			System.out.println("Game started");
 		}
 		
 		ActionHelper.broadcast(connections, game);
@@ -125,6 +127,7 @@ public class Round {
 
 	private void randomStartPlayer(ArrayList<Player> players){
 		int index = random.nextInt(players.size());
+		System.out.println("Random player in turn: "+index);
 		players.get(index).setStatus(Player.STATUS.ROLLING);
 	}
 }
