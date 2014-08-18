@@ -188,6 +188,7 @@ public class Room {
     }
 
     public void toOutputStream(DataOutputStream dos) throws  IOException{
+        dos.writeByte(getName().ordinal());
         dos.writeByte(charasInside.size());
         //stores tokens positions
         if (charasInside.size() != 0) {
@@ -205,20 +206,24 @@ public class Room {
         }
     }
 
-    public void fromInputStream(DataInputStream dis) throws IOException{
+    public static Room fromInputStream(DataInputStream dis) throws IOException{
+        Room temp = new Room(Card.ROOM.values()[dis.readByte()]);
         //retrieve tokens positions
-        if (dis.readByte() != 0) {
-            for (Chara c : charasInside) {
-                c.fromInputStream(dis);
+        int charaSize = dis.readByte();
+        if (charaSize != 0) {
+            for (int i = 0; i < charaSize;++i) {
+                temp.setInRoom(Chara.fromInputStream(dis));
             }
         }
 
         //retrieve weapon tokens positions
-        if (dis.readByte() != 0) {
-            for (Weapon w: weaponsInside) {
-                w.fromInputStream(dis);
+        int weaponSize = dis.readByte();
+        if (weaponSize != 0) {
+            for (int i = 0; i < weaponSize; ++i) {
+                temp.setInRoom(Weapon.fromInputStream(dis));
             }
         }
+        return temp;
     }
 
     /**

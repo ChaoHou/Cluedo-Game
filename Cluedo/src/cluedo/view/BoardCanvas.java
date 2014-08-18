@@ -28,6 +28,7 @@ public class BoardCanvas extends Canvas {
      * @param g
      */
     public void paint(Graphics g) {
+
     	Image offScreen = createImage(this.getWidth(),this.getHeight());
     	Graphics g1 = offScreen.getGraphics();
     	
