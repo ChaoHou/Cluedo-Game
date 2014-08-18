@@ -179,7 +179,7 @@ public class Board {
         //retrieve weapon tokens positions
         if (dis.readByte() != 0) {
             for (Room r : rooms) {
-                r.fromInputStream(dis);
+                r.fromInputStream(dis,characters);
             }
         }
 

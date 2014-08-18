@@ -173,6 +173,7 @@ public class Room {
     public void draw(Graphics2D g2, int cell) {
         if (charasInside.isEmpty()){return;}
         for (int i = 0; i<charasInside.size();++i) {
+            System.out.println("hogehogeRoom");
             Chara chara = charasInside.get(i);
             g2.setColor(chara.getCColor(chara.getName()));
             Coordinates c = getRoomOrigin();
@@ -194,7 +195,7 @@ public class Room {
         //stores tokens positions
         if (charasInside.size() != 0) {
             for (Chara c : charasInside) {
-                c.toOutputStream(dos);
+                dos.writeByte(c.getName().ordinal());
             }
         }
 
@@ -207,13 +208,13 @@ public class Room {
         }
     }
 
-    public static Room fromInputStream(DataInputStream dis) throws IOException{
+    public static Room fromInputStream(DataInputStream dis, Chara[] charas) throws IOException{
         Room temp = new Room(Card.ROOM.values()[dis.readByte()]);
         //retrieve tokens positions
         int charaSize = dis.readByte();
         if (charaSize != 0) {
             for (int i = 0; i < charaSize;++i) {
-                temp.setInRoom(Chara.fromInputStream(dis));
+                temp.setInRoom(charas[dis.readByte()]);
             }
         }
 

@@ -32,7 +32,8 @@ public class RoomTest extends Room {
         ByteArrayInputStream bin = new ByteArrayInputStream(bout.toByteArray());
         DataInputStream din = new DataInputStream(bin);
 
-        Room test = fromInputStream(din);
+        Chara[] charas = {new Chara(Card.CHARACTER.SCARLETT)};
+        Room test = fromInputStream(din,charas);
 
         assert(this.getName().equals(test.getName()));
         assert(this.getCharactersInside().get(0).getName().equals(test.getCharactersInside().get(0).getName()));
