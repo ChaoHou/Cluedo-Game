@@ -74,8 +74,17 @@ public class Initialize implements MasterAction{
 			
 			
 			if(!inUse){
+				Chara[] characters = game.getCharacters();
 				
-				player.setCharacter(new Chara(character));
+				for(Chara chara:characters){
+					System.out.println("chara:"+chara+" chacacter:"+character);
+					if(chara.getName().equals(character)){
+						player.setCharacter(chara);
+						break;
+					}
+				}
+				
+				//player.setCharacter(new Chara(character));
 				player.setUName(name);
 				player.setStatus(STATUS.WATCHING);
 				

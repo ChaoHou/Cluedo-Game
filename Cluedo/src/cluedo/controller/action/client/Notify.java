@@ -63,7 +63,8 @@ public class Notify implements SlaveAction{
 				frame.enableRoll();
 			}else if(status.equals(Player.STATUS.MOVING)){
 				frame.requestFocus();
-				System.out.println("Recieved dice: "+game.getPlayer(connection.uid()).getDice());
+				System.out.println("Recieved move");
+				System.out.println("New Pos, x:"+player.getCharacter().getX()+" y:"+player.getCharacter().getY());
 				
 			}else if(status.equals(Player.STATUS.MAKINGANNOUNCEMENT)){
 				frame.enableAction();

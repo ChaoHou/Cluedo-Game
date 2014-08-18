@@ -22,7 +22,9 @@ import cluedo.controller.connection.SlaveConnection;
 import cluedo.exception.IllegalRequestException;
 import cluedo.model.Board;
 import cluedo.model.Card;
+import cluedo.model.Card.ROOM;
 import cluedo.model.Player;
+import cluedo.model.Room;
 import cluedo.tests.MockSlave;
 import cluedo.view.BoardFrame;
 
@@ -122,6 +124,7 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 				}
 				
 			}else if(status.equals(Player.STATUS.MOVING)){
+				if(!player.canMove()) return;
 				Direction direction = frame.clickOnArrow(x, y);
 				System.out.println("Client request moving direction: "+direction);
 				if(direction != null){
@@ -176,13 +179,20 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 		
 		//TODO
 		//get character, room, weapon of the announcement
+		String[] announcement = frame.getAnnouncement();
+		
+		Card.CHARACTER character = Card.CHARACTER.valueOf(announcement[0]);
+		Card.WEAPON weapon = Card.WEAPON.valueOf(announcement[1]);
+		Card.ROOM room = Card.ROOM.valueOf(announcement[2]);
+		
+		
 		
 		String button = arg.getActionCommand();
 		
 		if(button.equals("ASSUMPTION")){
-			//ActionHelper.requestAnnouncement(connection, ActionType.SUGGESTION, character, weapon, room);
+			ActionHelper.requestAnnouncement(connection, ActionType.SUGGESTION, character, weapon, room);
 		}else if(button.equals("ACCUSATION")){
-			//ActionHelper.requestAnnouncement(connection, ActionType.ACCUSATION, character, weapon, room);
+			ActionHelper.requestAnnouncement(connection, ActionType.ACCUSATION, character, weapon, room);
 		}else{
 			throw new IllegalArgumentException();
 		}
@@ -201,6 +211,9 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 		assert(player != null);
 		//check the state of the board, if allows to move
 		if(!player.getStatus().equals(Player.STATUS.MOVING)){
+			return;
+		}
+		if(!player.canMove()){
 			return;
 		}
 		

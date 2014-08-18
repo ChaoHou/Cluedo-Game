@@ -7,11 +7,13 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import cluedo.controller.action.ActionHelper.ActionType;
+import cluedo.controller.action.server.Accusation;
 import cluedo.controller.action.server.Initialize;
 import cluedo.controller.action.server.Move;
 import cluedo.controller.action.server.Move.Direction;
 import cluedo.controller.action.server.Refute;
 import cluedo.controller.action.server.Roll;
+import cluedo.controller.action.server.Suggestion;
 import cluedo.controller.connection.MasterConnection;
 import cluedo.controller.connection.SlaveConnection;
 import cluedo.model.Board;
@@ -43,9 +45,9 @@ public class ActionHelper{
 		}else if(type.equals(ActionType.MOVE)){
 			return new Move(connection);
 		}else if(type.equals(ActionType.SUGGESTION)){
-			
+			return new Suggestion(connection);
 		}else if(type.equals(ActionType.ACCUSATION)){
-			
+			return new Accusation(connection);
 		}else if(type.equals(ActionType.ROLL)){
 			return new Roll(connection);
 		}else if(type.equals(ActionType.REFUTE)){
@@ -188,7 +190,8 @@ public class ActionHelper{
 		ArrayList<Player> players = game.getPlayers();
 		System.out.println("Start broadCast");
 		for(Player p:players){
-			System.out.println("Player uid:"+p.getUid()+" Status before broadcast:"+p.getStatus());
+			if(p.getCharacter() != null)
+			System.out.println("Player uid:"+p.getUid()+" Pos x:"+p.getCharacter().getX()+" y:"+p.getCharacter().getY());
 		}
 		
 		try {
