@@ -185,7 +185,9 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 		}
 		assert(player != null);
 		
-		if(!player.getStatus().equals(Player.STATUS.MAKINGANNOUNCEMENT)){
+		Player.STATUS status = player.getStatus();
+		if(!(status.equals(Player.STATUS.MAKINGANNOUNCEMENT)
+				|| status.equals(Player.STATUS.MOVING))){
 			return;
 		}
 		

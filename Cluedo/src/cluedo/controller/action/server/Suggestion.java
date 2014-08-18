@@ -56,26 +56,26 @@ public class Suggestion implements MasterAction{
 		try {
 			Player player = game.getPlayer(connection.uid());
 			
+			boolean inRoom = false;
 			Room[] rooms = game.getRooms();
 			for(Room r:rooms){
 				if(r.getName().equals(room)){
-					if(!r.getCharactersInside().contains(player)){
-						player.setString("Player should in the room you want to make the announcement");
-						System.out.println("not in Room");
-						return;
+					if(r.getCharactersInside().contains(player)){
+						// if in room, make suggestion
+						Card[] suggestion = {
+								new Card(TYPE.CHARCTER, character.toString()),
+								new Card(TYPE.WEAPON,weapon.toString()),
+								new Card(TYPE.ROOM,room.toString()),
+						};
+						
+						game.setSuggestion(suggestion);
+						
+						player.setStatus(STATUS.WAITING);
 					}
 				}
 			}
 			
-			Card[] suggestion = {
-					new Card(TYPE.CHARCTER, character.toString()),
-					new Card(TYPE.WEAPON,weapon.toString()),
-					new Card(TYPE.ROOM,room.toString()),
-			};
 			
-			game.setSuggestion(suggestion);
-			
-			player.setStatus(STATUS.WAITING);
 			
 			
 		} catch (IllegalRequestException e) {
