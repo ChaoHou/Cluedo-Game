@@ -65,6 +65,7 @@ public class Initialize implements MasterAction{
 			for(Player tPlayer:players){
 				if(tPlayer.getCharacter() != null){
 					if(tPlayer.getCharacter().equals(character)){
+						System.out.println("Character is in use");
 						inUse = true;
 						break;
 					}
@@ -73,6 +74,7 @@ public class Initialize implements MasterAction{
 			
 			
 			if(!inUse){
+				
 				player.setCharacter(new Chara(character));
 				player.setUName(name);
 				player.setStatus(STATUS.WATCHING);

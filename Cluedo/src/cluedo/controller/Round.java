@@ -40,9 +40,8 @@ public class Round {
 				try {
 					Player player = game.getPlayer(connection.uid());
 					
-					if(player.getStatus().equals(Player.STATUS.INITIALIZING)){
-						System.out.println("Player id: "+connection.uid()+" status:"+player.getStatus());
-						
+					if(player.getCharacter() == null){
+						System.out.println("Player id:"+connection.uid()+" is not initialized.");
 						return;
 					}
 
