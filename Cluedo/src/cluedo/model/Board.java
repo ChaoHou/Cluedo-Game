@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Board {
     private final int width = 20 * 24;
     private final int height = 20 * 26;
+    private Card[] Suggestion;
 
     // C = corridor c = corridor next a door R = room D = door S = start J = jump j = jump
     public final String[] map = {
@@ -330,5 +331,23 @@ public class Board {
         return temp;
     }
 
+    /**
+     *
+     * move the character's token and weapon into a room announced
+     * @param room
+     * @param player
+     * @param weapon
+     */
+     public void annoInRoom(Room room, Player player, Card.WEAPON weapon) {
+        player.getCharacter().setInRoom(room);
+        weapons[weapon.ordinal()].setInRoom(room);
+    }
 
+    public Card[] getSuggestion() {
+        return Suggestion;
+    }
+
+    public void setSuggestion(Card[] suggestion) {
+        Suggestion = suggestion;
+    }
 }
