@@ -286,7 +286,7 @@ public class Board {
                 p.decStepR();
                 // get out from a room
             } else if (p.getCharacter().isInRoom()) {
-                Coordinates c = p.getCharacter().getRoom().getC(direction);
+                        Coordinates c = p.getCharacter().getRoom().getC(direction);
                 if (c != null) {
                     p.getCharacter().outFromRoom();
                     p.getCharacter().setPosition(c.x, c.y);

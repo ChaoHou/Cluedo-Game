@@ -66,6 +66,9 @@ public class Room {
             if(this.getName() == Card.ROOM.STUDY){
                 return new Coordinates(17,21);
             }
+            if(this.getName() == Card.ROOM.HALL) {
+                return new Coordinates(11,18);
+            }
         }
         if (direction == Move.Direction.DOWN) {
             if(this.getName() == Card.ROOM.KITCHEN){
@@ -79,6 +82,9 @@ public class Room {
             }
             if(this.getName() == Card.ROOM.DINING_ROOM){
                 return new Coordinates(6,17);
+            }
+            if(this.getName() == Card.ROOM.BALL_ROOM) {
+                return new Coordinates(9,9);
             }
         }
         if (direction == Move.Direction.LEFT) {
