@@ -36,8 +36,16 @@ public class MasterActionHandler extends Thread implements ActionHandler{
 		game = new Board(players);
 		
 		
-		//initial broadcast
+		//initial broadcast to make user input the name and character
 		ActionHelper.broadcast(con, game);
+		
+		//make all the player watching 
+		ArrayList<Player> tPlayers = game.getPlayers();
+		for(Player p:tPlayers){
+			p.setStatus(Player.STATUS.WATCHING);
+		}
+		ActionHelper.broadcast(con, game);
+		
 	}
 	
 	@Override

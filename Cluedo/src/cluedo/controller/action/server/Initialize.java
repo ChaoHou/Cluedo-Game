@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.net.ssl.SSLEngineResult.Status;
+
 import cluedo.controller.Round;
 import cluedo.controller.action.Action;
 import cluedo.controller.action.ActionHelper;
@@ -69,12 +71,15 @@ public class Initialize implements MasterAction{
 				}
 			}
 			
+			
 			if(!inUse){
 				player.setCharacter(new Chara(character));
 				player.setUName(name);
 				player.setStatus(STATUS.WATCHING);
 				
 				System.out.println("UID: "+connection.uid()+" Status: "+player.getStatus());
+			}else{
+				player.setStatus(STATUS.INITIALIZING);
 			}
 			
 			
