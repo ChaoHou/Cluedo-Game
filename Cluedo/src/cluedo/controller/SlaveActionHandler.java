@@ -122,6 +122,7 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 				}
 				
 			}else if(status.equals(Player.STATUS.MOVING)){
+				if(!player.canMove()) return;
 				Direction direction = frame.clickOnArrow(x, y);
 				System.out.println("Client request moving direction: "+direction);
 				if(direction != null){
@@ -201,6 +202,9 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 		assert(player != null);
 		//check the state of the board, if allows to move
 		if(!player.getStatus().equals(Player.STATUS.MOVING)){
+			return;
+		}
+		if(!player.canMove()){
 			return;
 		}
 		

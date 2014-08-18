@@ -61,6 +61,7 @@ public class Player {
         }
         else {dos.writeBoolean(false);}
         dos.writeByte(dice);
+        dos.writeByte(stepsRemain);
         //write numbers of cards
         dos.writeByte(cards.size());
         for (Card c: cards) {
@@ -71,10 +72,11 @@ public class Player {
     /**
      * initialise a Player from ByteArray
      * @param dis
+     * @param characters 
      * @return
      * @throws IOException
      */
-    public static Player fromInputStream(DataInputStream dis) throws IOException{
+    public static Player fromInputStream(DataInputStream dis, Chara[] characters) throws IOException{
         Player temp = new Player(dis.readByte());
         temp.setStatus(Player.STATUS.values()[dis.readByte()]);
         //read name
@@ -88,10 +90,15 @@ public class Player {
         temp.setString(new String(nTemp,"UTF-8"));
         if (dis.readBoolean()) {
             Chara tempC = Chara.fromInputStream(dis);
-            temp.setCharacter(tempC);
+            for(Chara cha:characters){
+            	if(cha.getName().equals(tempC.getName())){
+            		temp.setCharacter(cha);
+            	}
+            }
+            //temp.setCharacter(tempC);
         }
         temp.setDice(dis.readByte());
-
+        temp.setStepsRemain(dis.readByte());
         //read cards
         temp.getCards().clear();
         int size = dis.readByte();
@@ -200,6 +207,10 @@ public class Player {
         return stepsRemain;
     }
 
+    public void setStepsRemain(int step){
+    	stepsRemain = step;
+    }
+    
     /**
      * return how much user have got
      * @return
@@ -222,5 +233,9 @@ public class Player {
      */
     public String getString() {
         return message;
+    }
+    
+    public boolean canMove(){
+    	return stepsRemain>0;
     }
 }

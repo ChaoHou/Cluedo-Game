@@ -34,7 +34,7 @@ public class PlayerTest extends Player{
         ByteArrayInputStream bin = new ByteArrayInputStream(bout.toByteArray());
         DataInputStream din = new DataInputStream(bin);
 
-        Player test = fromInputStream(din);
+        Player test = fromInputStream(din,null);
 
         System.out.printf("Uid: %d %d\n", this.getUid(), test.getUid());
         System.out.printf("UName: %s %s\n",this.getUName(),test.getUName());
@@ -79,8 +79,8 @@ public class PlayerTest extends Player{
         ByteArrayInputStream bin = new ByteArrayInputStream(bout.toByteArray());
         DataInputStream din = new DataInputStream(bin);
 
-        Player test = fromInputStream(din);
-        Player test2 = fromInputStream(din);
+        Player test = fromInputStream(din,null);
+        Player test2 = fromInputStream(din,null);
 
         System.out.printf("Uid: %d %d\n", this.getUid(), test.getUid());
         System.out.printf("UName: %s %s\n",this.getUName(),test.getUName());
@@ -124,7 +124,7 @@ public class PlayerTest extends Player{
         ByteArrayInputStream bin = new ByteArrayInputStream(bout.toByteArray());
         DataInputStream din = new DataInputStream(bin);
 
-        Player test = fromInputStream(din);
+        Player test = fromInputStream(din,null);
 
         System.out.printf("Uid: %d %d\n", this.getUid(), test.getUid());
         System.out.printf("UName: %s %s\n",this.getUName(),test.getUName());

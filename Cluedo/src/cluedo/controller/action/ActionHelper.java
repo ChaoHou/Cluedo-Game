@@ -188,7 +188,8 @@ public class ActionHelper{
 		ArrayList<Player> players = game.getPlayers();
 		System.out.println("Start broadCast");
 		for(Player p:players){
-			System.out.println("Player uid:"+p.getUid()+" Status before broadcast:"+p.getStatus());
+			if(p.getCharacter() != null)
+			System.out.println("Player uid:"+p.getUid()+" Pos x:"+p.getCharacter().getX()+" y:"+p.getCharacter().getY());
 		}
 		
 		try {

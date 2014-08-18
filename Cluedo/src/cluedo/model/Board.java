@@ -165,9 +165,15 @@ public class Board {
 
         //retrieve tokens positions
         if (dis.readByte() != 0) {
-            for (Chara c : characters) {
-                c.fromInputStream(dis);
-            }
+//            for (Chara c : characters) {
+//            	//Bug here
+//                c.fromInputStream(dis);
+//            }
+        	//ERROR WAS HERE NOW FIXED
+        	for(int i=0;i<characters.length;i++){
+        		characters[i] = Chara.fromInputStream(dis);
+        	}
+        	
         }
 
         //retrieve weapon tokens positions
@@ -182,7 +188,7 @@ public class Board {
             players.clear();
 
             for (int i = 0; i < nPlayers; ++i) {
-                players.add(Player.fromInputStream(dis));
+                players.add(Player.fromInputStream(dis,characters));
             }
         }
 
