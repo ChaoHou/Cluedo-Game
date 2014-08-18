@@ -196,7 +196,7 @@ public class BoardFrame extends JFrame {
     }
 
     public void repaint() {
-        //canvas.setMessage("repainted\n");
+        canvas.setMessage("repainted\n");
         canvas.repaint();
     }
 

@@ -4,8 +4,13 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import cluedo.controller.connection.MasterConnection;
+import cluedo.exception.IllegalRequestException;
 import cluedo.model.Board;
 import cluedo.model.Card;
+import cluedo.model.Card.TYPE;
+import cluedo.model.Player;
+import cluedo.model.Player.STATUS;
+import cluedo.model.Room;
 
 
 public class Suggestion implements MasterAction{
@@ -38,6 +43,36 @@ public class Suggestion implements MasterAction{
 
 		assert(connections != null);
 		assert(game != null);
+		
+		try {
+			Player player = game.getPlayer(connection.uid());
+			
+			Room[] rooms = game.getRooms();
+			for(Room r:rooms){
+				if(r.getName().equals(room)){
+					if(!r.getCharactersInside().contains(player)){
+						player.setString("Player should in the room you want to make the announcement");
+						System.out.println("not in Room");
+						return;
+					}
+				}
+			}
+			
+			Card[] suggestion = {
+					new Card(TYPE.CHARCTER, character.toString()),
+					new Card(TYPE.WEAPON,weapon.toString()),
+					new Card(TYPE.ROOM,room.toString()),
+			};
+			
+			game.setSuggestion(suggestion);
+			
+			player.setStatus(STATUS.WAITING);
+			
+			
+		} catch (IllegalRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//set the suggestion to board
 		//update player's status

@@ -185,16 +185,7 @@ public class SlaveActionHandler extends Thread implements ActionHandler,MouseLis
 		Card.WEAPON weapon = Card.WEAPON.valueOf(announcement[1]);
 		Card.ROOM room = Card.ROOM.valueOf(announcement[2]);
 		
-		Room[] rooms = game.getRooms();
-		for(Room r:rooms){
-			if(r.getName().equals(room)){
-				if(!r.getCharactersInside().contains(player)){
-					player.setString("Player should in the room you want to make the announcement");
-					System.out.println("not in Room");
-					return;
-				}
-			}
-		}
+		
 		
 		String button = arg.getActionCommand();
 		
