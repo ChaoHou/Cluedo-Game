@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.server.Initialize;
@@ -15,6 +16,7 @@ import cluedo.controller.connection.MasterConnection;
 import cluedo.controller.connection.SlaveConnection;
 import cluedo.model.Board;
 import cluedo.model.Card;
+import cluedo.model.Player;
 
 public class ActionHelper{
 	
@@ -183,6 +185,12 @@ public class ActionHelper{
 	 * Server broadcast
 	 */
 	public static void broadcast(MasterConnection[] connections,Board game){
+		ArrayList<Player> players = game.getPlayers();
+		System.out.println("Start broadCast");
+		for(Player p:players){
+			System.out.println("Player uid:"+p.getUid()+" Status before broadcast:"+p.getStatus());
+		}
+		
 		try {
 			assert(connections != null);
 			

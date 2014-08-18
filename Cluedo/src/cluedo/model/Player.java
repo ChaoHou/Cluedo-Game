@@ -15,6 +15,7 @@ public class Player {
         ROLLING,
         REFUTING,
         ELIMINATED,
+        REINITIALIZING,
         INITIALIZING,
         WAITING,
         FINISHREFUTE,
@@ -32,7 +33,7 @@ public class Player {
     public Player(int uid) {
         this.uid = uid;
         cards = new ArrayList<Card>();
-        setStatus(STATUS.INITIALIZING);
+        setStatus(STATUS.WATCHING);
     }
 
     public void toOutputStream(DataOutputStream dos) throws IOException{
