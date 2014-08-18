@@ -168,8 +168,8 @@ public class Board {
 
         //retrieve weapon tokens positions
         if (dis.readByte() != 0) {
-            for (Weapon w : weapons) {
-                w.fromInputStream(dis);
+            for (Room r : rooms) {
+                r.fromInputStream(dis);
             }
         }
 
@@ -205,11 +205,11 @@ public class Board {
             }
         }
 
-        dos.writeByte(characters.length);
-        //stores weapon tokens positions
-        if (weapons.length != 0) {
-            for (Weapon w : weapons) {
-                w.toOutputStream(dos);
+        dos.writeByte(rooms.length);
+        //stores rooms tokens positions
+        if (rooms.length != 0) {
+            for (Room r : rooms) {
+                r.toOutputStream(dos);
             }
         }
 

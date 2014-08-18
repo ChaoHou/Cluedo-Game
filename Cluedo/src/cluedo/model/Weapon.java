@@ -1,13 +1,12 @@
 package cluedo.model;
 
+import java.awt.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class Weapon {
     private final Card.WEAPON name;
-    private int xCoordinate;
-    private int yCoordinate;
 
     public Weapon(Card.WEAPON name) {
         this.name = name;
@@ -22,12 +21,14 @@ public class Weapon {
     }
 
     public void toOutputStream(DataOutputStream dos) throws IOException{
-        dos.writeByte(xCoordinate);
-        dos.writeByte(yCoordinate);
+        dos.writeByte(getName().ordinal());
     }
 
     public void fromInputStream(DataInputStream dis) throws IOException{
-        xCoordinate = dis.readByte();
-        yCoordinate = dis.readByte();
+        Weapon temp = new Weapon(Card.WEAPON.values()[dis.readByte()]);
+    }
+
+    public void setInRoom(Room room) {
+        room.setInRoom(this);
     }
 }

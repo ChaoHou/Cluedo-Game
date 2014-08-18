@@ -4,6 +4,9 @@ import cluedo.controller.action.server.Move;
 import cluedo.view.drawing.Coordinates;
 
 import java.awt.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Room {
@@ -122,6 +125,10 @@ public class Room {
         charasInside.add(chara);
     }
 
+    public void setInRoom(Weapon weapon) {
+        weaponsInside.add(weapon);
+    }
+
     public void draw(Graphics2D g2, int cell) {
         if (charasInside.isEmpty()){return;}
         for (int i = 0; i<charasInside.size();++i) {
@@ -137,6 +144,40 @@ public class Room {
             Coordinates c = getRoomOrigin();
             g2.fillOval((c.x+1) * cell, (c.y+i) * cell, cell, cell);
 
+        }
+    }
+
+    public void toOutputStream(DataOutputStream dos) throws  IOException{
+        dos.writeByte(charasInside.size());
+        //stores tokens positions
+        if (charasInside.size() != 0) {
+            for (Chara c : charasInside) {
+                c.toOutputStream(dos);
+            }
+        }
+
+        dos.writeByte(weaponsInside.size());
+        //stores rooms tokens positions
+        if (weaponsInside.size() != 0) {
+            for (Weapon w: weaponsInside) {
+                w.toOutputStream(dos);
+            }
+        }
+    }
+
+    public void fromInputStream(DataInputStream dis) throws IOException{
+        //retrieve tokens positions
+        if (dis.readByte() != 0) {
+            for (Chara c : charasInside) {
+                c.fromInputStream(dis);
+            }
+        }
+
+        //retrieve weapon tokens positions
+        if (dis.readByte() != 0) {
+            for (Weapon w: weaponsInside) {
+                w.fromInputStream(dis);
+            }
         }
     }
 }

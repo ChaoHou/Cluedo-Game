@@ -106,6 +106,11 @@ public class Chara {
         temp.setInRoom(this);
     }
 
+    public void setInRoom(Room room) {
+        isInRoom = true;
+        room.setInRoom(this);
+    }
+
     public boolean isInRoom() {
         return isInRoom;
     }
