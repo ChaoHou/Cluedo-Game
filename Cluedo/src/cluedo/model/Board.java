@@ -83,6 +83,9 @@ public class Board {
         setupBoard();
     }
 
+    /**
+     * constructor for user-client constructor takes nothing
+     */
     public Board() {
         players = new ArrayList<Player>();
 
@@ -91,6 +94,7 @@ public class Board {
 
     /**
      * setup default board
+     * weapons is not randomly placed in rooms
      */
     private void setupBoard() {
         Card.ROOM[] valuesR = Card.ROOM.values();
@@ -102,6 +106,7 @@ public class Board {
         }
         for (int i = 0; i < valuesW.length; i++) {
             weapons[i] = new Weapon(valuesW[i]);
+            rooms[i].setInRoom(weapons[i]);
         }
         for (int i = 0; i < valuesW.length; i++) {
             characters[i] = new Chara(valuesC[i]);
@@ -300,14 +305,26 @@ public class Board {
         }
     }
 
+    /**
+     * return all rooms on the board
+     * @return
+     */
     public synchronized Room[] getRooms() {
         return rooms;
     }
 
+    /**
+     * return all characters on the board
+     * @return
+     */
     public synchronized Chara[] getCharacters() {
         return characters;
     }
 
+    /**
+     * return all weapons on the board
+     * @return
+     */
     public synchronized Weapon[] getWeapons() {
         return weapons;
     }
@@ -348,10 +365,18 @@ public class Board {
         weapons[weapon.ordinal()].setInRoom(room);
     }
 
+    /**
+     * return suggestion(Assumption) made by user
+     * @return
+     */
     public synchronized Card[] getSuggestion() {
         return Suggestion;
     }
 
+    /**
+     * set suggestion(Assumption) made by user
+     * @param suggestion
+     */
     public synchronized void setSuggestion(Card[] suggestion) {
         Suggestion = suggestion;
     }

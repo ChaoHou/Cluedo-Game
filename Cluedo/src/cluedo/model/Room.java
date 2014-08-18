@@ -55,6 +55,12 @@ public class Room {
         return 0;
     }
 
+    /**
+     * returns the coordinates of corridors just outside of door
+     * by direction it choose corresponding door in each room
+     * @param direction
+     * @return
+     */
     public Coordinates getC(Move.Direction direction) {
         if (direction == Move.Direction.UP) {
             if(this.getName() == Card.ROOM.LOUNGE){
@@ -114,6 +120,10 @@ public class Room {
         return null;
     }
 
+    /**
+     * returns the base point for drawing characters and weapons inside the room
+     * @return
+     */
     public Coordinates getRoomOrigin() {
         if (name == Card.ROOM.KITCHEN){return new Coordinates(1,2);}
         if (name == Card.ROOM.BALL_ROOM){return new Coordinates(9,2);}
@@ -209,5 +219,13 @@ public class Room {
                 w.fromInputStream(dis);
             }
         }
+    }
+
+    /**
+     * returns weapon inside the room
+     * @return
+     */
+    public ArrayList<Weapon> getWeaponsInside() {
+        return weaponsInside;
     }
 }
