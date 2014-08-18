@@ -21,6 +21,15 @@ import cluedo.model.Chara;
 import cluedo.model.Player;
 import cluedo.model.Player.STATUS;
 
+/**
+ * Server side Action.
+ * will recieve the user name and Character from connection
+ * 
+ * When executing, will check if the character is already in use, if is in use, will ask user to input again
+ * 
+ * @author C
+ *
+ */
 public class Initialize implements MasterAction{
 	
 	private MasterConnection connection;
@@ -64,7 +73,7 @@ public class Initialize implements MasterAction{
 			boolean inUse = false;
 			for(Player tPlayer:players){
 				if(tPlayer.getCharacter() != null){
-					if(tPlayer.getCharacter().equals(character)){
+					if(tPlayer.getCharacter().getName().equals(character)){
 						System.out.println("Character is in use");
 						inUse = true;
 						break;

@@ -9,6 +9,12 @@ import cluedo.controller.action.ActionHelper.ActionType;
 import cluedo.controller.action.Action;
 import cluedo.model.Board;
 
+/**
+ * Connection at slave side
+ * Will enqueue action to the handler
+ * @author C
+ *
+ */
 public class MasterConnection extends AbstractConnection{
 	
 	public MasterConnection(Socket socket,int clock, int id) {

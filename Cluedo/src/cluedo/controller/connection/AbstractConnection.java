@@ -7,6 +7,11 @@ import java.net.Socket;
 
 import cluedo.controller.ActionHandler;
 
+/**
+ * Class for maitain the connections
+ * @author C
+ *
+ */
 public abstract class AbstractConnection extends Thread{
 	protected final Socket socket;
 	protected int boardcastClock;

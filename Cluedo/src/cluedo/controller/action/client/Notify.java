@@ -15,6 +15,12 @@ import cluedo.model.Card;
 import cluedo.model.Player;
 import cluedo.view.BoardFrame;
 
+/**
+ * Client side action, will update the board with the given infomation, 
+ * and update the UI base on current player's status
+ * @author C
+ *
+ */
 public class Notify implements SlaveAction{
 	
 	SlaveConnection connection;
@@ -65,6 +71,7 @@ public class Notify implements SlaveAction{
 				frame.enableRoll();
 			}else if(status.equals(Player.STATUS.MOVING)){
 				frame.requestFocus();
+				frame.enableAction();
 				System.out.println("Recieved move");
 				System.out.println("New Pos, x:"+player.getCharacter().getX()+" y:"+player.getCharacter().getY());
 				
@@ -74,8 +81,10 @@ public class Notify implements SlaveAction{
 				//update messages
 			}else if(status.equals(Player.STATUS.REFUTING)){
 				//enable refuting
+				frame.enableRefute();
 			}else if(status.equals(Player.STATUS.ELIMINATED)){
 				//disable all user actions
+				frame.enableRefute();
 			}
 		} catch (IllegalRequestException e) {
 			e.printStackTrace();

@@ -13,6 +13,15 @@ import cluedo.exception.IllegalRequestException;
 import cluedo.model.Board;
 import cluedo.model.Player;
 
+/**
+ * Server side Actions
+ * 
+ * Will read user input which is Direction from connection
+ * When executing, check the remaining steps,if remaining steps is 0,make the user starting make announcement
+ * 
+ * @author C
+ *
+ */
 public class Move implements MasterAction{
 
 	public enum Direction{

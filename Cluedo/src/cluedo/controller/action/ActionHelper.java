@@ -21,6 +21,13 @@ import cluedo.model.Board;
 import cluedo.model.Card;
 import cluedo.model.Player;
 
+/**
+ * Helper method for actions
+ * Includes all the request method, and broadcast method
+ * And generate the action for server depends on the action type
+ * @author C
+ *
+ */
 public class ActionHelper{
 	
 	/**

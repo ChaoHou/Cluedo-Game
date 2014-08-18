@@ -12,7 +12,15 @@ import cluedo.model.Player;
 import cluedo.model.Player.STATUS;
 import cluedo.model.Room;
 
-
+/**
+ * Server side action
+ * 
+ * will read the suggestion from connection
+ * When executing
+ * 
+ * @author C
+ *
+ */
 public class Suggestion implements MasterAction{
 
 	private MasterConnection connection;
@@ -43,39 +51,38 @@ public class Suggestion implements MasterAction{
 
 		assert(connections != null);
 		assert(game != null);
-		
+		//set the suggestion to board
+		//update player's status
 		try {
 			Player player = game.getPlayer(connection.uid());
 			
+			boolean inRoom = false;
 			Room[] rooms = game.getRooms();
 			for(Room r:rooms){
 				if(r.getName().equals(room)){
-					if(!r.getCharactersInside().contains(player)){
-						player.setString("Player should in the room you want to make the announcement");
-						System.out.println("not in Room");
-						return;
+					if(r.getCharactersInside().contains(player)){
+						// if in room, make suggestion
+						Card[] suggestion = {
+								new Card(TYPE.CHARCTER, character.toString()),
+								new Card(TYPE.WEAPON,weapon.toString()),
+								new Card(TYPE.ROOM,room.toString()),
+						};
+						
+						game.setSuggestion(suggestion);
+						
+						player.setStatus(STATUS.WAITING);
 					}
 				}
 			}
 			
-			Card[] suggestion = {
-					new Card(TYPE.CHARCTER, character.toString()),
-					new Card(TYPE.WEAPON,weapon.toString()),
-					new Card(TYPE.ROOM,room.toString()),
-			};
 			
-			game.setSuggestion(suggestion);
-			
-			player.setStatus(STATUS.WAITING);
 			
 			
 		} catch (IllegalRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		//set the suggestion to board
-		//update player's status
+
 		
 	}
 
